@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
+import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
@@ -69,28 +70,39 @@ class MainScreen extends StatelessWidget {
           child: CarouselSlider(
               items: List.generate(
                   4,
-                  (index) => Column(
-                        children: [
-                          Expanded(
-                              child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
-                              fit: BoxFit.fill,
+                  (index) => InkWell(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MovieDetailScreen(
+                                      heroTag: 'Elemental$index',
+                                    ))),
+                        child: Column(
+                          children: [
+                            Expanded(
+                                child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Hero(
+                                tag: 'Elemental$index',
+                                child: Image.network(
+                                  "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            )),
+                            const Text(
+                              "المنتال (Elemental)",
+                              style: TextStyle(
+                                  color: Color(0xffffffff), fontSize: 16),
                             ),
-                          )),
-                          const Text(
-                            "المنتال (Elemental)",
-                            style: TextStyle(
-                                color: Color(0xffffffff), fontSize: 16),
-                          ),
-                          const Text(
-                            "(2023)",
-                            style: TextStyle(
-                              color: Color(0xffffffff),
-                            ),
-                          )
-                        ],
+                            const Text(
+                              "(2023)",
+                              style: TextStyle(
+                                color: Color(0xffffffff),
+                              ),
+                            )
+                          ],
+                        ),
                       )),
               options: CarouselOptions(
                   autoPlay: true,
