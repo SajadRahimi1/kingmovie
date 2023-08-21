@@ -131,6 +131,7 @@ class MovieDetailScreen extends StatelessWidget {
                 textAlign: TextAlign.justify,
                 style: TextStyle(color: Colors.white),
               ),
+              // tabs
               Expanded(
                   child: TabBar(
                 labelStyle: TextStyle(
@@ -156,6 +157,81 @@ class MovieDetailScreen extends StatelessWidget {
                         )),
               ))
             ]),
+          ),
+          // pages
+          SizedBox(
+              width: Get.width,
+              height: Get.height / 1.3,
+              child: TabBarView(children: [
+                SizedBox(),
+                SizedBox(),
+                Column(
+                  children: [
+                    Expanded(
+                        child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (_, index) => Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 5),
+                                  width: Get.width,
+                                  height: Get.height / 11,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: blackColor,
+                                      border:
+                                          Border.all(color: Color(0xff3f3f3f))),
+                                  child: Row(
+                                      textDirection: TextDirection.ltr,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          child: Image.network(
+                                            "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
+                                            fit: BoxFit.fill,
+                                          ),
+                                        ),
+                                        const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 8),
+                                          child: Text(
+                                            "Shameik Moore",
+                                            textDirection: TextDirection.ltr,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15),
+                                          ),
+                                        ),
+                                        const Text(
+                                          "Shameik Moore",
+                                          textDirection: TextDirection.ltr,
+                                          style: TextStyle(
+                                              color: Color(0xff5f5f5f),
+                                              fontSize: 14),
+                                        ),
+                                      ]),
+                                ))),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "مشاهده همه\t",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: Get.width / 22,
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(),
+                SizedBox(),
+              ])),
+          SizedBox(
+            height: 20,
           )
         ]),
       ),

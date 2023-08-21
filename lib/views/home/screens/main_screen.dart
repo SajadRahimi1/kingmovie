@@ -113,6 +113,7 @@ class MainScreen extends StatelessWidget {
         SizedBox(
           height: Get.height / 20,
         ),
+        
         // new series and movies
         Container(
           width: Get.width,
