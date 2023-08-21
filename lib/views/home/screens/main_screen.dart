@@ -305,7 +305,7 @@ class MainScreen extends StatelessWidget {
 
         // Time line
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: SizedBox(
               width: Get.width,
               height: Get.height / 6.6,
@@ -318,7 +318,7 @@ class MainScreen extends StatelessWidget {
                           width: Get.width,
                           height: Get.height,
                           margin: const EdgeInsets.all(3),
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
                               color: redColor,
                               borderRadius: BorderRadius.circular(5)),
@@ -331,7 +331,7 @@ class MainScreen extends StatelessWidget {
                               ),
                               Text(
                                 '${daysList[0].month.toString().toPersianDigit()}/${daysList[0].day.toString().toPersianDigit()}',
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ],
                           ),
@@ -355,7 +355,7 @@ class MainScreen extends StatelessWidget {
                               ),
                               Text(
                                 '${daysList[1].month.toString().toPersianDigit()}/${daysList[1].day.toString().toPersianDigit()}',
-                                style: TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ],
                           ),
@@ -493,6 +493,200 @@ class MainScreen extends StatelessWidget {
                   ),
                 ],
               )),
+        ),
+
+        // time line widgets
+        SizedBox(
+          height: Get.height / 35,
+        ),
+        Column(
+          children: List.generate(
+              4,
+              (index) => Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                    width: Get.width,
+                    height: Get.height / 8,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: darkBlue,
+                    ),
+                    child: Row(textDirection: TextDirection.ltr, children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Expanded(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            "1. Elemental | المنتال",
+                            textDirection: TextDirection.ltr,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15 *
+                                    MediaQuery.of(context).textScaleFactor),
+                          ),
+                          Row(
+                            textDirection: TextDirection.ltr,
+                            children: [
+                              const Icon(
+                                Icons.access_time,
+                                color: yellowColor,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text("07:29",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15 *
+                                          MediaQuery.of(context)
+                                              .textScaleFactor))
+                            ],
+                          )
+                        ],
+                      )),
+                      Padding(
+                          padding: EdgeInsets.only(right: Get.width / 25),
+                          child: const Text("فصل 2 قسمت 4",
+                              style: TextStyle(
+                                color: Colors.white,
+                              )))
+                    ]),
+                  )),
+        ),
+
+        SizedBox(
+          height: Get.height / 35,
+        ),
+
+        // new dub series and movies
+        Container(
+          width: Get.width,
+          height: Get.height / 2,
+          color: darkBlue,
+          child: DefaultTabController(
+            length: 2,
+            child: Column(children: [
+              TabBar(
+                labelStyle: TextStyle(
+                    fontSize: 16 * MediaQuery.of(context).textScaleFactor),
+                tabs: const [
+                  Tab(
+                    text: "سریال های دوبله بروز شده",
+                  ),
+                  Tab(
+                    text: "فیلم های دوبله بروز شده",
+                  )
+                ],
+                indicatorColor: yellowColor,
+              ),
+              Expanded(
+                child: TabBarView(
+                    children: List.generate(
+                        2,
+                        (index) => ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 5,
+                            itemBuilder: (_, listIndex) => Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: SizedBox(
+                                    width: Get.width / 2.5,
+                                    height: Get.height,
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                            child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Stack(
+                                            children: [
+                                              Image.network(
+                                                "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
+                                                fit: BoxFit.fill,
+                                                height: Get.height,
+                                              ),
+                                              Align(
+                                                alignment:
+                                                    Alignment.bottomCenter,
+                                                child: Container(
+                                                  alignment: Alignment.center,
+                                                  width: Get.width,
+                                                  height: Get.height / 20,
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          gradient: LinearGradient(
+                                                              colors: [
+                                                        Color.fromRGBO(
+                                                            0, 0, 0, 0.8),
+                                                        Color.fromRGBO(
+                                                            0, 0, 0, 0.4),
+                                                      ],
+                                                              begin: Alignment
+                                                                  .bottomCenter,
+                                                              end: Alignment
+                                                                  .topCenter)),
+                                                  child: Text(
+                                                    "قسمت 2 فصل 1",
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                        const Text(
+                                          "المنتال (Elemental)",
+                                          style: TextStyle(
+                                              color: Color(0xffffffff),
+                                              fontSize: 16),
+                                        ),
+                                        const Text(
+                                          "",
+                                          style: TextStyle(
+                                            color: Color(0xffffffff),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                )))),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "مشاهده همه\t",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white,
+                    size: Get.width / 22,
+                  )
+                ],
+              ),
+              SizedBox(
+                height: Get.height / 45,
+              )
+            ]),
+          ),
+        ),
+
+        SizedBox(
+          height: Get.height / 25,
         )
       ]),
     );
