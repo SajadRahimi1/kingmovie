@@ -10,6 +10,7 @@ class MovieDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RxInt starSelected = (-1).obs;
+    RxInt openEexpansionIndex = (-1).obs;
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -163,8 +164,126 @@ class MovieDetailScreen extends StatelessWidget {
               width: Get.width,
               height: Get.height / 1.3,
               child: TabBarView(children: [
-                SizedBox(),
-                SizedBox(),
+                const SizedBox(),
+                SizedBox(
+                  child: SingleChildScrollView(
+                      child: Obx(
+                    () => ExpansionPanelList(
+                      expandIconColor: Colors.white,
+                      expansionCallback: (panelIndex, isExpanded) => isExpanded
+                          ? openEexpansionIndex.value = -1
+                          : openEexpansionIndex.value = panelIndex,
+                      children: [
+                        ExpansionPanel(
+                          backgroundColor: Color(0xff49461d),
+                          // canTapOnHeader: true,
+                          isExpanded: openEexpansionIndex.value == 0,
+                          headerBuilder:
+                              (BuildContext context, bool isExpanded) =>
+                                  ListTile(
+                                      textColor: Colors.white,
+                                      title: Text(
+                                        "نسخه دوبله فارسی، سه زبانه",
+                                      )),
+                          body: Column(
+                            children: List.generate(
+                              4,
+                              (index) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: ListTile(
+                                  textColor: Colors.white,
+                                  iconColor: Colors.white,
+                                  titleTextStyle: TextStyle(fontSize: 16),
+                                  trailing: SizedBox(
+                                    width: Get.width / 7,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Icon(
+                                          Icons.download,
+                                          color: Colors.white,
+                                        ),
+                                        Icon(
+                                          Icons.play_arrow,
+                                          color: Colors.blue,
+                                          size: Get.width / 14,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  title: Text(
+                                    [
+                                      "1080p WEB-DL | انکودر : KingMovie | حجم فایل: 1.73 گیگابایت",
+                                      "720p WEB-DL | انکودر : KingMovie | حجم فایل: 970 مگابایت",
+                                      "480p WEB-DL | انکودر : KingMovie | حجم فایل: 670 مگابایت",
+                                      "صوت دوبله به صورت جداگانه | حجم فایل : 90 مگابایت"
+                                    ][index],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        ExpansionPanel(
+                          backgroundColor: const Color(0xff440f2d),
+                          // canTapOnHeader: true,
+                          isExpanded: openEexpansionIndex.value == 1,
+                          headerBuilder:
+                              (BuildContext context, bool isExpanded) =>
+                                  const ListTile(
+                                      textColor: Colors.white,
+                                      title: Text(
+                                        "نسخه زیرنویس فارسی",
+                                      )),
+                          body: Column(
+                            children: List.generate(
+                              2,
+                              (index) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: ListTile(
+                                  textColor: Colors.white,
+                                  iconColor: Colors.white,
+                                  titleTextStyle: TextStyle(fontSize: 16),
+                                  trailing: SizedBox(
+                                    width: Get.width / 7,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Icon(
+                                          Icons.download,
+                                          color: Colors.white,
+                                        ),
+                                        Icon(
+                                          Icons.play_arrow,
+                                          color: Colors.blue,
+                                          size: Get.width / 14,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  title: Text(
+                                    [
+                                      "دانلود نسخه 1080p WEB-DL | انکودر : KingMovie | حجم فایل: 1.55 گیگابایت",
+                                      "دانلود نسخه 720p WEB-DL | انکودر : KingMovie | حجم فایل: 820 مگابایت"
+                                    ][index],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )),
+                ),
                 Column(
                   children: [
                     Expanded(

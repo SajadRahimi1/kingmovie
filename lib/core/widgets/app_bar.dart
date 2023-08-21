@@ -20,16 +20,22 @@ AppBar homeAppBar({required BuildContext context}) => AppBar(
         color: Colors.white,
         size: MediaQuery.sizeOf(context).width / 13,
       ),
-      leading: const Icon(
-        Icons.menu_rounded,
-      ),
+      leading: Builder(builder: (context) {
+        return InkWell(
+          onTap: () => Scaffold.of(context).openDrawer(),
+          child: const Icon(
+            Icons.menu_rounded,
+          ),
+        );
+      }),
     );
 
-    AppBar screenAppBar({required BuildContext context,String title=""}) => AppBar(
+AppBar screenAppBar({required BuildContext context, String title = ""}) =>
+    AppBar(
       backgroundColor: darkBlue,
-      title:  Text(
-       title,
-        style:const TextStyle(color: Colors.white),
+      title: Text(
+        title,
+        style: const TextStyle(color: Colors.white),
       ),
       centerTitle: true,
       actions: const [
