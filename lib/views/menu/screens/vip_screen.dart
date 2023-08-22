@@ -15,7 +15,9 @@ class VipScreen extends StatelessWidget {
         title: const Text(
           "« اشتراک ویژه »",
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white, fontSize: 22),
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
         leading: IconButton(
             onPressed: () => Navigator.pop(context),

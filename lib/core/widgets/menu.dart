@@ -36,6 +36,7 @@ class Menu extends StatelessWidget {
           color: Color(0xff5f5f5f),
         ),
         const ListTile(
+          onTap: toProfileScreen,
           textColor: Colors.white,
           title: Text("تنظیمات کاربری"),
           trailing: Icon(
