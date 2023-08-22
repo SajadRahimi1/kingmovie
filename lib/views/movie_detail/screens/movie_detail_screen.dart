@@ -166,7 +166,27 @@ class MovieDetailScreen extends StatelessWidget {
               width: Get.width,
               height: Get.height / 1.3,
               child: TabBarView(children: [
-                const SizedBox(),
+                SizedBox(
+                  width: Get.width,
+                  height: Get.height,
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text(
+                        """دوبله فارسی انیمیشن "المنتال"
+________________________________
+دوبله اول | سورن
+گویندگان: راضیه فهیمی، سامان مظلومی، علی میلانی، فریبا ثابتی، سمیه الیاسی، آیلار احمدی، روژینا ظهوری، ناصر محمدی، آیدین الماسیان، علیرضا تابان، علیرضا طاهری، کسری نیک آذر، عرفان هنربخش، بهزاد الماسی، علیرضا وارسته، پرنیان شادکام، نرگس رجبی، عسل فتحی و...
+________________________________
+دوبله دوم | فیلیمو
+گویندگان: هومن حاجی عبدالهی، مریم نوری درخشان و...
+________________________________
+هر دو دوبله روی فیلم قرار گرفته است""",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
                 SizedBox(
                   child: SingleChildScrollView(
                       child: Obx(
