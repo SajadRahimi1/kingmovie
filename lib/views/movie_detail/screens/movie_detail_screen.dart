@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
 import 'package:king_movie/core/widgets/menu.dart';
+import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   const MovieDetailScreen({super.key, required this.heroTag});
@@ -166,6 +167,7 @@ class MovieDetailScreen extends StatelessWidget {
               width: Get.width,
               height: Get.height / 1.3,
               child: TabBarView(children: [
+                // description
                 SizedBox(
                   width: Get.width,
                   height: Get.height,
@@ -187,6 +189,8 @@ ________________________________
                     ),
                   ),
                 ),
+
+                // downloads
                 SizedBox(
                   child: SingleChildScrollView(
                       child: Obx(
@@ -306,6 +310,8 @@ ________________________________
                     ),
                   )),
                 ),
+
+                // actors
                 Column(
                   children: [
                     Expanded(
@@ -368,7 +374,17 @@ ________________________________
                     ),
                   ],
                 ),
-                SizedBox(),
+
+                // comments
+                SizedBox(
+                  width: Get.width,
+                  height: Get.height,
+                  child: ListView(
+                    children: [CommentWidget()],
+                  ),
+                ),
+
+                // trailer
                 SizedBox(),
               ])),
           SizedBox(
