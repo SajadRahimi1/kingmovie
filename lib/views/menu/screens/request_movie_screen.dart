@@ -41,7 +41,7 @@ class RequestMovieScreen extends StatelessWidget {
             decoration: BoxDecoration(
                 color: redColor, borderRadius: BorderRadius.circular(8)),
             child: const Text(
-              "ثبت درخواست",
+              "ثبت درخواست", 
               style: TextStyle(color: Colors.white),
             ),
           ),

@@ -72,6 +72,7 @@ class Menu extends StatelessWidget {
           color: Color(0xff5f5f5f),
         ),
         const ListTile(
+          onTap: toFavoriteScreen,
           textColor: Colors.white,
           title: Text("لیست مورد علاقه"),
           trailing: Icon(
