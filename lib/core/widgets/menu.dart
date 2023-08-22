@@ -60,6 +60,7 @@ class Menu extends StatelessWidget {
           color: Color(0xff5f5f5f),
         ),
         const ListTile(
+          onTap: toReuestScreen,
           textColor: Colors.white,
           title: Text("درخواست ها"),
           trailing: Icon(

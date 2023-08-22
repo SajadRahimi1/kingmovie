@@ -7,4 +7,5 @@ A new Flutter project.
 - [x] add trailer widget
 - [x] buy vip screen
 - [x] Profile Screen
-- [ ] request movie screen
+- [x] request movie screen
+- [ ] favorite movie screen
