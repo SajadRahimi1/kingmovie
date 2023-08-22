@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
+import 'package:king_movie/core/services/menu_service.dart';
 
 class Menu extends StatelessWidget {
   const Menu({super.key});
@@ -46,6 +47,7 @@ class Menu extends StatelessWidget {
           color: Color(0xff5f5f5f),
         ),
         const ListTile(
+          onTap: toVipScreen,
           textColor: Colors.white,
           title: Text("اشتراک ویژه دانلود"),
           trailing: Icon(

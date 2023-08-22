@@ -5,6 +5,6 @@ A new Flutter project.
 - [x] Movie description in detail screen
 - [x] comment widget detail screen
 - [x] add trailer widget
-- [ ] buy vip screen
+- [x] buy vip screen
 - [ ] Profile Screen
 - [ ] request movie screen
