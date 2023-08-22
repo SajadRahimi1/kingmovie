@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
 import 'package:king_movie/core/widgets/menu.dart';
+import 'package:king_movie/core/widgets/trailer_widget.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 
 class MovieDetailScreen extends StatelessWidget {
@@ -385,7 +386,15 @@ ________________________________
                 ),
 
                 // trailer
-                SizedBox(),
+                SizedBox(
+                  width: Get.width,
+                  height: Get.height,
+                  child: ListView(
+                    children: const[
+                      TrailerWidget(),
+                    ],
+                  ),
+                ),
               ])),
           SizedBox(
             height: 20,

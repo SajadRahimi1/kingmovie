@@ -2,9 +2,9 @@
 
 A new Flutter project.
 ### 22 Agust
-- [ ] Movie description in detail screen
-- [ ] comment widget detail screen
-- [ ] add trailer widget
+- [x] Movie description in detail screen
+- [x] comment widget detail screen
+- [x] add trailer widget
 - [ ] buy vip screen
 - [ ] Profile Screen
 - [ ] request movie screen
