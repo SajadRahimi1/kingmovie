@@ -50,7 +50,12 @@ AppBar screenAppBar({required BuildContext context, String title = ""}) =>
         color: Colors.white,
         size: MediaQuery.sizeOf(context).width / 13,
       ),
-      leading: const Icon(
-        Icons.menu_rounded,
-      ),
+      leading: Builder(builder: (context) {
+        return InkWell(
+          onTap: () => Scaffold.of(context).openDrawer(),
+          child: const Icon(
+            Icons.menu_rounded,
+          ),
+        );
+      }),
     );

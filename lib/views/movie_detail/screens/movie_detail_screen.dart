@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
+import 'package:king_movie/core/widgets/menu.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   const MovieDetailScreen({super.key, required this.heroTag});
@@ -16,6 +17,7 @@ class MovieDetailScreen extends StatelessWidget {
       child: Scaffold(
         appBar: screenAppBar(context: context),
         backgroundColor: blackColor,
+        drawer: const Menu(),
         body: ListView(children: [
           Hero(
               tag: heroTag,

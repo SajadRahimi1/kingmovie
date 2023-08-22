@@ -25,7 +25,7 @@ class Menu extends StatelessWidget {
           padding: EdgeInsets.symmetric(
               vertical: MediaQuery.sizeOf(context).height / 45),
           child: const Text(
-            "علی رحیمی",
+            "کاربر مهمان",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(color: Colors.white, fontSize: 18),

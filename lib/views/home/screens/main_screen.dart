@@ -34,7 +34,7 @@ class MainScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: blackColor,
         appBar: homeAppBar(context: context),
-        drawer: Menu(),
+        drawer: const Menu(),
         body: ListView(children: [
           // search text form field
           Padding(
