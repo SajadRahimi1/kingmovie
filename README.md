@@ -13,8 +13,8 @@ A new Flutter project.
 ### 23 Agust
 - [x] Transactions
 - [x] Tickets
+- [x] like or dislike comments
 - [ ] reply comment
 - [ ] comment post
 - [ ] login and singup screen
-- [x] like or dislike comments
-- [ ] show all
+- [x] show all

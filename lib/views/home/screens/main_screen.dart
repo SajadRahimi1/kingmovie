@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
 import 'package:king_movie/core/widgets/menu.dart';
+import 'package:king_movie/views/home/screens/show_all_screen.dart';
 import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:shamsi_date/shamsi_date.dart';
@@ -209,19 +210,24 @@ class MainScreen extends StatelessWidget {
                                     ),
                                   )))),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "مشاهده همه\t",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                      size: Get.width / 22,
-                    )
-                  ],
+                InkWell(
+                  onTap: () => Get.to(() => ShowAllScreen(
+                        title: "سریال های بروز شده",
+                      )),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "مشاهده همه\t",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                        size: Get.width / 22,
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: Get.height / 45,
