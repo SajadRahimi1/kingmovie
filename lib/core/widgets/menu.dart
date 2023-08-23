@@ -96,6 +96,7 @@ class Menu extends StatelessWidget {
           color: Color(0xff5f5f5f),
         ),
         const ListTile(
+          onTap: toTicketsScreen,
           textColor: Colors.white,
           title: Text("تیکت و پشتیبانی"),
           trailing: Icon(
