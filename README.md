@@ -8,4 +8,13 @@ A new Flutter project.
 - [x] buy vip screen
 - [x] Profile Screen
 - [x] request movie screen
-- [ ] favorite movie screen
+- [x] favorite movie screen
+  
+### 23 Agust
+- [ ] Transactions
+- [ ] Tickets
+- [ ] reply comment
+- [ ] comment post
+- [ ] login and singup screen
+- [x] like or dislike comments
+- [ ] show all
