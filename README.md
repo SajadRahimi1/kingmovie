@@ -12,7 +12,7 @@ A new Flutter project.
   
 ### 23 Agust
 - [x] Transactions
-- [ ] Tickets
+- [x] Tickets
 - [ ] reply comment
 - [ ] comment post
 - [ ] login and singup screen
