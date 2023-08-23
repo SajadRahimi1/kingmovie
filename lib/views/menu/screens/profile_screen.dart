@@ -46,13 +46,13 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          ProfileTextInput(
+          const ProfileTextInput(
             label: "ایمیل",
           ),
-          ProfileTextInput(
+          const ProfileTextInput(
             label: "موبایل",
           ),
-          ProfileTextInput(
+          const ProfileTextInput(
             label: "نام و نام خانوادگی",
           ),
           Container(

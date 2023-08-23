@@ -46,7 +46,7 @@ class TicketsScreen extends StatelessWidget {
           ),
           InkWell(
             onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ShowTicketScreen())),
+                MaterialPageRoute(builder: (context) => const ShowTicketScreen())),
             child: Container(
               width: MediaQuery.sizeOf(context).width,
               height: MediaQuery.sizeOf(context).height / 17,

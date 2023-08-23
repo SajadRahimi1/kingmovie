@@ -183,7 +183,7 @@ class MainScreen extends StatelessWidget {
                                                                     .bottomCenter,
                                                                 end: Alignment
                                                                     .topCenter)),
-                                                    child: Text(
+                                                    child: const Text(
                                                       "قسمت 2 فصل 1",
                                                       style: TextStyle(
                                                           color: Colors.white),
@@ -211,7 +211,7 @@ class MainScreen extends StatelessWidget {
                                   )))),
                 ),
                 InkWell(
-                  onTap: () => Get.to(() => ShowAllScreen(
+                  onTap: () => Get.to(() => const ShowAllScreen(
                         title: "سریال های بروز شده",
                       )),
                   child: Row(
@@ -365,7 +365,7 @@ class MainScreen extends StatelessWidget {
                             width: Get.width,
                             height: Get.height,
                             margin: const EdgeInsets.all(3),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             decoration: BoxDecoration(
                                 color: darkBlue,
                                 borderRadius: BorderRadius.circular(5)),
@@ -393,7 +393,7 @@ class MainScreen extends StatelessWidget {
                             width: Get.width,
                             height: Get.height,
                             margin: const EdgeInsets.all(3),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             decoration: BoxDecoration(
                                 color: darkBlue,
                                 borderRadius: BorderRadius.circular(5)),
@@ -406,7 +406,7 @@ class MainScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   '${daysList[2].month.toString().toPersianDigit()}/${daysList[2].day.toString().toPersianDigit()}',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
@@ -417,7 +417,7 @@ class MainScreen extends StatelessWidget {
                             width: Get.width,
                             height: Get.height,
                             margin: const EdgeInsets.all(3),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             decoration: BoxDecoration(
                                 color: darkBlue,
                                 borderRadius: BorderRadius.circular(5)),
@@ -430,7 +430,7 @@ class MainScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   '${daysList[3].month.toString().toPersianDigit()}/${daysList[3].day.toString().toPersianDigit()}',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
@@ -445,7 +445,7 @@ class MainScreen extends StatelessWidget {
                             width: Get.width,
                             height: Get.height,
                             margin: const EdgeInsets.all(3),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             decoration: BoxDecoration(
                                 color: darkBlue,
                                 borderRadius: BorderRadius.circular(5)),
@@ -458,7 +458,7 @@ class MainScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   '${daysList[4].month.toString().toPersianDigit()}/${daysList[4].day.toString().toPersianDigit()}',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
@@ -469,7 +469,7 @@ class MainScreen extends StatelessWidget {
                             width: Get.width,
                             height: Get.height,
                             margin: const EdgeInsets.all(3),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             decoration: BoxDecoration(
                                 color: darkBlue,
                                 borderRadius: BorderRadius.circular(5)),
@@ -482,7 +482,7 @@ class MainScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   '${daysList[5].month.toString().toPersianDigit()}/${daysList[5].day.toString().toPersianDigit()}',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
@@ -493,7 +493,7 @@ class MainScreen extends StatelessWidget {
                             width: Get.width,
                             height: Get.height,
                             margin: const EdgeInsets.all(3),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             decoration: BoxDecoration(
                                 color: darkBlue,
                                 borderRadius: BorderRadius.circular(5)),
@@ -506,7 +506,7 @@ class MainScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   '${daysList[6].month.toString().toPersianDigit()}/${daysList[6].day.toString().toPersianDigit()}',
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
@@ -660,7 +660,7 @@ class MainScreen extends StatelessWidget {
                                                                     .bottomCenter,
                                                                 end: Alignment
                                                                     .topCenter)),
-                                                    child: Text(
+                                                    child: const Text(
                                                       "قسمت 2 فصل 1",
                                                       style: TextStyle(
                                                           color: Colors.white),

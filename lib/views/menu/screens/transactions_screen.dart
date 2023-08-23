@@ -11,7 +11,7 @@ class TransactionsScreen extends StatelessWidget {
       appBar: menuAppBar(context: context, title: "« سوابق پرداخت »"),
       backgroundColor: darkBlue,
       body: ListView(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         children: [
           Container(
             width: MediaQuery.sizeOf(context).width,

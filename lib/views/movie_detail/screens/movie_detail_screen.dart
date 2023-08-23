@@ -172,7 +172,7 @@ class MovieDetailScreen extends StatelessWidget {
                 SizedBox(
                   width: Get.width,
                   height: Get.height,
-                  child: SingleChildScrollView(
+                  child: const SingleChildScrollView(
                     child: Padding(
                       padding: EdgeInsets.all(10),
                       child: Text(
@@ -202,12 +202,12 @@ ________________________________
                           : openEexpansionIndex.value = panelIndex,
                       children: [
                         ExpansionPanel(
-                          backgroundColor: Color(0xff49461d),
+                          backgroundColor: const Color(0xff49461d),
                           // canTapOnHeader: true,
                           isExpanded: openEexpansionIndex.value == 0,
                           headerBuilder:
                               (BuildContext context, bool isExpanded) =>
-                                  ListTile(
+                                  const ListTile(
                                       textColor: Colors.white,
                                       title: Text(
                                         "نسخه دوبله فارسی، سه زبانه",
@@ -221,7 +221,7 @@ ________________________________
                                 child: ListTile(
                                   textColor: Colors.white,
                                   iconColor: Colors.white,
-                                  titleTextStyle: TextStyle(fontSize: 16),
+                                  titleTextStyle: const TextStyle(fontSize: 16),
                                   trailing: SizedBox(
                                     width: Get.width / 7,
                                     child: Row(
@@ -230,7 +230,7 @@ ________________________________
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.download,
                                           color: Colors.white,
                                         ),
@@ -275,7 +275,7 @@ ________________________________
                                 child: ListTile(
                                   textColor: Colors.white,
                                   iconColor: Colors.white,
-                                  titleTextStyle: TextStyle(fontSize: 16),
+                                  titleTextStyle: const TextStyle(fontSize: 16),
                                   trailing: SizedBox(
                                     width: Get.width / 7,
                                     child: Row(
@@ -284,7 +284,7 @@ ________________________________
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.download,
                                           color: Colors.white,
                                         ),
@@ -317,7 +317,7 @@ ________________________________
                   children: [
                     Expanded(
                         child: ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (_, index) => Container(
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 5),
@@ -327,7 +327,7 @@ ________________________________
                                       borderRadius: BorderRadius.circular(8),
                                       color: blackColor,
                                       border:
-                                          Border.all(color: Color(0xff3f3f3f))),
+                                          Border.all(color: const Color(0xff3f3f3f))),
                                   child: Row(
                                       textDirection: TextDirection.ltr,
                                       children: [
@@ -381,7 +381,7 @@ ________________________________
                   width: Get.width,
                   height: Get.height,
                   child: ListView(
-                    children: [CommentWidget()],
+                    children: const [CommentWidget()],
                   ),
                 ),
 
@@ -396,7 +396,7 @@ ________________________________
                   ),
                 ),
               ])),
-          SizedBox(
+          const SizedBox(
             height: 20,
           )
         ]),

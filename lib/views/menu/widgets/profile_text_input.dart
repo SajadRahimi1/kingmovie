@@ -24,10 +24,10 @@ class ProfileTextInput extends StatelessWidget {
             labelText: label,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Color(0xff3f3f3f))),
+                borderSide: const BorderSide(color: Color(0xff3f3f3f))),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: Color(0xff3f3f3f))),
+                borderSide: const BorderSide(color: Color(0xff3f3f3f))),
           ),
         ),
       ),

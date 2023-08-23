@@ -44,7 +44,7 @@ class FavoritesScreen extends StatelessWidget {
                               color: yellowColor,
                               borderRadius: BorderRadius.circular(10)),
                         ),
-                        Expanded(
+                        const Expanded(
                             child: Text(
                           "Lego Jurassic World: The Secret Exhibit (2018)",
                           maxLines: 2,

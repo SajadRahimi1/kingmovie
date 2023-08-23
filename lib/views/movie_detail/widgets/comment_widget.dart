@@ -9,7 +9,7 @@ class CommentWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          margin: const EdgeInsets.all(8) + EdgeInsets.only(top: 5),
+          margin: const EdgeInsets.all(8) + const EdgeInsets.only(top: 5),
           padding: const EdgeInsets.all(12),
           width: MediaQuery.sizeOf(context).width,
           decoration: BoxDecoration(

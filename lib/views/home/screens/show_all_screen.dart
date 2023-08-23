@@ -42,27 +42,27 @@ class ShowAllScreen extends StatelessWidget {
                                       MediaQuery.of(context).textScaleFactor),
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           // subtitle
-                          Text(
+                          const Text(
                             "زیرنویس : دارد",
                             style: TextStyle(color: Colors.white),
                           ),
 
                           // age
-                          Text(
+                          const Text(
                             "رده سنی : R",
                             style: TextStyle(color: Colors.white),
                           ),
 
                           // language
-                          Text(
+                          const Text(
                             "زبان : انگلیسی",
                             style: TextStyle(color: Colors.white),
                           ),
 
                           // description
-                          Text(
+                          const Text(
                             "دوبله فارسی انیمیشن المنتالدوبله اول | سورن",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
