@@ -59,3 +59,19 @@ AppBar screenAppBar({required BuildContext context, String title = ""}) =>
         );
       }),
     );
+
+AppBar menuAppBar({required BuildContext context, String? title}) => AppBar(
+      backgroundColor: darkBlue,
+      centerTitle: true,
+      title:  Text(
+        title??"",
+        textAlign: TextAlign.center,
+        style: const TextStyle(color: Colors.white),
+      ),
+      leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          )),
+    );

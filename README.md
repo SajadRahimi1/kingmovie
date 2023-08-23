@@ -11,7 +11,7 @@ A new Flutter project.
 - [x] favorite movie screen
   
 ### 23 Agust
-- [ ] Transactions
+- [x] Transactions
 - [ ] Tickets
 - [ ] reply comment
 - [ ] comment post
