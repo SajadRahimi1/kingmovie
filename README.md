@@ -16,5 +16,5 @@ A new Flutter project.
 - [x] like or dislike comments
 - [x] show all
 - [ ] reply comment
-- [ ] comment post
+- [x] comment post
 - [ ] login and singup screen

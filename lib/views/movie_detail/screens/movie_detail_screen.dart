@@ -14,6 +14,7 @@ class MovieDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     RxInt starSelected = (-1).obs;
     RxInt openEexpansionIndex = (-1).obs;
+    RxBool isReply = false.obs;
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -326,8 +327,8 @@ ________________________________
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
                                       color: blackColor,
-                                      border:
-                                          Border.all(color: const Color(0xff3f3f3f))),
+                                      border: Border.all(
+                                          color: const Color(0xff3f3f3f))),
                                   child: Row(
                                       textDirection: TextDirection.ltr,
                                       children: [
@@ -378,10 +379,76 @@ ________________________________
 
                 // comments
                 SizedBox(
-                  width: Get.width,
-                  height: Get.height,
                   child: ListView(
-                    children: const [CommentWidget()],
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      Obx(() => isReply.value
+                          ? InkWell(
+                              onTap: () => isReply.value = false,
+                              child: Center(
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8),
+                                  child: Text(
+                                    "پاسخ به کامنت فعال شد. جهت حذف اینجا کلیک نمایید",
+                                    style: TextStyle(
+                                        color: Colors.green,
+                                        fontSize: 12 *
+                                            MediaQuery.of(context)
+                                                .textScaleFactor),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : const SizedBox()),
+                      // text input
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: SizedBox(
+                          width: MediaQuery.sizeOf(context).width,
+                          height: MediaQuery.sizeOf(context).height / 5,
+                          child: TextFormField(
+                            maxLines: 5,
+                            style: const TextStyle(
+                                fontSize: 13, color: Colors.white),
+                            decoration: InputDecoration(
+                                hintText: "نظر خود را ثبت کنید",
+                                hintStyle:
+                                    const TextStyle(color: Color(0xff5f5f5f)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xff5f5f5f))),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    borderSide: const BorderSide(
+                                        color: Color(0xff5f5f5f)))),
+                          ),
+                        ),
+                      ),
+
+                      // submit comment button
+                      Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(8),
+                        margin: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.sizeOf(context).width / 2.8) +
+                            const EdgeInsets.only(bottom: 8),
+                        decoration: BoxDecoration(
+                            color: redColor,
+                            borderRadius: BorderRadius.circular(8)),
+                        child: const Text(
+                          "ثبت و ارسال",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+
+                      // comments
+                      CommentWidget(
+                        onReplyTap: () => isReply.value = true,
+                      )
+                    ],
                   ),
                 ),
 
@@ -390,7 +457,7 @@ ________________________________
                   width: Get.width,
                   height: Get.height,
                   child: ListView(
-                    children: const[
+                    children: const [
                       TrailerWidget(),
                     ],
                   ),

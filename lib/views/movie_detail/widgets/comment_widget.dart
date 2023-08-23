@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 
 class CommentWidget extends StatelessWidget {
-  const CommentWidget({super.key});
+  const CommentWidget({super.key, this.onReplyTap});
+  final void Function()? onReplyTap;
 
   @override
   Widget build(BuildContext context) {
@@ -46,21 +47,27 @@ class CommentWidget extends StatelessWidget {
                   height: 10,
                 ),
                 // date and reply
-                const Row(
+                Row(
                   children: [
                     // date
-                    Text(
+                    const Text(
                       "27 مرداد 1402, 00:36 ق.ظ\t\t",
                       style: TextStyle(color: Color(0xffafafaf), fontSize: 11),
                     ),
                     // reply icon
-                    Icon(
-                      Icons.reply,
-                      color: redColor,
+                    InkWell(
+                      onTap: onReplyTap,
+                      child: const Icon(
+                        Icons.reply,
+                        color: redColor,
+                      ),
                     ),
-                    Text(
-                      "ثبت پاسخ",
-                      style: TextStyle(color: redColor, fontSize: 12),
+                    InkWell(
+                      onTap: onReplyTap,
+                      child: const Text(
+                        "ثبت پاسخ",
+                        style: TextStyle(color: redColor, fontSize: 12),
+                      ),
                     ),
                   ],
                 )
@@ -68,6 +75,8 @@ class CommentWidget extends StatelessWidget {
             ),
           ]),
         ),
+
+        // like or dislike
         Align(
           alignment: Alignment.topLeft,
           child: Padding(
