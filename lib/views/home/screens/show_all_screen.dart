@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
+import 'package:king_movie/core/widgets/menu.dart';
 
 class ShowAllScreen extends StatelessWidget {
   const ShowAllScreen({super.key, this.title});
@@ -10,9 +11,11 @@ class ShowAllScreen extends StatelessWidget {
     return Scaffold(
       appBar: screenAppBar(context: context, title: title ?? ""),
       backgroundColor: blackColor,
+      drawer: const Menu(),
       body: ListView.builder(
           padding: const EdgeInsets.all(5),
-          itemCount: 2,
+          physics: const BouncingScrollPhysics(),
+          itemCount: 4,
           itemBuilder: (_, index) => Container(
                 width: MediaQuery.sizeOf(context).width,
                 height: MediaQuery.sizeOf(context).height / 4,
@@ -21,6 +24,7 @@ class ShowAllScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10), color: darkBlue),
                 child: Row(
                   children: [
+                    // texts
                     Expanded(
                         child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -28,6 +32,7 @@ class ShowAllScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          // title
                           SizedBox(
                             width: MediaQuery.sizeOf(context).width,
                             child: Text(
@@ -42,6 +47,7 @@ class ShowAllScreen extends StatelessWidget {
                                       MediaQuery.of(context).textScaleFactor),
                             ),
                           ),
+
                           const Spacer(),
                           // subtitle
                           const Text(
@@ -74,12 +80,17 @@ class ShowAllScreen extends StatelessWidget {
                         ],
                       ),
                     )),
-                    Container(
+                    // image
+                    SizedBox(
                       width: MediaQuery.sizeOf(context).width / 3,
                       height: MediaQuery.sizeOf(context).height,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: yellowColor),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     )
                   ],
                 ),

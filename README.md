@@ -14,7 +14,7 @@ A new Flutter project.
 - [x] Transactions
 - [x] Tickets
 - [x] like or dislike comments
+- [x] show all
 - [ ] reply comment
 - [ ] comment post
 - [ ] login and singup screen
-- [x] show all
