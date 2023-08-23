@@ -408,6 +408,7 @@ ________________________________
                           width: MediaQuery.sizeOf(context).width,
                           height: MediaQuery.sizeOf(context).height / 5,
                           child: TextFormField(
+                            textInputAction: TextInputAction.done,
                             maxLines: 5,
                             style: const TextStyle(
                                 fontSize: 13, color: Colors.white),
