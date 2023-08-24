@@ -17,4 +17,6 @@ A new Flutter project.
 - [x] show all
 - [x] reply comment
 - [x] comment post
+
+### 24 Agust
 - [x] login and singup screen
