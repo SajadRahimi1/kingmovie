@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:king_movie/core/widgets/login_dialog.dart';
 import 'package:king_movie/views/login/screens/login_screen.dart';
+import 'package:king_movie/views/login/screens/singup_screen.dart';
 import 'package:king_movie/views/menu/screens/favorites_screen.dart';
 import 'package:king_movie/views/menu/screens/profile_screen.dart';
 import 'package:king_movie/views/menu/screens/request_movie_screen.dart';
@@ -31,5 +32,10 @@ void toLoginScreen() =>
     Get.to(() => const LoginScreen(), transition: Transition.leftToRight);
 
 void loginTap() {
-  Get.dialog(LoginDialog());
+  Get.dialog(LoginDialog(
+    onLoginTap: () =>
+        Get.to(() => const LoginScreen(), transition: Transition.leftToRight),
+    onSingupTap: () =>
+        Get.to(() => const SingupScreen(), transition: Transition.leftToRight),
+  ));
 }
