@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:king_movie/core/widgets/login_dialog.dart';
 import 'package:king_movie/views/login/screens/login_screen.dart';
 import 'package:king_movie/views/menu/screens/favorites_screen.dart';
 import 'package:king_movie/views/menu/screens/profile_screen.dart';
@@ -27,3 +29,7 @@ void toTicketsScreen() =>
 
 void toLoginScreen() =>
     Get.to(() => const LoginScreen(), transition: Transition.leftToRight);
+
+void loginTap() {
+  Get.dialog(LoginDialog());
+}

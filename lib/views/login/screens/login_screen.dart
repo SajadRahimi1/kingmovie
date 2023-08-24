@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
           SizedBox(
             height: MediaQuery.sizeOf(context).height / 20,
           ),
-          InkWell(
+        const  InkWell(
             child: Text(
               "اگر رمز عبور خود را فراموش کرده اید اینجا کلیک نمایید",
               style: TextStyle(color: Colors.white),

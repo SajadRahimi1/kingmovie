@@ -39,14 +39,23 @@ class Menu extends StatelessWidget {
           color: Color(0xff5f5f5f),
         ),
         const ListTile(
-          onTap: toProfileScreen,
+          onTap: loginTap,
           textColor: Colors.white,
-          title: Text("تنظیمات کاربری"),
+          title: Text("ورود / ثبت نام"),
           trailing: Icon(
-            Icons.settings,
+            Icons.login,
             color: Colors.white,
           ),
         ),
+        // const ListTile(
+        //   onTap: toProfileScreen,
+        //   textColor: Colors.white,
+        //   title: Text("تنظیمات کاربری"),
+        //   trailing: Icon(
+        //     Icons.settings,
+        //     color: Colors.white,
+        //   ),
+        // ),
         const Divider(
           color: Color(0xff5f5f5f),
         ),
