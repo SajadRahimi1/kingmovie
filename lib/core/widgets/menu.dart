@@ -12,15 +12,18 @@ class Menu extends StatelessWidget {
       height: MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(color: blackColor),
       child: Column(children: [
-        SizedBox(
-          width: MediaQuery.sizeOf(context).width,
-          height: MediaQuery.sizeOf(context).height / 5,
-          child: Align(
-              alignment: Alignment.bottomCenter,
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: MediaQuery.sizeOf(context).width / 6,
-              )),
+        InkWell(
+          onTap: toLoginScreen,
+          child: SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height / 5,
+            child: Align(
+                alignment: Alignment.bottomCenter,
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: MediaQuery.sizeOf(context).width / 6,
+                )),
+          ),
         ),
         Padding(
           padding: EdgeInsets.symmetric(

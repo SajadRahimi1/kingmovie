@@ -1,4 +1,5 @@
 import 'package:get/route_manager.dart';
+import 'package:king_movie/views/login/screens/login_screen.dart';
 import 'package:king_movie/views/menu/screens/favorites_screen.dart';
 import 'package:king_movie/views/menu/screens/profile_screen.dart';
 import 'package:king_movie/views/menu/screens/request_movie_screen.dart';
@@ -23,3 +24,6 @@ void toTransactionScreen() => Get.to(() => const TransactionsScreen(),
 
 void toTicketsScreen() =>
     Get.to(() => const TicketsScreen(), transition: Transition.leftToRight);
+
+void toLoginScreen() =>
+    Get.to(() => const LoginScreen(), transition: Transition.leftToRight);
