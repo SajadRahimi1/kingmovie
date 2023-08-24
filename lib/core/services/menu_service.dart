@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:king_movie/core/widgets/login_dialog.dart';
 import 'package:king_movie/views/login/screens/login_screen.dart';

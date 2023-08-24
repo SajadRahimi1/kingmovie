@@ -78,7 +78,7 @@ class CommentWidget extends StatelessWidget {
                   ],
                 ),
               ]),
-              ReplyCommentWidget()
+              const ReplyCommentWidget()
             ],
           ),
         ),
