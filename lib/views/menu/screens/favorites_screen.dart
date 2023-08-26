@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
+import 'package:king_movie/viewmodels/favorite_viewmodel.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(FavoriteViewModel());
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkBlue,
@@ -23,11 +27,12 @@ class FavoritesScreen extends StatelessWidget {
             )),
       ),
       backgroundColor: darkBlue,
-      body: Padding(
+      body: controller.obx((status) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView.builder(
+              itemCount: controller.favoriteModel?.data?.list?.length ?? 0,
               itemBuilder: (_, index) => Container(
-                    margin:const EdgeInsets.symmetric(vertical: 5),
+                    margin: const EdgeInsets.symmetric(vertical: 5),
                     width: MediaQuery.sizeOf(context).width,
                     height: MediaQuery.sizeOf(context).height / 8,
                     decoration: BoxDecoration(
@@ -37,30 +42,35 @@ class FavoritesScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          margin:const EdgeInsets.only(left: 10),
+                          margin: const EdgeInsets.only(left: 10),
                           width: MediaQuery.sizeOf(context).width / 6,
                           height: double.maxFinite,
                           decoration: BoxDecoration(
-                              color: yellowColor,
+                              image: DecorationImage(
+                                  image: NetworkImage(controller.favoriteModel
+                                          ?.data?.list?[index].poster ??
+                                      ""),
+                                  fit: BoxFit.fill),
                               borderRadius: BorderRadius.circular(10)),
                         ),
-                        const Expanded(
+                        Expanded(
                             child: Text(
-                          "Lego Jurassic World: The Secret Exhibit (2018)",
+                          controller.favoriteModel?.data?.list?[index].title ??
+                              "",
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         )),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15),
-                          child: Icon(
-                            Icons.delete,
-                            color: redColor,
-                          ),
-                        )
+                        // const Padding(
+                        //   padding: EdgeInsets.symmetric(horizontal: 15),
+                        //   child: Icon(
+                        //     Icons.delete,
+                        //     color: redColor,
+                        //   ),
+                        // )
                       ],
                     ),
-                  ))),
+                  )))),
     );
   }
 }
