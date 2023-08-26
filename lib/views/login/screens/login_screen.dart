@@ -18,13 +18,13 @@ class LoginScreen extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: ProfileTextInput(
                 label: "ایمیل",
                 onChanged: (value) => controller.email = value,
               )),
           Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: ProfileTextInput(
                 label: "رمز عبور",
                 onChanged: (value) => controller.password = value,
