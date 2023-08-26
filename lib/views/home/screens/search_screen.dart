@@ -18,6 +18,7 @@ class SearchScreen extends StatelessWidget {
       body: controller.obx((state) => ListView.builder(
           padding: const EdgeInsets.all(5),
           physics: const BouncingScrollPhysics(),
+          controller: controller.scrollController,
           itemCount: controller.searchModel?.data?.dataList?.length ?? 0,
           itemBuilder: (_, index) => Container(
                 width: MediaQuery.sizeOf(context).width,
