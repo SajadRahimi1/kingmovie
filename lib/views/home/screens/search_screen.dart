@@ -94,7 +94,9 @@ class SearchScreen extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
+                          controller
+                                  .searchModel?.data?.dataList?[index].poster ??
+                              "",
                           fit: BoxFit.fill,
                         ),
                       ),

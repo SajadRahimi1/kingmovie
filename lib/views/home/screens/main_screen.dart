@@ -5,6 +5,7 @@ import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
 import 'package:king_movie/core/widgets/menu.dart';
 import 'package:king_movie/viewmodels/home_viewmodel.dart';
+import 'package:king_movie/views/home/screens/search_screen.dart';
 import 'package:king_movie/views/home/screens/show_all_screen.dart';
 import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
@@ -51,12 +52,21 @@ class MainScreen extends StatelessWidget {
                 style: const TextStyle(color: Colors.white, fontSize: 12),
                 maxLines: 1,
                 textAlignVertical: TextAlignVertical.bottom,
+                onChanged: (value) => controller.searchValue = value,
+                onFieldSubmitted: (value) => Get.to(() => SearchScreen(
+                      title: value,
+                    )),
                 decoration: InputDecoration(
                     focusColor: darkBlue,
                     filled: true,
-                    suffixIcon: const Icon(
-                      Icons.search,
-                      color: yellowColor,
+                    suffixIcon: InkWell(
+                      onTap: () => Get.to(() => SearchScreen(
+                            title: controller.searchValue,
+                          )),
+                      child: const Icon(
+                        Icons.search,
+                        color: yellowColor,
+                      ),
                     ),
                     hintStyle:
                         const TextStyle(color: Color(0xffafafaf), fontSize: 12),

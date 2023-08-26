@@ -4,6 +4,7 @@ import 'package:king_movie/models/home_model.dart';
 
 class HomeViewModel extends GetxController with StateMixin {
   HomeModel? homeModel;
+  String searchValue = '';
 
   @override
   void onInit() async {
