@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
 import 'package:king_movie/core/widgets/menu.dart';
+import 'package:king_movie/viewmodels/home_viewmodel.dart';
 import 'package:king_movie/views/home/screens/show_all_screen.dart';
 import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
@@ -29,10 +30,12 @@ class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeViewModel());
     final daysList = getDaysOfCurrentWeek();
 
     return SafeArea(
-      child: Scaffold(
+        child: controller.obx(
+      (status) => Scaffold(
         backgroundColor: blackColor,
         appBar: homeAppBar(context: context),
         drawer: const Menu(),
@@ -73,7 +76,7 @@ class MainScreen extends StatelessWidget {
             height: Get.height / 2.8,
             child: CarouselSlider(
                 items: List.generate(
-                    4,
+                    controller.homeModel?.data?.slider?.length ?? 0,
                     (index) => InkWell(
                           onTap: () => Navigator.push(
                               context,
@@ -89,19 +92,25 @@ class MainScreen extends StatelessWidget {
                                 child: Hero(
                                   tag: 'Elemental$index',
                                   child: Image.network(
-                                    "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
+                                    controller.homeModel?.data?.slider?[index]
+                                            .poster ??
+                                        "",
                                     fit: BoxFit.fill,
                                   ),
                                 ),
                               )),
-                              const Text(
-                                "المنتال (Elemental)",
-                                style: TextStyle(
+                              Text(
+                                controller.homeModel?.data?.slider?[index]
+                                        .title ??
+                                    "",
+                                style: const TextStyle(
                                     color: Color(0xffffffff), fontSize: 16),
                               ),
-                              const Text(
-                                "(2023)",
-                                style: TextStyle(
+                              Text(
+                                controller
+                                        .homeModel?.data?.slider?[index].year ??
+                                    "",
+                                style: const TextStyle(
                                   color: Color(0xffffffff),
                                 ),
                               )
@@ -713,6 +722,6 @@ class MainScreen extends StatelessWidget {
           )
         ]),
       ),
-    );
+    ));
   }
 }
