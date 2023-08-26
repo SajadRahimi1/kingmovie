@@ -3,9 +3,10 @@ import 'package:king_movie/core/constants/color_constants.dart';
 
 class ProfileTextInput extends StatelessWidget {
   const ProfileTextInput(
-      {super.key, required this.label, this.textEditingController});
+      {super.key, required this.label, this.textEditingController, this.onChanged});
   final String label;
   final TextEditingController? textEditingController;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +16,7 @@ class ProfileTextInput extends StatelessWidget {
         width: MediaQuery.sizeOf(context).width,
         height: MediaQuery.sizeOf(context).height / 15,
         child: TextFormField(
+          onChanged: onChanged,
           controller: textEditingController,
           style: const TextStyle(color: Colors.white, fontSize: 12),
           decoration: InputDecoration(
