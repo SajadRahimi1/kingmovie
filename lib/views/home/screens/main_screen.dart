@@ -147,77 +147,163 @@ class MainScreen extends StatelessWidget {
                   indicatorColor: yellowColor,
                 ),
                 Expanded(
-                  child: TabBarView(
-                      children: List.generate(
-                          2,
-                          (index) => ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 5,
-                              itemBuilder: (_, listIndex) => Padding(
-                                    padding: const EdgeInsets.all(10),
-                                    child: SizedBox(
-                                      width: Get.width / 2.5,
-                                      height: Get.height,
-                                      child: Column(
+                  child: TabBarView(children: [
+                    ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.homeModel?.data?.series?.length,
+                        itemBuilder: (_, listIndex) => Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: SizedBox(
+                                width: Get.width / 2.5,
+                                height: Get.height,
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                        child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Stack(
                                         children: [
-                                          Expanded(
-                                              child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: Stack(
-                                              children: [
-                                                Image.network(
-                                                  "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
-                                                  fit: BoxFit.fill,
-                                                  height: Get.height,
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.bottomCenter,
-                                                  child: Container(
-                                                    alignment: Alignment.center,
-                                                    width: Get.width,
-                                                    height: Get.height / 20,
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                            gradient: LinearGradient(
-                                                                colors: [
-                                                          Color.fromRGBO(
-                                                              0, 0, 0, 0.8),
-                                                          Color.fromRGBO(
-                                                              0, 0, 0, 0.4),
-                                                        ],
-                                                                begin: Alignment
-                                                                    .bottomCenter,
-                                                                end: Alignment
-                                                                    .topCenter)),
-                                                    child: const Text(
-                                                      "قسمت 2 فصل 1",
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          )),
-                                          const Text(
-                                            "المنتال (Elemental)",
-                                            style: TextStyle(
-                                                color: Color(0xffffffff),
-                                                fontSize: 16),
+                                          Image.network(
+                                            controller
+                                                    .homeModel
+                                                    ?.data
+                                                    ?.series?[listIndex]
+                                                    .poster ??
+                                                "",
+                                            fit: BoxFit.fill,
+                                            height: Get.height,
                                           ),
-                                          const Text(
-                                            "",
-                                            style: TextStyle(
-                                              color: Color(0xffffffff),
+                                          Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              width: Get.width,
+                                              height: Get.height / 20,
+                                              decoration: const BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                      colors: [
+                                                    Color.fromRGBO(
+                                                        0, 0, 0, 0.8),
+                                                    Color.fromRGBO(
+                                                        0, 0, 0, 0.4),
+                                                  ],
+                                                      begin: Alignment
+                                                          .bottomCenter,
+                                                      end:
+                                                          Alignment.topCenter)),
+                                              child: Text(
+                                                controller
+                                                        .homeModel
+                                                        ?.data
+                                                        ?.series?[listIndex]
+                                                        .genre ??
+                                                    "",
+                                                style: const TextStyle(
+                                                    color: Colors.white),
+                                              ),
                                             ),
                                           )
                                         ],
                                       ),
+                                    )),
+                                    Text(
+                                      controller.homeModel?.data
+                                              ?.series?[listIndex].title ??
+                                          "",
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                        color: Color(0xffffffff),
+                                      ),
                                     ),
-                                  )))),
+                                    const Text(
+                                      "",
+                                      style: TextStyle(
+                                        color: Color(0xffffffff),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )),
+                    ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.homeModel?.data?.movie?.length,
+                        itemBuilder: (_, listIndex) => Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: SizedBox(
+                                width: Get.width / 2.5,
+                                height: Get.height,
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                        child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Stack(
+                                        children: [
+                                          Image.network(
+                                            controller
+                                                    .homeModel
+                                                    ?.data
+                                                    ?.movie?[listIndex]
+                                                    .poster ??
+                                                "",
+                                            fit: BoxFit.fill,
+                                            height: Get.height,
+                                          ),
+                                          Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              width: Get.width,
+                                              height: Get.height / 20,
+                                              decoration: const BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                      colors: [
+                                                    Color.fromRGBO(
+                                                        0, 0, 0, 0.8),
+                                                    Color.fromRGBO(
+                                                        0, 0, 0, 0.4),
+                                                  ],
+                                                      begin: Alignment
+                                                          .bottomCenter,
+                                                      end:
+                                                          Alignment.topCenter)),
+                                              child: Text(
+                                                controller
+                                                        .homeModel
+                                                        ?.data
+                                                        ?.movie?[listIndex]
+                                                        .genre ??
+                                                    "",
+                                                style: const TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )),
+                                    Text(
+                                      controller.homeModel?.data
+                                              ?.movie?[listIndex].title ??
+                                          "",
+                                      style: TextStyle(
+                                          color: Color(0xffffffff),
+                                          fontSize: 16),
+                                    ),
+                                    const Text(
+                                      "",
+                                      style: TextStyle(
+                                        color: Color(0xffffffff),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ))
+                  ]),
                 ),
                 InkWell(
                   onTap: () => Get.to(() => const ShowAllScreen(
