@@ -389,7 +389,8 @@ class MovieDetailScreen extends StatelessWidget {
                     // comments
                     SizedBox(
                       child: ListView(
-                        physics: const BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(
+                            parent: BouncingScrollPhysics()),
                         children: [
                           Obx(() => isReply.value
                               ? InkWell(
@@ -456,10 +457,16 @@ class MovieDetailScreen extends StatelessWidget {
                           ),
 
                           // comments
-                          Column(children: List.generate(controller.movieModel?.data?.comment?.length??0, (index) => CommentWidget(
-                            onReplyTap: () => isReply.value = true,
-                            commentModel: controller.movieModel?.data?.comment?[index],
-                          )),)
+                          Column(
+                            children: List.generate(
+                                controller.movieModel?.data?.comment?.length ??
+                                    0,
+                                (index) => CommentWidget(
+                                      onReplyTap: () => isReply.value = true,
+                                      commentModel: controller
+                                          .movieModel?.data?.comment?[index],
+                                    )),
+                          )
                         ],
                       ),
                     ),

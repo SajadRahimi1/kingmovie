@@ -7,3 +7,4 @@ const String favotiteUrl = '$baseUrl=watch';
 const String newRequestUrl = '$baseUrl=newrequest';
 const String movieRequestsUrl = '$baseUrl=request';
 const String getMovieUrl = '$baseUrl=movie';
+const String searchUrl = '$baseUrl=category';
