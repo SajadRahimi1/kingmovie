@@ -3,3 +3,4 @@ const String homeUrl = '$baseUrl=home';
 const String loginUrl = '$baseUrl=login';
 const String ticketUrl = '$baseUrl=ticket';
 const String transactionUrl = '$baseUrl=trans';
+const String favotiteUrl = '$baseUrl=watch';
