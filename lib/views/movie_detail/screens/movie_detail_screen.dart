@@ -456,9 +456,10 @@ class MovieDetailScreen extends StatelessWidget {
                           ),
 
                           // comments
-                          CommentWidget(
+                          Column(children: List.generate(controller.movieModel?.data?.comment?.length??0, (index) => CommentWidget(
                             onReplyTap: () => isReply.value = true,
-                          )
+                            commentModel: controller.movieModel?.data?.comment?[index],
+                          )),)
                         ],
                       ),
                     ),
@@ -467,10 +468,12 @@ class MovieDetailScreen extends StatelessWidget {
                     SizedBox(
                       width: Get.width,
                       height: Get.height,
-                      child: ListView(
-                        children: const [
-                          TrailerWidget(),
-                        ],
+                      child: ListView.builder(
+                        itemCount:
+                            controller.movieModel?.data?.trailer?.length ?? 0,
+                        itemBuilder: (_, index) => TrailerWidget(
+                            trailerModel:
+                                controller.movieModel?.data?.trailer?[index]),
                       ),
                     ),
                   ])),

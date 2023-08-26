@@ -110,11 +110,11 @@ class Data {
             json['writerArray'].map((x) => WriterArray.fromJson(x)));
     directorArray = json["directorArray"] == null
         ? null
-       : List<DirectorArray>.from(
+        : List<DirectorArray>.from(
             json['directorArray'].map((x) => DirectorArray.fromJson(x)));
     genreArray = json["genreArray"] == null
         ? null
-       : List<GenreArray>.from(
+        : List<GenreArray>.from(
             json['genreArray'].map((x) => GenreArray.fromJson(x)));
     country = json["country"];
     age = json["age"];
@@ -124,16 +124,13 @@ class Data {
     genre = json["genre"];
     cast = json["cast"] == null
         ? null
-        : List<Cast>.from(
-            json['cast'].map((x) => Cast.fromJson(x)));
+        : List<Cast>.from(json['cast'].map((x) => Cast.fromJson(x)));
     trailer = json["trailer"] == null
         ? null
-        : List<Trailer>.from(
-            json['trailer'].map((x) => Trailer.fromJson(x)));
+        : List<Trailer>.from(json['trailer'].map((x) => Trailer.fromJson(x)));
     comment = json["comment"] == null
         ? null
-        : List<Comment>.from(
-            json['comment'].map((x) => Comment.fromJson(x)));
+        : List<Comment>.from(json['comment'].map((x) => Comment.fromJson(x)));
     suggest = json["suggest"] == null
         ? null
         : (json["suggest"] as List).map((e) => Suggest.fromJson(e)).toList();
@@ -258,7 +255,7 @@ class Comment {
   String? date;
   int? like;
   int? dislike;
-  List? reply;
+  List<Comment>? reply;
 
   Comment(
       {this.id,
@@ -278,7 +275,9 @@ class Comment {
     date = json["date"];
     like = json["like"];
     dislike = json["dislike"];
-    reply = json["reply"] ?? [];
+    reply = json["reply"] == null
+        ? null
+        : List<Comment>.from(json['reply'].map((x) => Comment.fromJson(x)));
   }
 
   Map<String, dynamic> toJson() {
@@ -354,8 +353,7 @@ class Link {
     allow = json["allow"];
     data = json["data"] == null
         ? null
-      :  List<Data1>.from(
-            json['data'].map((x) => Data1.fromJson(x)));
+        : List<Data1>.from(json['data'].map((x) => Data1.fromJson(x)));
   }
 }
 

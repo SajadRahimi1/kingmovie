@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
+import 'package:king_movie/models/movie_model.dart';
 
 class CommentWidget extends StatelessWidget {
-  const CommentWidget({super.key, this.onReplyTap});
+  const CommentWidget({super.key, this.onReplyTap, required this.commentModel});
   final void Function()? onReplyTap;
+  final Comment? commentModel;
 
   @override
   Widget build(BuildContext context) {
@@ -22,28 +24,30 @@ class CommentWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: CircleAvatar(
-                      radius: MediaQuery.sizeOf(context).width / 15),
+                    radius: MediaQuery.sizeOf(context).width / 15,
+                    backgroundImage: NetworkImage(commentModel?.avatar ?? ""),
+                  ),
                 ),
                 // texts
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // name
-                    const Text(
-                      "محمد کیان دست افکن",
+                    Text(
+                      commentModel?.name ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                     // comment body
                     SizedBox(
                       width: MediaQuery.sizeOf(context).width / 1.4,
-                      child: const Text(
-                        "ممنونم از کینگ مووی عزیز برای گذاشتن این اثر زیبا و از اون استادیو دوبلاژ ممنونم واقعا دستشون درد نکنه خصوصن جناب هومن حاج عبدالهی که دوبله نقش پسر رو بر عهده داشت واقعا کار زیبا فاخر که دو شدت بزرگ با کمک هم ساختن Pixar و wall Disney و امید وارم که این کار فاخر ادامه دار باشه حالا چه سریالی بشه چه نسخه دومش بیاد اینم بگم از اون انیمیشن که قشنگ خوب بلده حال دلتو خوب کنه ارز دیدن داره 100٪ بنظرم الان که دوبله شده نسخه باکیفیت منتشر شده ارزش دیدن داره هرکی نبینه اشتباه میکنه اینم اضافه کنم که بله صد درصد سورن هم اینو دوبله کنه عالی که نه مهشر میشه و اگه کیفیت این فیلم نسخه دوبله نظر رو 1080 بلوری سینک بشه عالیه من تخصص نیست ولی کلی این انیمیشن ارز دیدن دوبله تو blu ray داره دوستان :",
+                      child: Text(
+                        commentModel?.text ?? "",
                         textAlign: TextAlign.justify,
-                        style:
-                            TextStyle(color: Color(0xffdfdfdf), fontSize: 12),
+                        style: const TextStyle(
+                            color: Color(0xffdfdfdf), fontSize: 12),
                       ),
                     ),
                     const SizedBox(
@@ -53,10 +57,10 @@ class CommentWidget extends StatelessWidget {
                     Row(
                       children: [
                         // date
-                        const Text(
-                          "27 مرداد 1402, 00:36 ق.ظ\t\t",
-                          style:
-                              TextStyle(color: Color(0xffafafaf), fontSize: 11),
+                        Text(
+                          "${commentModel?.date}\t\t",
+                          style: const TextStyle(
+                              color: Color(0xffafafaf), fontSize: 11),
                         ),
                         // reply icon
                         InkWell(
@@ -78,7 +82,11 @@ class CommentWidget extends StatelessWidget {
                   ],
                 ),
               ]),
-              const ReplyCommentWidget()
+              (commentModel?.reply?.isEmpty ?? true)
+                  ? const SizedBox()
+                  : ReplyCommentWidget(
+                      commentModel: commentModel?.reply?[0],
+                    )
             ],
           ),
         ),
@@ -98,7 +106,7 @@ class CommentWidget extends StatelessWidget {
                       backgroundColor: const Color(0xff7a7a9e),
                       child: Center(
                           child: Text(
-                        "+12",
+                        "+${commentModel?.like}",
                         textDirection: TextDirection.ltr,
                         style: TextStyle(
                             color: Colors.white,
@@ -119,7 +127,7 @@ class CommentWidget extends StatelessWidget {
                         backgroundColor: const Color(0xff7a7a9e),
                         child: Center(
                             child: Text(
-                          "-8",
+                          "-${commentModel?.dislike}",
                           textDirection: TextDirection.ltr,
                           style: TextStyle(
                               color: Colors.white,
@@ -136,8 +144,10 @@ class CommentWidget extends StatelessWidget {
 }
 
 class ReplyCommentWidget extends StatelessWidget {
-  const ReplyCommentWidget({super.key, this.onReplyTap});
+  const ReplyCommentWidget(
+      {super.key, this.onReplyTap, required this.commentModel});
   final void Function()? onReplyTap;
+  final Comment? commentModel;
 
   @override
   Widget build(BuildContext context) {
@@ -155,28 +165,31 @@ class ReplyCommentWidget extends StatelessWidget {
             // avatar
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child:
-                  CircleAvatar(radius: MediaQuery.sizeOf(context).width / 15),
+              child: CircleAvatar(
+                radius: MediaQuery.sizeOf(context).width / 18,
+                backgroundImage: NetworkImage(commentModel?.avatar ?? ""),
+              ),
             ),
             // texts
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // name
-                const Text(
-                  "محمد کیان دست افکن",
+                Text(
+                  commentModel?.name ?? "",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 // comment body
                 SizedBox(
-                  width: MediaQuery.sizeOf(context).width / 2,
-                  child: const Text(
-                    "ممنونم از کینگ مووی عزیز برای گذاشتن این اثر زیبا و از اون استادیو دوبلاژ ممنونم واقعا دستشون درد نکنه خصوصن جناب هومن حاج عبدالهی که دوبله نقش پسر رو بر عهده داشت واقعا کار زیبا فاخر که دو شدت بزرگ با کمک هم ساختن Pixar و wall Disney و امید وارم که این کار فاخر ادامه دار باشه حالا چه سریالی بشه چه نسخه دومش بیاد اینم بگم از اون انیمیشن که قشنگ خوب بلده حال دلتو خوب کنه ارز دیدن داره 100٪ بنظرم الان که دوبله شده نسخه باکیفیت منتشر شده ارزش دیدن داره هرکی نبینه اشتباه میکنه اینم اضافه کنم که بله صد درصد سورن هم اینو دوبله کنه عالی که نه مهشر میشه و اگه کیفیت این فیلم نسخه دوبله نظر رو 1080 بلوری سینک بشه عالیه من تخصص نیست ولی کلی این انیمیشن ارز دیدن دوبله تو blu ray داره دوستان :",
+                  width: MediaQuery.sizeOf(context).width / 1.8,
+                  child: Text(
+                    commentModel?.text ?? "",
                     textAlign: TextAlign.justify,
-                    style: TextStyle(color: Color(0xffdfdfdf), fontSize: 12),
+                    style:
+                        const TextStyle(color: Color(0xffdfdfdf), fontSize: 12),
                   ),
                 ),
                 const SizedBox(
@@ -186,9 +199,10 @@ class ReplyCommentWidget extends StatelessWidget {
                 Row(
                   children: [
                     // date
-                    const Text(
-                      "27 مرداد 1402, 00:36 ق.ظ\t\t",
-                      style: TextStyle(color: Color(0xffafafaf), fontSize: 11),
+                    Text(
+                      "${commentModel?.date}\t\t",
+                      style: const TextStyle(
+                          color: Color(0xffafafaf), fontSize: 11),
                     ),
                     // reply icon
                     InkWell(
@@ -206,7 +220,7 @@ class ReplyCommentWidget extends StatelessWidget {
                       ),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ]),
