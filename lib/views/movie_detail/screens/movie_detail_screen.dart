@@ -62,29 +62,29 @@ class MovieDetailScreen extends StatelessWidget {
                       ),
 
                       // score
-                      const Row(
+                      Row(
                         // mainAxisAlignment: MainAxisAlignment.end,
                         textDirection: TextDirection.ltr,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.star,
                             color: Colors.yellow,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
-                          Text("8.9",
+                          Text(controller.movieModel?.data?.vote ?? "",
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color(0xffffffff), fontSize: 18)),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
-                          Text("200,682",
+                          Text(controller.movieModel?.data?.voter ?? "",
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xffffffff),
                               )),
                         ],
@@ -94,13 +94,13 @@ class MovieDetailScreen extends StatelessWidget {
                       Center(
                         child: Column(
                           children: [
-                            const Text(
-                              "9.3 / 67",
-                              textDirection: TextDirection.ltr,
-                              style: TextStyle(
-                                color: Color(0xffffffff),
-                              ),
-                            ),
+                            // const Text(
+                            //   "9.3 / 67",
+                            //   textDirection: TextDirection.ltr,
+                            //   style: TextStyle(
+                            //     color: Color(0xffffffff),
+                            //   ),
+                            // ),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Row(
@@ -140,12 +140,12 @@ class MovieDetailScreen extends StatelessWidget {
                         "خلاصه داستان : ",
                         style: TextStyle(color: yellowColor),
                       ),
-                      const Text(
-                        "انیمیشن المنتال 2023 در شهری که ساکنانش، آتش، آب، خاک و هوا در کنار هم زندگی می‌کنند؛ یک زن جوان آتشین و یک مرد شوخ و شنگول و «همراه با جریان»، در شرف کشف یک چیز اساسی هستند؛ این که چقدر با هم اشتراک دارند.",
+                      Text(
+                        controller.movieModel?.data?.story ?? "",
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.justify,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                       // tabs
                       Expanded(
@@ -183,20 +183,14 @@ class MovieDetailScreen extends StatelessWidget {
                     SizedBox(
                       width: Get.width,
                       height: Get.height,
-                      child: const SingleChildScrollView(
+                      child: SingleChildScrollView(
                         child: Padding(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: Text(
-                            """دوبله فارسی انیمیشن "المنتال"
-________________________________
-دوبله اول | سورن
-گویندگان: راضیه فهیمی، سامان مظلومی، علی میلانی، فریبا ثابتی، سمیه الیاسی، آیلار احمدی، روژینا ظهوری، ناصر محمدی، آیدین الماسیان، علیرضا تابان، علیرضا طاهری، کسری نیک آذر، عرفان هنربخش، بهزاد الماسی، علیرضا وارسته، پرنیان شادکام، نرگس رجبی، عسل فتحی و...
-________________________________
-دوبله دوم | فیلیمو
-گویندگان: هومن حاجی عبدالهی، مریم نوری درخشان و...
-________________________________
-هر دو دوبله روی فیلم قرار گرفته است""",
-                            style: TextStyle(color: Colors.white),
+                            (controller.movieModel?.data?.text ?? "")
+                                .replaceAll('<br>', '\n')
+                                .replaceAll('&quot;', ''),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
