@@ -78,19 +78,23 @@ class MainScreen extends StatelessWidget {
                 items: List.generate(
                     controller.homeModel?.data?.slider?.length ?? 0,
                     (index) => InkWell(
-                          onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MovieDetailScreen(
-                                        heroTag: 'Elemental$index',
-                                      ))),
+                          onTap: () => Get.to(() => MovieDetailScreen(
+                                heroTag: controller
+                                        .homeModel?.data?.slider?[index].id ??
+                                    "",
+                                movieId: controller
+                                        .homeModel?.data?.slider?[index].id ??
+                                    "",
+                              )),
                           child: Column(
                             children: [
                               Expanded(
                                   child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Hero(
-                                  tag: 'Elemental$index',
+                                  tag: controller
+                                          .homeModel?.data?.slider?[index].id ??
+                                      "",
                                   child: Image.network(
                                     controller.homeModel?.data?.slider?[index]
                                             .poster ??
@@ -212,7 +216,7 @@ class MainScreen extends StatelessWidget {
                                               ?.series?[listIndex].title ??
                                           "",
                                       maxLines: 1,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Color(0xffffffff),
                                       ),
                                     ),
@@ -289,7 +293,7 @@ class MainScreen extends StatelessWidget {
                                       controller.homeModel?.data
                                               ?.movie?[listIndex].title ??
                                           "",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Color(0xffffffff),
                                           fontSize: 16),
                                     ),
@@ -764,7 +768,7 @@ class MainScreen extends StatelessWidget {
                                                             listIndex]
                                                         .genre ??
                                                     "",
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.white),
                                               ),
                                             ),
@@ -780,7 +784,7 @@ class MainScreen extends StatelessWidget {
                                               .title ??
                                           "",
                                       maxLines: 1,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Color(0xffffffff),
                                       ),
                                     ),
@@ -858,7 +862,7 @@ class MainScreen extends StatelessWidget {
                                       controller.homeModel?.data
                                               ?.movie?[listIndex].title ??
                                           "",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Color(0xffffffff),
                                       ),
                                     ),

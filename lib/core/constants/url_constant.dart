@@ -6,3 +6,4 @@ const String transactionUrl = '$baseUrl=trans';
 const String favotiteUrl = '$baseUrl=watch';
 const String newRequestUrl = '$baseUrl=newrequest';
 const String movieRequestsUrl = '$baseUrl=request';
+const String getMovieUrl = '$baseUrl=movie';
