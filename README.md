@@ -20,3 +20,15 @@ A new Flutter project.
 
 ### 24 Agust
 - [x] login and singup screen
+
+
+### 26 Agust
+- [x] connect home to backend
+- [x] connect show ticket to backend
+- [x] connect transaction to backend
+- [x] connect login to backend
+- [x] connect vip to backend
+- [ ] connect favorite to backend
+- [ ] connect movie detail to backend
+- [ ] connect request movie to backend
+- [ ] connect new ticket to backend
