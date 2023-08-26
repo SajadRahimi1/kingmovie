@@ -29,6 +29,6 @@ A new Flutter project.
 - [x] connect login to backend
 - [x] connect vip to backend
 - [x] connect favorite to backend
+- [x] connect request movie to backend
 - [ ] connect movie detail to backend
-- [ ] connect request movie to backend
 - [ ] connect new ticket to backend
