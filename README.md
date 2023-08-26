@@ -30,5 +30,6 @@ A new Flutter project.
 - [x] connect vip to backend
 - [x] connect favorite to backend
 - [x] connect request movie to backend
+- [x] connect simple search (except pagination)
 - [ ] connect movie detail to backend (except load more comment and show video and download and show trailer)
 - [ ] connect new ticket to backend
