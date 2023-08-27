@@ -89,9 +89,7 @@ class MainScreen extends StatelessWidget {
                     controller.homeModel?.data?.slider?.length ?? 0,
                     (index) => InkWell(
                           onTap: () => Get.to(() => MovieDetailScreen(
-                                heroTag: controller
-                                        .homeModel?.data?.slider?[index].id ??
-                                    "",
+                               
                                 movieId: controller
                                         .homeModel?.data?.slider?[index].id ??
                                     "",
@@ -101,16 +99,11 @@ class MainScreen extends StatelessWidget {
                               Expanded(
                                   child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
-                                child: Hero(
-                                  tag: controller
-                                          .homeModel?.data?.slider?[index].id ??
+                                child: Image.network(
+                                  controller.homeModel?.data?.slider?[index]
+                                          .poster ??
                                       "",
-                                  child: Image.network(
-                                    controller.homeModel?.data?.slider?[index]
-                                            .poster ??
-                                        "",
-                                    fit: BoxFit.fill,
-                                  ),
+                                  fit: BoxFit.fill,
                                 ),
                               )),
                               Text(

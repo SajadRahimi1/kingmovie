@@ -1,7 +1,6 @@
 class MovieModel {
   String? status;
   String? forceOut;
-  User? user;
   String? error;
   String? message;
   Data? data;
@@ -9,7 +8,6 @@ class MovieModel {
   MovieModel({
     this.status,
     this.forceOut,
-    this.user,
     this.error,
     this.message,
     this.data,
@@ -18,7 +16,7 @@ class MovieModel {
   MovieModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     forceOut = json["forceOut"];
-    user = json["user"] == null ? null : User.fromJson(json["user"]);
+
     error = json["error"];
     message = json["message"];
     data = json["data"] == null ? null : Data.fromJson(json["data"]);

@@ -33,3 +33,7 @@ A new Flutter project.
 - [x] connect simple search (except pagination)
 - [ ] connect movie detail to backend (except load more comment and show video and download and show trailer)
 - [ ] connect new ticket to backend
+
+### 27 Agust 
+- [ ] connect download page to model
+- [ ] show video when click on download box
