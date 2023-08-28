@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart' show ScrollController, Curves;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -12,7 +14,6 @@ class MovieViewModel extends GetxController with StateMixin {
   final String movieId;
 
   MovieModel? movieModel;
-
   RxBool isInitialVideo = false.obs;
 
   late final player = Player();
@@ -25,9 +26,9 @@ class MovieViewModel extends GetxController with StateMixin {
   final ScrollController pageScrollController = ScrollController();
 
   final GetStorage getStorage = GetStorage();
+  StreamSubscription? _subscription;
   String token = '';
-
-
+  bool isSeek = false;
 
   @override
   void onInit() async {
@@ -36,8 +37,30 @@ class MovieViewModel extends GetxController with StateMixin {
     await GetStorage.init();
     token = getStorage.read('token') ?? "";
     print('$token:$movieId');
+
+    player.stream.position.listen((event) {
+      if (event.inSeconds > 10) {
+        getStorage.write(movieId, event.inMilliseconds);
+      }
+    });
+
+    player.stream.position.listen((event) async {
+      if (event.inSeconds == 1) {
+        int? movieDuration = getStorage.read(movieId);
+        print("movieeeeeeeeeeeeeeeeeeeeeeeee duration$movieDuration");
+        if (movieDuration != null) {
+          isSeek = true;
+          if (isSeek) {
+            print(movieDuration);
+            await player
+                .seek(Duration(milliseconds: movieDuration))
+                .then((value) => isSeek = false);
+          }
+        }
+      }
+    });
+
     await getData();
-    
   }
 
   @override
@@ -62,6 +85,7 @@ class MovieViewModel extends GetxController with StateMixin {
       await player.open(Media(url));
 
       isInitialVideo.value = true;
+
       pageScrollController.animateTo(0.0,
           duration: const Duration(milliseconds: 100), curve: Curves.bounceIn);
     }
