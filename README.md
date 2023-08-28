@@ -35,5 +35,5 @@ A new Flutter project.
 - [ ] connect new ticket to backend
 
 ### 27 Agust 
-- [ ] connect download page to model
-- [ ] show video when click on download box
+- [x] connect download page to model
+- [x] show video when click on download box

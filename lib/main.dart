@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:king_movie/views/home/screens/main_screen.dart';
+import 'package:media_kit/media_kit.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
+  MediaKit.ensureInitialized();
   runApp(const MainApp());
 }
 
