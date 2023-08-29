@@ -336,8 +336,7 @@ class MovieDetailScreen extends StatelessWidget {
                                                                           ?.data?[
                                                                               index]
                                                                           .list?[
-                                                                              listIndex]
-                                                                          .link),
+                                                                              listIndex]),
                                                                       child:
                                                                           Icon(
                                                                         Icons

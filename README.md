@@ -37,3 +37,8 @@ A new Flutter project.
 ### 27 Agust 
 - [x] connect download page to model
 - [x] show video when click on download box
+
+### 29 Agust
+- [ ] login list tile change when logged in
+- [ ] profile setting connect to model and backend
+- [ ] setting subtitle

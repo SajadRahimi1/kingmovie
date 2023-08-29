@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
+import 'package:king_movie/core/constants/singleton_class.dart';
 import 'package:king_movie/core/services/menu_service.dart';
 
 class Menu extends StatelessWidget {
@@ -28,34 +29,35 @@ class Menu extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(
               vertical: MediaQuery.sizeOf(context).height / 45),
-          child: const Text(
-            "کاربر مهمان",
+          child: Text(
+            SingletonClass.instance.user?.name ?? "کاربر مهمان",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
         ),
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        const ListTile(
-          onTap: loginTap,
-          textColor: Colors.white,
-          title: Text("ورود / ثبت نام"),
-          trailing: Icon(
-            Icons.login,
-            color: Colors.white,
-          ),
-        ),
-        // const ListTile(
-        //   onTap: toProfileScreen,
-        //   textColor: Colors.white,
-        //   title: Text("تنظیمات کاربری"),
-        //   trailing: Icon(
-        //     Icons.settings,
-        //     color: Colors.white,
-        //   ),
-        // ),
+        SingletonClass.instance.user == null
+            ? const ListTile(
+                onTap: loginTap,
+                textColor: Colors.white,
+                title: Text("ورود / ثبت نام"),
+                trailing: Icon(
+                  Icons.login,
+                  color: Colors.white,
+                ),
+              )
+            : const ListTile(
+                onTap: toProfileScreen,
+                textColor: Colors.white,
+                title: Text("تنظیمات کاربری"),
+                trailing: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+              ),
         const Divider(
           color: Color(0xff5f5f5f),
         ),
