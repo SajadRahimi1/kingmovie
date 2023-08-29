@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/instance_manager.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
-import 'package:king_movie/core/constants/singleton_class.dart';
+import 'package:king_movie/viewmodels/profile_viewmodel.dart';
 import 'package:king_movie/views/menu/widgets/profile_text_input.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -8,9 +9,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SingletonClass singletonClass = SingletonClass.instance;
-
+    final controller = Get.put(ProfileViewModel());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: darkBlue,
         centerTitle: true,
@@ -51,27 +52,33 @@ class ProfileScreen extends StatelessWidget {
           ),
           ProfileTextInput(
             label: "ایمیل",
-            textEditingController:
-                TextEditingController(text: singletonClass.user?.email),
+            textEditingController: TextEditingController(
+                text: controller.singletonClass.user?.email),
+            isEnable: false,
           ),
           ProfileTextInput(
             label: "موبایل",
-            textEditingController:
-                TextEditingController(text: singletonClass.user?.mobile),
+            textEditingController: TextEditingController(
+                text: controller.singletonClass.user?.mobile),
+            onChanged: (value) => controller.userModel.mobile = value,
           ),
           ProfileTextInput(
             label: "نام و نام خانوادگی",
-            textEditingController:
-                TextEditingController(text: singletonClass.user?.name),
+            textEditingController: TextEditingController(
+                text: controller.singletonClass.user?.name),
+            onChanged: (value) => controller.userModel.name = value,
           ),
-          Container(
-            padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-                color: redColor, borderRadius: BorderRadius.circular(8)),
-            child: const Text(
-              "ثبت تغیرات",
-              style: TextStyle(color: Colors.white),
+          InkWell(
+            onTap: controller.updateInformation,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                  color: redColor, borderRadius: BorderRadius.circular(8)),
+              child: const Text(
+                "ثبت تغیرات",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
           const Padding(
