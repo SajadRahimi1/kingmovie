@@ -5,6 +5,7 @@ import 'package:king_movie/core/widgets/trailer_widget.dart';
 import 'package:king_movie/viewmodels/movie_viewmodel.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 import 'package:king_movie/core/extensions/string_extension.dart';
+import 'package:king_movie/views/movie_detail/widgets/setting_bottom_sheet.dart';
 import 'package:king_movie/views/movie_detail/widgets/top_video_widget.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
@@ -50,7 +51,25 @@ class MovieDetailScreen extends StatelessWidget {
                                             SubtitleWidget(
                                                 player: controller.player),
                                             AudioWidget(
-                                                player: controller.player)
+                                                player: controller.player),
+                                            IconButton(
+                                                onPressed: () async {
+                                                  TextStyle? subtitleStyle =
+                                                      await showModalBottomSheet(
+                                                          context: context,
+                                                          builder: (context) =>
+                                                              const SettingBottomSheet());
+                                                  if (subtitleStyle != null) {
+                                                    controller.setSubStyle(
+                                                        SubtitleViewConfiguration(
+                                                            style:
+                                                                subtitleStyle));
+                                                  }
+                                                },
+                                                icon: const Icon(
+                                                  Icons.settings,
+                                                  color: Colors.white,
+                                                ))
                                           ]),
                                       fullscreen:
                                           MaterialVideoControlsThemeData(
@@ -69,9 +88,13 @@ class MovieDetailScreen extends StatelessWidget {
                                         automaticallyImplySkipPreviousButton:
                                             false,
                                       ),
-                                      child: Video(
-                                        controller: controller.controller,
-                                      )))
+                                      child: Obx(() => Video(
+                                            controller: controller.controller,
+                                            subtitleViewConfiguration:
+                                                controller
+                                                    .subtitleViewConfiguration
+                                                    .value,
+                                          ))))
                               : SizedBox(
                                   width: Get.width / 1.6,
                                   height: Get.height / 2.5,
@@ -335,8 +358,7 @@ class MovieDetailScreen extends StatelessWidget {
                                                                           ?.link
                                                                           ?.data?[
                                                                               index]
-                                                                          .list?[
-                                                                              listIndex]),
+                                                                          .list?[listIndex]),
                                                                       child:
                                                                           Icon(
                                                                         Icons

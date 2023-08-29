@@ -38,7 +38,7 @@
 - [x] connect favorite to backend
 - [x] connect request movie to backend
 - [x] connect simple search (except pagination)
-- [ ] connect movie detail to backend (except load more comment and show video and download and show trailer)
+- [x] connect movie detail to backend (except load more comment and show video and download and show trailer)
 - [ ] connect new ticket to backend
 
 ### 27 Agust 
@@ -48,4 +48,4 @@
 ### 29 Agust
 - [x] login list tile change when logged in
 - [x] profile setting connect to model and backend
-- [ ] setting subtitle
+- [x] setting subtitle (but not working good)

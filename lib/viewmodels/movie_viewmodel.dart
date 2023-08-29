@@ -25,6 +25,8 @@ class MovieViewModel extends GetxController with StateMixin {
       ));
 
   final ScrollController pageScrollController = ScrollController();
+  Rx<SubtitleViewConfiguration> subtitleViewConfiguration =
+      const SubtitleViewConfiguration().obs;
 
   final GetStorage getStorage = GetStorage();
   String token = '';
@@ -68,6 +70,9 @@ class MovieViewModel extends GetxController with StateMixin {
     super.dispose();
     player.dispose();
   }
+
+  void setSubStyle(SubtitleViewConfiguration config) =>
+      subtitleViewConfiguration.value = config;
 
   Future<void> getData() async {
     final request = await getMovie(token, movieId);
