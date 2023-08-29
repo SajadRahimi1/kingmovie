@@ -5,6 +5,7 @@
 - box office prices
 - there isn't api for get time line 
 - signup api
+- rate movie api
 
 
 

@@ -404,8 +404,11 @@ class MovieDetailScreen extends StatelessWidget {
                               children: [
                                 Expanded(
                                     child: ListView.builder(
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
+                                        // physics:
+                                        //     const NeverScrollableScrollPhysics(),
+                                        itemCount: controller.movieModel?.data
+                                                ?.cast?.length ??
+                                            0,
                                         itemBuilder: (_, index) => Container(
                                               margin:
                                                   const EdgeInsets.symmetric(
@@ -429,28 +432,43 @@ class MovieDetailScreen extends StatelessWidget {
                                                           BorderRadius.circular(
                                                               8),
                                                       child: Image.network(
-                                                        "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
+                                                        controller
+                                                                .movieModel
+                                                                ?.data
+                                                                ?.cast?[index]
+                                                                .image ??
+                                                            "",
                                                         fit: BoxFit.fill,
                                                       ),
                                                     ),
-                                                    const Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 8),
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 8),
                                                       child: Text(
-                                                        "Shameik Moore",
+                                                        controller
+                                                                .movieModel
+                                                                ?.data
+                                                                ?.cast?[index]
+                                                                .name ??
+                                                            "",
                                                         textDirection:
                                                             TextDirection.ltr,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 15),
                                                       ),
                                                     ),
-                                                    const Text(
-                                                      "Shameik Moore",
+                                                    Text(
+                                                      controller
+                                                              .movieModel
+                                                              ?.data
+                                                              ?.cast?[index]
+                                                              .simple ??
+                                                          "",
                                                       textDirection:
                                                           TextDirection.ltr,
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           color:
                                                               Color(0xff5f5f5f),
                                                           fontSize: 14),
