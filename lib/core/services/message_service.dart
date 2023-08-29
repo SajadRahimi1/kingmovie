@@ -56,7 +56,7 @@ void showMessage(
         message,
         textAlign: TextAlign.right,
         textDirection: TextDirection.rtl,
-        style: messageStyle,
+        style: messageStyle ?? const TextStyle(color: Colors.white),
       ),
       borderRadius: 3,
       icon: type != null ? icon(type: type) : null,
@@ -64,7 +64,7 @@ void showMessage(
         title,
         textAlign: TextAlign.right,
         textDirection: TextDirection.rtl,
-        style: titleStyle,
+        style: titleStyle ?? const TextStyle(color: Colors.white),
       ),
       snackPosition: snackPosition);
 }

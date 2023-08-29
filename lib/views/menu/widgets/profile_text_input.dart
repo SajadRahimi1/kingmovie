@@ -6,7 +6,7 @@ class ProfileTextInput extends StatelessWidget {
       {super.key,
       required this.label,
       this.textEditingController,
-      this.isEnable=true,
+      this.isEnable = true,
       this.onChanged});
   final String label;
   final TextEditingController? textEditingController;

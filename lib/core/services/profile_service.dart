@@ -10,3 +10,11 @@ Future<Response<dynamic>> updateInformation(
 
   return await getConnect.post(updateProfileUrl, formData, headers: {});
 }
+
+Future<Response<dynamic>> updatePassword(
+    {required String password, required String token}) async {
+  FormData formData = FormData(
+      {'password': password, 'repassword': password, 'userSalt': token});
+
+  return await getConnect.post(updatePasswordUrl, formData, headers: {});
+}

@@ -9,3 +9,4 @@ const String movieRequestsUrl = '$baseUrl=request';
 const String getMovieUrl = '$baseUrl=movie';
 const String searchUrl = '$baseUrl=category';
 const String updateProfileUrl = '$baseUrl=setting';
+const String updatePasswordUrl = '$baseUrl=change';

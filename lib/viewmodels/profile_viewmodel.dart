@@ -14,6 +14,8 @@ class ProfileViewModel extends GetxController {
 
   UserModel userModel = UserModel();
 
+  String password = '', repassword = '';
+
   @override
   void onInit() async {
     // TODO: implement onInit
@@ -33,6 +35,27 @@ class ProfileViewModel extends GetxController {
           type: MessageType.success);
     } else {
       networkErrorMessage();
+    }
+  }
+
+  Future<void> updatePassword() async {
+    if (password == repassword) {
+      final request =
+          await service.updatePassword(password: password, token: token);
+      if (request.statusCode == 200 && request.body['error'] == 'false') {
+        singletonClass.user = User.fromJson(request.body['user']);
+        showMessage(
+            title: 'ویرایش رمز عبور',
+            message: 'تغییر رمز عبور را موفقیت انجام شد',
+            type: MessageType.success);
+      } else {
+        networkErrorMessage();
+      }
+    } else {
+      showMessage(
+          title: 'خطا',
+          message: 'رمز عبور و تکرار آن یکسان نیست',
+          type: MessageType.warning);
     }
   }
 }

@@ -46,6 +46,6 @@
 - [x] show video when click on download box
 
 ### 29 Agust
-- [ ] login list tile change when logged in
-- [ ] profile setting connect to model and backend
+- [x] login list tile change when logged in
+- [x] profile setting connect to model and backend
 - [ ] setting subtitle
