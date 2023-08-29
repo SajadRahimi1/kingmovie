@@ -1,6 +1,12 @@
 # king_movie
 
-A new Flutter project.
+### api problems
+- update image profile
+- box office prices
+- there isn't api for get time line 
+
+
+
 ### 22 Agust
 - [x] Movie description in detail screen
 - [x] comment widget detail screen

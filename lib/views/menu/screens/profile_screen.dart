@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
+import 'package:king_movie/core/constants/singleton_class.dart';
 import 'package:king_movie/views/menu/widgets/profile_text_input.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -7,6 +8,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SingletonClass singletonClass = SingletonClass.instance;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkBlue,
@@ -46,14 +49,20 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-          const ProfileTextInput(
+          ProfileTextInput(
             label: "ایمیل",
+            textEditingController:
+                TextEditingController(text: singletonClass.user?.email),
           ),
-          const ProfileTextInput(
+          ProfileTextInput(
             label: "موبایل",
+            textEditingController:
+                TextEditingController(text: singletonClass.user?.mobile),
           ),
-          const ProfileTextInput(
+          ProfileTextInput(
             label: "نام و نام خانوادگی",
+            textEditingController:
+                TextEditingController(text: singletonClass.user?.name),
           ),
           Container(
             padding: const EdgeInsets.all(10),
