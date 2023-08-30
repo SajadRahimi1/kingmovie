@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart' show ScrollController, Curves;
+import 'package:flutter/material.dart'
+    show Colors, Curves, ScrollController, TextStyle;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:king_movie/core/services/message_service.dart';
@@ -72,7 +73,8 @@ class MovieViewModel extends GetxController with StateMixin {
   }
 
   void setSubStyle(SubtitleViewConfiguration config) =>
-      subtitleViewConfiguration.value = config;
+      subtitleViewConfiguration.value =
+          const SubtitleViewConfiguration(style: TextStyle(color: Colors.red));
 
   Future<void> getData() async {
     final request = await getMovie(token, movieId);

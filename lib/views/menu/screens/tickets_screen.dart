@@ -4,12 +4,14 @@ import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
 import 'package:king_movie/viewmodels/ticket_viewmodel.dart';
 import 'package:king_movie/views/menu/screens/show_ticket_screen.dart';
+import 'package:king_movie/views/menu/widgets/profile_text_input.dart';
 
 class TicketsScreen extends StatelessWidget {
   const TicketsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    RxBool isClickNew = false.obs;
     final controller = Get.put(TicketViewModel());
 
     return Scaffold(
@@ -102,18 +104,30 @@ class TicketsScreen extends StatelessWidget {
                 ),
               ),
 
+              Obx(() => isClickNew.value
+                  ? const ProfileTextInput(label: "عنوان تیکت جدید")
+                  : const SizedBox()),
+
               // new ticket button
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                margin: EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: MediaQuery.sizeOf(context).width / 3.2),
-                decoration: BoxDecoration(
-                    color: redColor, borderRadius: BorderRadius.circular(8)),
-                alignment: Alignment.center,
-                child: const Text(
-                  "ثبت تیکت جدید",
-                  style: TextStyle(color: Colors.white),
+              InkWell(
+                onTap: () {
+                  if (isClickNew.value) {
+                  } else {
+                    isClickNew.value = true;
+                  }
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  margin: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: MediaQuery.sizeOf(context).width / 3.2),
+                  decoration: BoxDecoration(
+                      color: redColor, borderRadius: BorderRadius.circular(8)),
+                  alignment: Alignment.center,
+                  child: Obx(() => Text(
+                        isClickNew.value ? "ارسال پیام" : "ثبت تیکت جدید",
+                        style: const TextStyle(color: Colors.white),
+                      )),
                 ),
               ),
             ],
