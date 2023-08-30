@@ -17,8 +17,10 @@ class LoginViewModel extends GetxController with StateMixin {
   Future<void> login() async {
     final request = await service.login(email: email, password: password);
     if (request.statusCode == 200 && request.body['error'] == 'false') {
-      getStorage.write('token', request.body['salt']);
-      Get.offAll(() => const MainScreen());
+      await getStorage.write('token', request.body['salt']);
+      Get.offAll(() => const MainScreen(
+            isLogedIn: true,
+          ));
     } else {
       // TODO: show error message
       print(request.body['message']);

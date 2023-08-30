@@ -49,7 +49,7 @@ class HomeModel {
     forceOut = json["forceOut"];
     error = json["error"];
     message = json["message"];
-    user = json['forceOut'] == 'false' ? User.fromJson(json['user']) : null;
+    user = json['user'].length > 0 ? User.fromJson(json['user']) : null;
     data = json["data"] == null ? null : Data.fromJson(json["data"]);
     best = json["best"] == null
         ? null
@@ -82,7 +82,7 @@ class HomeModel {
 
     data["error"] = error;
     data["message"] = message;
-   
+
     if (best != null) {
       data["best"] = best?.map((e) => e.toJson()).toList();
     }

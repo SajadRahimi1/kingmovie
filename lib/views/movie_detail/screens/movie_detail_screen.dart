@@ -28,6 +28,14 @@ class MovieDetailScreen extends StatelessWidget {
       child: DefaultTabController(
           length: 5,
           child: Scaffold(
+              floatingActionButton: FloatingActionButton(
+                  onPressed: () => controller.pageScrollController
+                    ..animateTo(0.0,
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.linear),
+                  child: const Center(
+                    child: Icon(Icons.arrow_upward),
+                  )),
               // appBar: Obx(()=>controller.isPortrait.value? screenAppBar(context: context):null),
               backgroundColor: blackColor,
               // drawer: const Menu(),
@@ -400,97 +408,73 @@ class MovieDetailScreen extends StatelessWidget {
                             ),
 
                             // actors
-                            Column(
-                              children: [
-                                Expanded(
-                                    child: ListView.builder(
-                                        // physics:
-                                        //     const NeverScrollableScrollPhysics(),
-                                        itemCount: controller.movieModel?.data
-                                                ?.cast?.length ??
-                                            0,
-                                        itemBuilder: (_, index) => Container(
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10,
-                                                      vertical: 5),
-                                              width: Get.width,
-                                              height: Get.height / 11,
-                                              decoration: BoxDecoration(
+                            SizedBox(
+                                child: ListView.builder(
+                                    // physics:
+                                    //     const NeverScrollableScrollPhysics(),
+                                    itemCount: controller
+                                            .movieModel?.data?.cast?.length ??
+                                        0,
+                                    itemBuilder: (_, index) => Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 5),
+                                          width: Get.width,
+                                          height: Get.height / 11,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              color: blackColor,
+                                              border: Border.all(
+                                                  color:
+                                                      const Color(0xff3f3f3f))),
+                                          child: Row(
+                                              textDirection: TextDirection.ltr,
+                                              children: [
+                                                ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(8),
-                                                  color: blackColor,
-                                                  border: Border.all(
-                                                      color: const Color(
-                                                          0xff3f3f3f))),
-                                              child: Row(
+                                                  child: Image.network(
+                                                    controller
+                                                            .movieModel
+                                                            ?.data
+                                                            ?.cast?[index]
+                                                            .image ??
+                                                        "",
+                                                    fit: BoxFit.fill,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(horizontal: 8),
+                                                  child: Text(
+                                                    controller
+                                                            .movieModel
+                                                            ?.data
+                                                            ?.cast?[index]
+                                                            .name ??
+                                                        "",
+                                                    textDirection:
+                                                        TextDirection.ltr,
+                                                    style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 15),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  controller
+                                                          .movieModel
+                                                          ?.data
+                                                          ?.cast?[index]
+                                                          .simple ??
+                                                      "",
                                                   textDirection:
                                                       TextDirection.ltr,
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                      child: Image.network(
-                                                        controller
-                                                                .movieModel
-                                                                ?.data
-                                                                ?.cast?[index]
-                                                                .image ??
-                                                            "",
-                                                        fit: BoxFit.fill,
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 8),
-                                                      child: Text(
-                                                        controller
-                                                                .movieModel
-                                                                ?.data
-                                                                ?.cast?[index]
-                                                                .name ??
-                                                            "",
-                                                        textDirection:
-                                                            TextDirection.ltr,
-                                                        style: const TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 15),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      controller
-                                                              .movieModel
-                                                              ?.data
-                                                              ?.cast?[index]
-                                                              .simple ??
-                                                          "",
-                                                      textDirection:
-                                                          TextDirection.ltr,
-                                                      style: const TextStyle(
-                                                          color:
-                                                              Color(0xff5f5f5f),
-                                                          fontSize: 14),
-                                                    ),
-                                                  ]),
-                                            ))),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      "مشاهده همه\t",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: Colors.white,
-                                      size: Get.width / 22,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
+                                                  style: const TextStyle(
+                                                      color: Color(0xff5f5f5f),
+                                                      fontSize: 14),
+                                                ),
+                                              ]),
+                                        ))),
 
                             // comments
                             SizedBox(

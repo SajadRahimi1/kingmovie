@@ -9,30 +9,16 @@ import 'package:king_movie/views/home/screens/search_screen.dart';
 import 'package:king_movie/views/home/screens/show_all_screen.dart';
 import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
-import 'package:shamsi_date/shamsi_date.dart';
 
 class MainScreen extends StatelessWidget {
-  List<Jalali> getDaysOfCurrentWeek() {
-    final now = DateTime.now();
-    final currentWeekday = now.toJalali().weekDay;
+  const MainScreen({super.key, this.isLogedIn = false});
+  final bool isLogedIn;
 
-    // First day of the week
-    final firstDay = now.subtract(Duration(days: currentWeekday - 1));
-
-    // Last day of the week
-    final lastDay =
-        now.add(Duration(days: DateTime.daysPerWeek - currentWeekday));
-
-    // List of each day as DateTime
-    return List.generate(lastDay.difference(firstDay).inDays + 1,
-        (index) => firstDay.add(Duration(days: index)).toJalali());
-  }
-
-  const MainScreen({super.key});
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeViewModel());
-    final daysList = getDaysOfCurrentWeek();
+    if (isLogedIn) controller.getData();
+    final daysList = controller.getDaysOfCurrentWeek();
 
     return SafeArea(
         child: controller.obx(
@@ -89,7 +75,6 @@ class MainScreen extends StatelessWidget {
                     controller.homeModel?.data?.slider?.length ?? 0,
                     (index) => InkWell(
                           onTap: () => Get.to(() => MovieDetailScreen(
-                               
                                 movieId: controller
                                         .homeModel?.data?.slider?[index].id ??
                                     "",

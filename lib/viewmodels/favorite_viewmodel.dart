@@ -14,7 +14,7 @@ class FavoriteViewModel extends GetxController with StateMixin {
     // TODO: implement onInit
     super.onInit();
     await GetStorage.init();
-    token = getStorage.read('token');
+    token = getStorage.read('token') ?? '';
     await getData();
   }
 
@@ -23,7 +23,7 @@ class FavoriteViewModel extends GetxController with StateMixin {
     if (request.statusCode == 200 && request.body['error'] == 'false') {
       favoriteModel = FavoriteModel.fromJson(request.body);
       change(null, status: RxStatus.success());
-    }else{
+    } else {
       change(null, status: RxStatus.error(request.body['message']));
     }
   }

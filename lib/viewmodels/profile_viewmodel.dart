@@ -21,7 +21,7 @@ class ProfileViewModel extends GetxController {
     // TODO: implement onInit
     super.onInit();
     await GetStorage.init();
-    token = getStorage.read('token');
+    token = getStorage.read('token') ?? '';
     userModel.token = token;
   }
 
