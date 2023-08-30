@@ -16,7 +16,6 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final controller = Get.put(HomeViewModel());
     if (isLogedIn) controller.getData();
     final daysList = controller.getDaysOfCurrentWeek();
@@ -128,9 +127,9 @@ class MainScreen extends StatelessWidget {
             child: DefaultTabController(
               length: 2,
               child: Column(children: [
-                 TabBar(
-                  onTap: (index)=>controller.newTabIndex=index,
-                  tabs: [
+                TabBar(
+                  onTap: (index) => controller.newTabIndex = index,
+                  tabs: const [
                     Tab(
                       text: "سریال های بروز شده",
                     ),
@@ -300,9 +299,8 @@ class MainScreen extends StatelessWidget {
                   ]),
                 ),
                 InkWell(
-                  onTap: () => Get.to(() =>  ShowAllScreen(
-                       
-isMovie: controller.newTabIndex==1,
+                  onTap: () => Get.to(() => ShowAllScreen(
+                        isMovie: controller.newTabIndex == 1,
                       )),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -694,6 +692,7 @@ isMovie: controller.newTabIndex==1,
                 TabBar(
                   labelStyle: TextStyle(
                       fontSize: 16 * MediaQuery.of(context).textScaleFactor),
+                  onTap: (index) => controller.newDubTabIndex = index,
                   tabs: const [
                     Tab(
                       text: "سریال های دوبله بروز شده",
@@ -869,19 +868,23 @@ isMovie: controller.newTabIndex==1,
                             )),
                   ]),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "مشاهده همه\t",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                      size: Get.width / 22,
-                    )
-                  ],
+                InkWell(
+                  onTap: () => Get.to(() => ShowAllScreen(
+                      isMovie: controller.newDubTabIndex == 1, dub: true)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "مشاهده همه\t",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                        size: Get.width / 22,
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: Get.height / 45,

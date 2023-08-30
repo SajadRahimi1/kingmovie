@@ -6,12 +6,13 @@ import 'package:king_movie/core/widgets/menu.dart';
 import 'package:king_movie/viewmodels/new_all_viewmodel.dart';
 
 class ShowAllScreen extends StatelessWidget {
-  const ShowAllScreen({super.key, required this.isMovie});
+  const ShowAllScreen({super.key, required this.isMovie, this.dub});
   final bool isMovie;
+  final bool? dub;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NewAllViewModel(isMovie: isMovie));
+    final controller = Get.put(NewAllViewModel(isMovie: isMovie, dub: dub));
 
     return Scaffold(
       appBar: screenAppBar(
@@ -61,19 +62,24 @@ class ShowAllScreen extends StatelessWidget {
                             const Spacer(),
                             // subtitle
                             Text(
-                              "زیرنویس : ${controller.movieList[index].subtitle ?? ""}",
+                              (dub ?? false)
+                                  ? "دوبله : ${(controller.movieList[index].double ?? false) ? 'دارد' : 'ندارد'}"
+                                  : "زیرنویس : ${controller.movieList[index].subtitle ?? ""}",
+                              maxLines: 1,
                               style: const TextStyle(color: Colors.white),
                             ),
 
                             // age
                             Text(
                               "رده سنی : ${controller.movieList[index].age ?? ""}",
+                              maxLines: 1,
                               style: const TextStyle(color: Colors.white),
                             ),
 
                             // language
                             Text(
                               "زبان : ${controller.movieList[index].lang ?? ""}",
+                              maxLines: 1,
                               style: const TextStyle(color: Colors.white),
                             ),
 

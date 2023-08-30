@@ -13,6 +13,7 @@ class HomeViewModel extends GetxController with StateMixin {
   String token = '';
 
   int newTabIndex = 0;
+  int newDubTabIndex = 0;
 
   @override
   void onInit() async {

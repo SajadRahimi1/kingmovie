@@ -4,8 +4,9 @@ import 'package:king_movie/core/services/movie_service.dart' as service;
 import 'package:king_movie/models/new_movie_model.dart';
 
 class NewAllViewModel extends GetxController with StateMixin {
-  NewAllViewModel({required this.isMovie});
+  NewAllViewModel({required this.isMovie, this.dub});
   final bool isMovie;
+  final bool? dub;
 
   final ScrollController scrollController = ScrollController();
 
@@ -31,7 +32,7 @@ class NewAllViewModel extends GetxController with StateMixin {
   }
 
   Future<void> getNewMovie() async {
-    final request = await service.getNewMovies(page, isMovie);
+    final request = await service.getNewMovies(page, isMovie, dub);
     if (request.statusCode == 200 && request.body['error'] == 'false') {
       movieModel = NewMovieModel.fromJson(request.body);
       movieList += movieModel?.data?.list ?? [];
