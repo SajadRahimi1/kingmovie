@@ -6,15 +6,17 @@ import 'package:king_movie/core/widgets/menu.dart';
 import 'package:king_movie/viewmodels/new_all_viewmodel.dart';
 
 class ShowAllScreen extends StatelessWidget {
-  const ShowAllScreen({super.key, this.title});
-  final String? title;
+  const ShowAllScreen({super.key, required this.isMovie});
+  final bool isMovie;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(NewAllViewModel(isMovie: false));
+    final controller = Get.put(NewAllViewModel(isMovie: isMovie));
 
     return Scaffold(
-      appBar: screenAppBar(context: context, title: title ?? ""),
+      appBar: screenAppBar(
+          context: context,
+          title: "${isMovie ? 'فیلم' : 'سریال'} های بروز شده"),
       backgroundColor: blackColor,
       drawer: const Menu(),
       body: controller.obx((state) => ListView.builder(

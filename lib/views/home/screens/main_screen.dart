@@ -16,6 +16,7 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final controller = Get.put(HomeViewModel());
     if (isLogedIn) controller.getData();
     final daysList = controller.getDaysOfCurrentWeek();
@@ -127,7 +128,8 @@ class MainScreen extends StatelessWidget {
             child: DefaultTabController(
               length: 2,
               child: Column(children: [
-                const TabBar(
+                 TabBar(
+                  onTap: (index)=>controller.newTabIndex=index,
                   tabs: [
                     Tab(
                       text: "سریال های بروز شده",
@@ -298,8 +300,9 @@ class MainScreen extends StatelessWidget {
                   ]),
                 ),
                 InkWell(
-                  onTap: () => Get.to(() => const ShowAllScreen(
-                        title: "سریال های بروز شده",
+                  onTap: () => Get.to(() =>  ShowAllScreen(
+                       
+isMovie: controller.newTabIndex==1,
                       )),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

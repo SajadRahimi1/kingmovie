@@ -12,6 +12,8 @@ class HomeViewModel extends GetxController with StateMixin {
   final GetStorage getStorage = GetStorage();
   String token = '';
 
+  int newTabIndex = 0;
+
   @override
   void onInit() async {
     // TODO: implement onInit
