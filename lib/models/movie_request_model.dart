@@ -13,6 +13,7 @@ class RequestMovieModel {
   RequestMovieModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
     forceOut = json["forceOut"];
+    
 
     error = json["error"];
     message = json["message"];

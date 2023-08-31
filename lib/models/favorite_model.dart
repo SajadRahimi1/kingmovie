@@ -46,11 +46,11 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (list != null) {
-      _data["list"] = list?.map((e) => e.toJson()).toList();
+      data["list"] = list?.map((e) => e.toJson()).toList();
     }
-    return _data;
+    return data;
   }
 }
 
@@ -70,12 +70,12 @@ class ListData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["title"] = title;
-    _data["year"] = year;
-    _data["poster"] = poster;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["title"] = title;
+    data["year"] = year;
+    data["poster"] = poster;
+    return data;
   }
 }
 
@@ -97,12 +97,12 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["email"] = email;
-    _data["name"] = name;
-    _data["vipDate"] = vipDate;
-    _data["mobile"] = mobile;
-    _data["vip"] = vip;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["email"] = email;
+    data["name"] = name;
+    data["vipDate"] = vipDate;
+    data["mobile"] = mobile;
+    data["vip"] = vip;
+    return data;
   }
 }

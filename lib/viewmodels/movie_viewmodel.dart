@@ -5,7 +5,7 @@ import 'package:flutter/material.dart'
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:king_movie/core/services/message_service.dart';
-import 'package:king_movie/core/services/movie_service.dart';
+import 'package:king_movie/core/services/movie_service.dart' as service;
 import 'package:king_movie/models/movie_model.dart';
 import 'package:king_movie/views/movie_detail/widgets/confirm_button.dart';
 import 'package:media_kit/media_kit.dart';
@@ -77,7 +77,7 @@ class MovieViewModel extends GetxController with StateMixin {
           const SubtitleViewConfiguration(style: TextStyle(color: Colors.red));
 
   Future<void> getData() async {
-    final request = await getMovie(token, movieId);
+    final request = await service.getMovie(token, movieId);
     if (request.statusCode == 200 && request.body['error'] == 'false') {
       movieModel = MovieModel.fromJson(request.body);
       change(null, status: RxStatus.success());
@@ -106,6 +106,15 @@ class MovieViewModel extends GetxController with StateMixin {
       pageScrollController.animateTo(0.0,
           duration: const Duration(milliseconds: 100), curve: Curves.bounceIn);
     }
+  }
+
+  Future<void> addFavorite() async {
+    final request = await service.addFavorite(token, movieId);
+    showMessage(
+        message: request.body['message'],
+        type: request.body['error'] == 'false'
+            ? MessageType.success
+            : MessageType.error);
   }
 
   List<AudioTrack> audios() {

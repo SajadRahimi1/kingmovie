@@ -7,6 +7,7 @@
 - signup api
 - rate movie api
 - get message of ticket api
+- delete favorite list
 
 
 
@@ -52,4 +53,7 @@
 - [x] profile setting connect to model and backend
 - [x] setting subtitle (but not working good)
 
-### 30 Augest
+### 31 Augest
+- [x] add movie to favorite list
+- [ ] create new ticket
+- [ ] make all movie clickable

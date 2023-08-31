@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/trailer_widget.dart';
 import 'package:king_movie/viewmodels/movie_viewmodel.dart';
+import 'package:king_movie/views/login/screens/login_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 import 'package:king_movie/core/extensions/string_extension.dart';
 import 'package:king_movie/views/movie_detail/widgets/setting_bottom_sheet.dart';
@@ -103,13 +104,36 @@ class MovieDetailScreen extends StatelessWidget {
                                                     .subtitleViewConfiguration
                                                     .value,
                                           ))))
-                              : SizedBox(
-                                  width: Get.width / 1.6,
-                                  height: Get.height / 2.5,
-                                  child: Image.network(
-                                    controller.movieModel?.data?.poster ?? "",
-                                    fit: BoxFit.fill,
-                                  ),
+                              : Stack(
+                                  children: [
+                                    Center(
+                                      child: SizedBox(
+                                        width: Get.width / 1.6,
+                                        height: Get.height / 2.5,
+                                        child: Image.network(
+                                          controller.movieModel?.data?.poster ??
+                                              "",
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.bookmark_add_outlined,
+                                              color: Colors.white,
+                                              size: MediaQuery.sizeOf(context)
+                                                      .width /
+                                                  10,
+                                            ),
+                                            onPressed: controller.addFavorite,
+                                          ),
+                                        ))
+                                  ],
                                 ),
                         ),
                       ),
@@ -256,8 +280,8 @@ class MovieDetailScreen extends StatelessWidget {
                               ))
                             ]),
                       ),
-                      // pages
 
+                      // pages
                       SizedBox(
                           width: Get.width,
                           height: Get.height / 1.3,
@@ -285,7 +309,62 @@ class MovieDetailScreen extends StatelessWidget {
                                   child: (controller.movieModel?.data?.link
                                               ?.data?.isEmpty ??
                                           true)
-                                      ? const SizedBox()
+                                      ? Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                              "برای استفاده از خدمات ابتدا وارد اپ شوید\n",
+                                              style: TextStyle(
+                                                  fontSize: 17 *
+                                                      MediaQuery.of(context)
+                                                          .textScaleFactor,
+                                                  color: Colors.white),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () => Get.to(() =>
+                                                      const LoginScreen()),
+                                                  child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(7),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)),
+                                                    child: const Text(
+                                                      "وارد شوید",
+                                                      style: TextStyle(),
+                                                    ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                  onTap: () {},
+                                                  child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(7),
+                                                    margin: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 10),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)),
+                                                    child: const Text(
+                                                      "ثبت نام کنید",
+                                                      style: TextStyle(),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        )
                                       : Obx(
                                           () => ExpansionPanelList(
                                             expandIconColor: Colors.white,
@@ -406,7 +485,6 @@ class MovieDetailScreen extends StatelessWidget {
                                           ),
                                         )),
                             ),
-
                             // actors
                             SizedBox(
                                 child: ListView.builder(
