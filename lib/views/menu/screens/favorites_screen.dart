@@ -61,13 +61,19 @@ class FavoritesScreen extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(color: Colors.white),
                         )),
-                        // const Padding(
-                        //   padding: EdgeInsets.symmetric(horizontal: 15),
-                        //   child: Icon(
-                        //     Icons.delete,
-                        //     color: redColor,
-                        //   ),
-                        // )
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.delete,
+                              color: redColor,
+                            ),
+                            onPressed: () => controller.removeFavorite(
+                                controller
+                                        .favoriteModel?.data?.list?[index].id ??
+                                    ""),
+                          ),
+                        )
                       ],
                     ),
                   )))),

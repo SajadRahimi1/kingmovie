@@ -15,7 +15,3 @@ Future<Response<dynamic>> getNewMovies(
   return await getConnect.post(searchUrl, formData);
 }
 
-Future<Response<dynamic>> addFavorite(String token, String id) async {
-  final FormData formData = FormData({'userSalt': token, 'id': id});
-  return await getConnect.post(addFavoriteUrl, formData);
-}
