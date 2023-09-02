@@ -55,5 +55,10 @@
 
 ### 31 Augest
 - [x] add movie to favorite list
+
+
+## 2 September
 - [ ] create new ticket
 - [ ] make all movie clickable
+- [x] create loading widget
+- [ ] add loading to all requets

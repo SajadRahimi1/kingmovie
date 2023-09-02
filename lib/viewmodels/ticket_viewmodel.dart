@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:king_movie/core/services/ticker_service.dart';
+import 'package:king_movie/core/services/ticket_service.dart';
 import 'package:king_movie/ticket_model.dart';
 
 class TicketViewModel extends GetxController with StateMixin {

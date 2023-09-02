@@ -23,6 +23,8 @@ class ProfileViewModel extends GetxController {
     await GetStorage.init();
     token = getStorage.read('token') ?? '';
     userModel.token = token;
+    userModel.name = singletonClass.user?.name;
+    userModel.mobile = singletonClass.user?.mobile;
   }
 
   Future<void> updateInformation() async {
@@ -48,8 +50,13 @@ class ProfileViewModel extends GetxController {
             title: 'ویرایش رمز عبور',
             message: 'تغییر رمز عبور را موفقیت انجام شد',
             type: MessageType.success);
-      } else {
+      } else if (request.statusCode == 500) {
         networkErrorMessage();
+      } else {
+        showMessage(
+            title: 'خطا',
+            message: request.body['message'],
+            type: MessageType.warning);
       }
     } else {
       showMessage(
