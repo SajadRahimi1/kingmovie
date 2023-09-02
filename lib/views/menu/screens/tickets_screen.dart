@@ -11,7 +11,7 @@ class TicketsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RxBool isClickNew = false.obs;
+    
     final controller = Get.put(TicketViewModel());
 
     return Scaffold(
@@ -21,6 +21,7 @@ class TicketsScreen extends StatelessWidget {
           (status) => ListView(
             padding: const EdgeInsets.all(8),
             children: [
+              // table header
               Container(
                 width: MediaQuery.sizeOf(context).width,
                 height: MediaQuery.sizeOf(context).height / 17,
@@ -52,6 +53,8 @@ class TicketsScreen extends StatelessWidget {
                   ))
                 ]),
               ),
+
+              // table items
               Column(
                 children: List.generate(
                   controller.ticketModel?.data?.list?.length ?? 0,
@@ -104,16 +107,31 @@ class TicketsScreen extends StatelessWidget {
                 ),
               ),
 
-              Obx(() => isClickNew.value
-                  ? const ProfileTextInput(label: "عنوان تیکت جدید")
+              Obx(() => controller.isClickNew.value
+                  ? Column(
+                      children: [
+                        ProfileTextInput(
+                          label: "عنوان تیکت جدید",
+                          onChanged: (value) => controller.ticketTitle = value,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ProfileTextInput(
+                          label: "متن پیام",
+                          onChanged: (value) => controller.ticketText = value,
+                        ),
+                      ],
+                    )
                   : const SizedBox()),
 
               // new ticket button
               InkWell(
-                onTap: () {
-                  if (isClickNew.value) {
+                onTap: () async {
+                  if (controller.isClickNew.value) {
+                    await controller.newTicket();
                   } else {
-                    isClickNew.value = true;
+                    controller.isClickNew.value = true;
                   }
                 },
                 child: Container(
@@ -125,7 +143,7 @@ class TicketsScreen extends StatelessWidget {
                       color: redColor, borderRadius: BorderRadius.circular(8)),
                   alignment: Alignment.center,
                   child: Obx(() => Text(
-                        isClickNew.value ? "ارسال پیام" : "ثبت تیکت جدید",
+                        controller.isClickNew.value ? "ارسال پیام" : "ثبت تیکت جدید",
                         style: const TextStyle(color: Colors.white),
                       )),
                 ),

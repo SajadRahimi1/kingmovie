@@ -58,7 +58,7 @@
 
 
 ## 2 September
-- [ ] create new ticket
-- [ ] make all movie clickable
 - [x] create loading widget
-- [ ] add loading to all requets
+- [x] add loading to all requets
+- [x] create new ticket
+- [ ] make all movie clickable
