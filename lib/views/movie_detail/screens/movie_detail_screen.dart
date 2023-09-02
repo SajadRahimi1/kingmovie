@@ -538,18 +538,23 @@ class MovieDetailScreen extends StatelessWidget {
                                                         fontSize: 15),
                                                   ),
                                                 ),
-                                                Text(
-                                                  controller
-                                                          .movieModel
-                                                          ?.data
-                                                          ?.cast?[index]
-                                                          .simple ??
-                                                      "",
-                                                  textDirection:
-                                                      TextDirection.ltr,
-                                                  style: const TextStyle(
-                                                      color: Color(0xff5f5f5f),
-                                                      fontSize: 14),
+                                                Expanded(
+                                                  child: Text(
+                                                    controller
+                                                            .movieModel
+                                                            ?.data
+                                                            ?.cast?[index]
+                                                            .simple ??
+                                                        "",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    textDirection:
+                                                        TextDirection.ltr,
+                                                    style: const TextStyle(
+                                                        color:
+                                                            Color(0xff5f5f5f),
+                                                        fontSize: 14),
+                                                  ),
                                                 ),
                                               ]),
                                         ))),

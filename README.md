@@ -61,4 +61,4 @@
 - [x] create loading widget
 - [x] add loading to all requets
 - [x] create new ticket
-- [ ] make all movie clickable
+- [x] make all movie clickable
