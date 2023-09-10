@@ -389,13 +389,20 @@ class DownloadList {
   String? link;
   String? format;
   String? title;
+  String? id;
+  List<DownloadList>? list;
 
-  DownloadList({this.link, this.format, this.title});
+  DownloadList({this.link, this.format, this.title, this.id, this.list});
 
   DownloadList.fromJson(Map<String, dynamic> json) {
     link = json["link"];
     format = json["format"];
     title = json["title"];
+    id = json['id'];
+    list = json["list"] == null
+        ? null
+        : List<DownloadList>.from(
+            json['list'].map((x) => DownloadList.fromJson(x)));
   }
 
   Map<String, dynamic> toJson() {

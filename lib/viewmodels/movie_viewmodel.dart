@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart'
     show Colors, Curves, ScrollController, TextStyle;
 import 'package:get/get.dart';
@@ -11,6 +13,7 @@ import 'package:king_movie/models/movie_model.dart';
 import 'package:king_movie/views/movie_detail/widgets/confirm_button.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MovieViewModel extends GetxController with StateMixin {
   MovieViewModel(this.movieId);
@@ -128,5 +131,27 @@ class MovieViewModel extends GetxController with StateMixin {
     return player.state.tracks.subtitle
         .where((element) => element.title != null)
         .toList();
+  }
+
+  Future<void> openUrl(DownloadList? url) async {
+    if (url?.link != null) {
+      bool isInstalled = await DeviceApps.isAppInstalled('com.dv.adm');
+
+      if (isInstalled) {
+        final AndroidIntent intent = AndroidIntent(
+          action: 'action_main',
+          package: 'com.dv.adm',
+          componentName: 'com.dv.adm.AEditor',
+          arguments: <String, dynamic>{
+            'android.intent.extra.TEXT': url?.link,
+          },
+        );
+        await intent.launch().then((value) => null).catchError((e) => print(e));
+      } else {
+        launchUrlString(url?.link ?? "", mode: LaunchMode.externalApplication);
+      }
+    } else {
+      showMessage(message: 'لینکی یافت نشد', type: MessageType.warning);
+    }
   }
 }

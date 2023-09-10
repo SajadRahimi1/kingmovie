@@ -21,6 +21,8 @@ dependencies:
   media_kit_video: ^1.1.8
   media_kit_libs_video: ^1.0.1
   flutter_easyloading: ^3.0.5
+  android_intent_plus: ^4.0.2
+  device_apps: ^2.2.0
   
 
 dev_dependencies:

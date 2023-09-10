@@ -457,10 +457,22 @@ class MovieDetailScreen extends StatelessWidget {
                                                                       ),
                                                                     )
                                                                   : const SizedBox(),
-                                                              const Icon(
-                                                                Icons.download,
-                                                                color: Colors
-                                                                    .white,
+                                                              InkWell(
+                                                                onTap: () => controller
+                                                                    .openUrl(controller
+                                                                        .movieModel
+                                                                        ?.data
+                                                                        ?.link
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .list?[listIndex]),
+                                                                child:
+                                                                    const Icon(
+                                                                  Icons
+                                                                      .download,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
@@ -485,7 +497,7 @@ class MovieDetailScreen extends StatelessWidget {
                                           ),
                                         )),
                             ),
-                            
+
                             // actors
                             SizedBox(
                                 child: ListView.builder(

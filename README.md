@@ -64,8 +64,9 @@
 - [x] make all movie clickable
 
 ### all tasks
+- [x] open download url
 - [ ] comment movie
 - [ ] reply comment
 - [ ] like and dislike comment
-- [ ] open download url
+- [ ] download series widget and download it
 - [ ] subtitle configuration 
