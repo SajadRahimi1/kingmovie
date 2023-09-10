@@ -57,11 +57,15 @@
 - [x] add movie to favorite list
 
 
-## 2 September
+### 2 September
 - [x] create loading widget
 - [x] add loading to all requets
 - [x] create new ticket
 - [x] make all movie clickable
+
+### all tasks
 - [ ] comment movie
 - [ ] reply comment
 - [ ] like and dislike comment
+- [ ] open download url
+- [ ] subtitle configuration 

@@ -1,3 +1,5 @@
+import 'package:king_movie/models/movie_widget_model.dart';
+
 class HomeModel {
   String? status;
   String? forceOut;
@@ -373,7 +375,14 @@ class MovieDouble {
     genre = json["genre"];
     action = json["action"] == null ? null : Action4.fromJson(json["action"]);
   }
-
+MovieWidgetModel toWidgetModel()=>MovieWidgetModel(
+    genre: genre,
+    double: double,
+    id: id,
+    poster: poster,
+    title: title,
+    year: year
+  );
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data["id"] = id;
@@ -434,7 +443,18 @@ class Movie {
     poster = json["poster"];
     genre = json["genre"];
     action = json["action"] == null ? null : Action3.fromJson(json["action"]);
+
+  
   }
+
+  MovieWidgetModel toWidgetModel()=>MovieWidgetModel(
+    double: double,
+    id: id,
+    genre: genre,
+    poster: poster,
+    title: title,
+    year: year
+  );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -496,7 +516,14 @@ class SeriesDouble {
     double = json["double"];
     genre = json["genre"];
     action = json["action"] == null ? null : Action2.fromJson(json["action"]);
-  }
+  }MovieWidgetModel toWidgetModel()=>MovieWidgetModel(
+    double: double,
+    id: id,
+    genre: genre,
+    poster: poster,
+    title: title,
+    year: year
+  );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -558,7 +585,14 @@ class Series {
     poster = json["poster"];
     genre = json["genre"];
     action = json["action"] == null ? null : Action1.fromJson(json["action"]);
-  }
+  }MovieWidgetModel toWidgetModel()=>MovieWidgetModel(
+    double: double,
+    id: id,
+    poster: poster,
+    genre: genre,
+    title: title,
+    year: year
+  );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

@@ -7,6 +7,7 @@ import 'package:king_movie/core/widgets/menu.dart';
 import 'package:king_movie/viewmodels/home_viewmodel.dart';
 import 'package:king_movie/views/home/screens/search_screen.dart';
 import 'package:king_movie/views/home/screens/show_all_screen.dart';
+import 'package:king_movie/views/home/widgets/new_movie_widget.dart';
 import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
@@ -95,8 +96,9 @@ class MainScreen extends StatelessWidget {
                                 controller.homeModel?.data?.slider?[index]
                                         .title ??
                                     "",
-                                style: const TextStyle(
-                                    color: Color(0xffffffff), fontSize: 16),
+                                style: TextStyle(
+                                    color: const Color(0xffffffff),
+                                    fontSize: Get.width / 28),
                               ),
                               Text(
                                 controller
@@ -145,157 +147,20 @@ class MainScreen extends StatelessWidget {
                         physics: const BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         itemCount: controller.homeModel?.data?.series?.length,
-                        itemBuilder: (_, listIndex) => Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: SizedBox(
-                                width: Get.width / 2.5,
-                                height: Get.height,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                        child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Stack(
-                                        children: [
-                                          Image.network(
-                                            controller
-                                                    .homeModel
-                                                    ?.data
-                                                    ?.series?[listIndex]
-                                                    .poster ??
-                                                "",
-                                            fit: BoxFit.fill,
-                                            height: Get.height,
-                                          ),
-                                          Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              width: Get.width,
-                                              height: Get.height / 20,
-                                              decoration: const BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                      colors: [
-                                                    Color.fromRGBO(
-                                                        0, 0, 0, 0.8),
-                                                    Color.fromRGBO(
-                                                        0, 0, 0, 0.4),
-                                                  ],
-                                                      begin: Alignment
-                                                          .bottomCenter,
-                                                      end:
-                                                          Alignment.topCenter)),
-                                              child: Text(
-                                                controller
-                                                        .homeModel
-                                                        ?.data
-                                                        ?.series?[listIndex]
-                                                        .genre ??
-                                                    "",
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                    Text(
-                                      controller.homeModel?.data
-                                              ?.series?[listIndex].title ??
-                                          "",
-                                      maxLines: 1,
-                                      style: const TextStyle(
-                                        color: Color(0xffffffff),
-                                      ),
-                                    ),
-                                    const Text(
-                                      "",
-                                      style: TextStyle(
-                                        color: Color(0xffffffff),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
+                        itemBuilder: (_, listIndex) => NewMovieWidget(
+                              model: controller
+                                  .homeModel?.data?.series?[listIndex]
+                                  .toWidgetModel(),
                             )),
                     ListView.builder(
                         physics: const BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         itemCount: controller.homeModel?.data?.movie?.length,
-                        itemBuilder: (_, listIndex) => Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: SizedBox(
-                                width: Get.width / 2.5,
-                                height: Get.height,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                        child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Stack(
-                                        children: [
-                                          Image.network(
-                                            controller
-                                                    .homeModel
-                                                    ?.data
-                                                    ?.movie?[listIndex]
-                                                    .poster ??
-                                                "",
-                                            fit: BoxFit.fill,
-                                            height: Get.height,
-                                          ),
-                                          Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              width: Get.width,
-                                              height: Get.height / 20,
-                                              decoration: const BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                      colors: [
-                                                    Color.fromRGBO(
-                                                        0, 0, 0, 0.8),
-                                                    Color.fromRGBO(
-                                                        0, 0, 0, 0.4),
-                                                  ],
-                                                      begin: Alignment
-                                                          .bottomCenter,
-                                                      end:
-                                                          Alignment.topCenter)),
-                                              child: Text(
-                                                controller
-                                                        .homeModel
-                                                        ?.data
-                                                        ?.movie?[listIndex]
-                                                        .genre ??
-                                                    "",
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                    Text(
-                                      controller.homeModel?.data
-                                              ?.movie?[listIndex].title ??
-                                          "",
-                                      style: const TextStyle(
-                                          color: Color(0xffffffff),
-                                          fontSize: 16),
-                                    ),
-                                    const Text(
-                                      "",
-                                      style: TextStyle(
-                                        color: Color(0xffffffff),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ))
+                        itemBuilder: (_, listIndex) => NewMovieWidget(
+                              model: controller
+                                  .homeModel?.data?.movie?[listIndex]
+                                  .toWidgetModel(),
+                            )),
                   ]),
                 ),
                 InkWell(
@@ -710,161 +575,21 @@ class MainScreen extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         itemCount:
                             controller.homeModel?.data?.seriesDouble?.length,
-                        itemBuilder: (_, listIndex) => Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: SizedBox(
-                                width: Get.width / 2.5,
-                                height: Get.height,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                        child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Stack(
-                                        children: [
-                                          Image.network(
-                                            controller
-                                                    .homeModel
-                                                    ?.data
-                                                    ?.seriesDouble?[listIndex]
-                                                    .poster ??
-                                                "",
-                                            fit: BoxFit.fill,
-                                            height: Get.height,
-                                          ),
-                                          Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              width: Get.width,
-                                              height: Get.height / 20,
-                                              decoration: const BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                      colors: [
-                                                    Color.fromRGBO(
-                                                        0, 0, 0, 0.8),
-                                                    Color.fromRGBO(
-                                                        0, 0, 0, 0.4),
-                                                  ],
-                                                      begin: Alignment
-                                                          .bottomCenter,
-                                                      end:
-                                                          Alignment.topCenter)),
-                                              child: Text(
-                                                controller
-                                                        .homeModel
-                                                        ?.data
-                                                        ?.seriesDouble?[
-                                                            listIndex]
-                                                        .genre ??
-                                                    "",
-                                                style: const TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                    Text(
-                                      controller
-                                              .homeModel
-                                              ?.data
-                                              ?.seriesDouble?[listIndex]
-                                              .title ??
-                                          "",
-                                      maxLines: 1,
-                                      style: const TextStyle(
-                                        color: Color(0xffffffff),
-                                      ),
-                                    ),
-                                    const Text(
-                                      "",
-                                      style: TextStyle(
-                                        color: Color(0xffffffff),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
+                        itemBuilder: (_, listIndex) => NewMovieWidget(
+                              model: controller
+                                  .homeModel?.data?.seriesDouble?[listIndex]
+                                  .toWidgetModel(),
                             )),
                     ListView.builder(
                         physics: const BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         itemCount:
-                            controller.homeModel?.data?.movie?.length ?? 0,
-                        itemBuilder: (_, listIndex) => Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: SizedBox(
-                                width: Get.width / 2.5,
-                                height: Get.height,
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                        child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Stack(
-                                        children: [
-                                          Image.network(
-                                            controller
-                                                    .homeModel
-                                                    ?.data
-                                                    ?.movie?[listIndex]
-                                                    .poster ??
-                                                "",
-                                            fit: BoxFit.fill,
-                                            height: Get.height,
-                                          ),
-                                          // Align(
-                                          //   alignment: Alignment.bottomCenter,
-                                          //   child: Container(
-                                          //     alignment: Alignment.center,
-                                          //     width: Get.width,
-                                          //     height: Get.height / 20,
-                                          //     decoration: const BoxDecoration(
-                                          //         gradient: LinearGradient(
-                                          //             colors: [
-                                          //           Color.fromRGBO(
-                                          //               0, 0, 0, 0.8),
-                                          //           Color.fromRGBO(
-                                          //               0, 0, 0, 0.4),
-                                          //         ],
-                                          //             begin: Alignment
-                                          //                 .bottomCenter,
-                                          //             end:
-                                          //                 Alignment.topCenter)),
-                                          //     child: Text(
-                                          //       controller
-                                          //               .homeModel
-                                          //               ?.data
-                                          //               ?.movie?[listIndex]
-                                          //               .genre ??
-                                          //           "",
-                                          //       style: TextStyle(
-                                          //           color: Colors.white),
-                                          //     ),
-                                          //   ),
-                                          // )
-                                        ],
-                                      ),
-                                    )),
-                                    Text(
-                                      controller.homeModel?.data
-                                              ?.movie?[listIndex].title ??
-                                          "",
-                                      style: const TextStyle(
-                                        color: Color(0xffffffff),
-                                      ),
-                                    ),
-                                    const Text(
-                                      "",
-                                      style: TextStyle(
-                                        color: Color(0xffffffff),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
+                            controller.homeModel?.data?.movieDouble?.length ??
+                                0,
+                        itemBuilder: (_, listIndex) => NewMovieWidget(
+                              model: controller
+                                  .homeModel?.data?.movieDouble?[listIndex]
+                                  .toWidgetModel(),
                             )),
                   ]),
                 ),
