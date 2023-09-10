@@ -485,6 +485,7 @@ class MovieDetailScreen extends StatelessWidget {
                                           ),
                                         )),
                             ),
+                            
                             // actors
                             SizedBox(
                                 child: ListView.builder(

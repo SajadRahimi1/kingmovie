@@ -62,3 +62,6 @@
 - [x] add loading to all requets
 - [x] create new ticket
 - [x] make all movie clickable
+- [ ] comment movie
+- [ ] reply comment
+- [ ] like and dislike comment
