@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart'
-    show Colors, Curves, ScrollController, TextStyle;
+    show Colors, Curves, ScrollController, TextEditingController, TextStyle;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:king_movie/core/services/message_service.dart';
@@ -22,6 +22,9 @@ class MovieViewModel extends GetxController with StateMixin {
   final String movieId;
   MovieModel? movieModel;
   RxBool isInitialVideo = false.obs;
+  RxInt commentUpdate = 1.obs;
+  final TextEditingController commentController = TextEditingController();
+  Rx<String?> replyId = null.obs;
 
   late final player = Player();
   // Create a [VideoController] to handle video output from [Player].
@@ -169,8 +172,27 @@ class MovieViewModel extends GetxController with StateMixin {
         } else {
           commentObject.dislike = (commentObject.dislike ?? 0) + 1;
         }
-        update(['comment']);
+        commentUpdate.value++;
       }
+    } else if (request.statusCode == 500) {
+      networkErrorMessage();
+    } else {
+      showMessage(
+          title: 'خطا',
+          message: request.body['message'],
+          type: MessageType.error);
+    }
+  }
+
+  Future<void> comment() async {
+    final request = await comment_service.comment(
+        parent: replyId.value,
+        id: movieId,
+        text: commentController.text,
+        token: token);
+    if (request.statusCode == 200 && request.body['error'] == 'false') {
+      commentController.clear();
+      showMessage(message: request.body['message'], type: MessageType.success);
     } else if (request.statusCode == 500) {
       networkErrorMessage();
     } else {

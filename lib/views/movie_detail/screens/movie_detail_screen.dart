@@ -20,7 +20,7 @@ class MovieDetailScreen extends StatelessWidget {
 
     RxInt starSelected = (-1).obs;
     RxInt openEexpansionIndex = (-1).obs;
-    Rx<String?> isReply = null.obs;
+
     return WillPopScope(
       onWillPop: () async {
         controller.dispose();
@@ -578,9 +578,10 @@ class MovieDetailScreen extends StatelessWidget {
                                 physics: const BouncingScrollPhysics(
                                     parent: BouncingScrollPhysics()),
                                 children: [
-                                  Obx(() => isReply.value != null
+                                  Obx(() => controller.replyId.value != null
                                       ? InkWell(
-                                          onTap: () => isReply.value = null,
+                                          onTap: () =>
+                                              controller.replyId.value = null,
                                           child: Center(
                                             child: Padding(
                                               padding:
@@ -606,6 +607,8 @@ class MovieDetailScreen extends StatelessWidget {
                                       height:
                                           MediaQuery.sizeOf(context).height / 5,
                                       child: TextFormField(
+                                        controller:
+                                            controller.commentController,
                                         textInputAction: TextInputAction.done,
                                         maxLines: 5,
                                         style: const TextStyle(
@@ -629,49 +632,58 @@ class MovieDetailScreen extends StatelessWidget {
                                   ),
 
                                   // submit comment button
-                                  Container(
-                                    alignment: Alignment.center,
-                                    padding: const EdgeInsets.all(8),
-                                    margin: EdgeInsets.symmetric(
-                                            horizontal:
-                                                MediaQuery.sizeOf(context)
-                                                        .width /
-                                                    2.8) +
-                                        const EdgeInsets.only(bottom: 8),
-                                    decoration: BoxDecoration(
-                                        color: redColor,
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: const Text(
-                                      "ثبت و ارسال",
-                                      style: TextStyle(color: Colors.white),
+                                  InkWell(
+                                    onTap: () async {
+                                      FocusScope.of(context).unfocus();
+                                      await controller.comment();
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.all(8),
+                                      margin: EdgeInsets.symmetric(
+                                              horizontal:
+                                                  MediaQuery.sizeOf(context)
+                                                          .width /
+                                                      2.8) +
+                                          const EdgeInsets.only(bottom: 8),
+                                      decoration: BoxDecoration(
+                                          color: redColor,
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      child: const Text(
+                                        "ثبت و ارسال",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     ),
                                   ),
 
                                   // comments
-                                  GetBuilder<MovieViewModel>(
-                                    init: controller,
-                                    id: 'comment',
-                                    builder: (controller) => Column(
-                                        children: List.generate(
-                                            controller.movieModel?.data?.comment
-                                                    ?.length ??
-                                                0,
-                                            (index) => CommentWidget(
-                                                  onReplyTap: (id) =>
-                                                      isReply.value = id,
-                                                  commentModel: controller
-                                                      .movieModel
-                                                      ?.data
-                                                      ?.comment?[index]
-                                                      ,
-                                                  onLikeTap: (id) =>
-                                                      controller.likeComment(
-                                                          id: id, way: 'like'),
-                                                  onDislikeTap: (id) =>
-                                                      controller.likeComment(
-                                                          id: id,
-                                                          way: 'dislike'),
-                                                ))),
+                                  Obx(
+                                    () => controller.commentUpdate.value > 0
+                                        ? Column(
+                                            children: List.generate(
+                                                controller.movieModel?.data
+                                                        ?.comment?.length ??
+                                                    0,
+                                                (index) => CommentWidget(
+                                                      onReplyTap: (id) =>
+                                                          controller.replyId
+                                                              .value = id,
+                                                      commentModel: controller
+                                                          .movieModel
+                                                          ?.data
+                                                          ?.comment?[index],
+                                                      onLikeTap: (id) =>
+                                                          controller
+                                                              .likeComment(
+                                                                  id: id,
+                                                                  way: 'like'),
+                                                      onDislikeTap: (id) =>
+                                                          controller.likeComment(
+                                                              id: id,
+                                                              way: 'dislike'),
+                                                    )))
+                                        : const SizedBox(),
                                   )
                                 ],
                               ),
