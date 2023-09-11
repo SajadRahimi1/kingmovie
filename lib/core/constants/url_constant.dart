@@ -12,3 +12,4 @@ const String searchUrl = '$baseUrl=category';
 const String updateProfileUrl = '$baseUrl=setting';
 const String updatePasswordUrl = '$baseUrl=change';
 const String addFavoriteUrl = '$baseUrl=addWatch';
+const String likeCommentUrl = '$baseUrl=addLike';

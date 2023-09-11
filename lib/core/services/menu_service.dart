@@ -1,4 +1,6 @@
 import 'package:get/route_manager.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:king_movie/core/constants/singleton_class.dart';
 import 'package:king_movie/core/widgets/login_dialog.dart';
 import 'package:king_movie/views/login/screens/login_screen.dart';
 import 'package:king_movie/views/login/screens/singup_screen.dart';
@@ -37,4 +39,12 @@ void loginTap() {
     onSingupTap: () =>
         Get.to(() => const SingupScreen(), transition: Transition.leftToRight),
   ));
+}
+
+void exit() {
+  final GetStorage getStorage = GetStorage();
+  GetStorage.init().then((value) {
+    getStorage.remove('token');
+    SingletonClass.instance.user = null;    
+  });
 }

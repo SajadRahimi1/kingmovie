@@ -9,6 +9,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:king_movie/core/services/message_service.dart';
 import 'package:king_movie/core/services/movie_service.dart' as movie_service;
 import 'package:king_movie/core/services/watch_service.dart' as watch_service;
+import 'package:king_movie/core/services/comment_service.dart'
+    as comment_service;
 import 'package:king_movie/models/movie_model.dart';
 import 'package:king_movie/views/movie_detail/widgets/confirm_button.dart';
 import 'package:media_kit/media_kit.dart';
@@ -18,7 +20,6 @@ import 'package:url_launcher/url_launcher_string.dart';
 class MovieViewModel extends GetxController with StateMixin {
   MovieViewModel(this.movieId);
   final String movieId;
-
   MovieModel? movieModel;
   RxBool isInitialVideo = false.obs;
 
@@ -152,6 +153,31 @@ class MovieViewModel extends GetxController with StateMixin {
       }
     } else {
       showMessage(message: 'لینکی یافت نشد', type: MessageType.warning);
+    }
+  }
+
+  Future<void> likeComment({required String id, required String way}) async {
+    final request =
+        await comment_service.likeComment(way: way, id: id, token: token);
+    if (request.statusCode == 200 && request.body['error'] == 'false') {
+      showMessage(message: 'با موفقیت ثبت شد', type: MessageType.success);
+      var commentObject =
+          movieModel?.data?.comment?.singleWhere((element) => element.id == id);
+      if (commentObject != null) {
+        if (way == 'like') {
+          commentObject.like = (commentObject.like ?? 0) + 1;
+        } else {
+          commentObject.dislike = (commentObject.dislike ?? 0) + 1;
+        }
+        update(['comment']);
+      }
+    } else if (request.statusCode == 500) {
+      networkErrorMessage();
+    } else {
+      showMessage(
+          title: 'خطا',
+          message: request.body['message'],
+          type: MessageType.error);
     }
   }
 }

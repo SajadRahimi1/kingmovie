@@ -20,7 +20,7 @@ class MovieDetailScreen extends StatelessWidget {
 
     RxInt starSelected = (-1).obs;
     RxInt openEexpansionIndex = (-1).obs;
-    RxBool isReply = false.obs;
+    Rx<String?> isReply = null.obs;
     return WillPopScope(
       onWillPop: () async {
         controller.dispose();
@@ -578,9 +578,9 @@ class MovieDetailScreen extends StatelessWidget {
                                 physics: const BouncingScrollPhysics(
                                     parent: BouncingScrollPhysics()),
                                 children: [
-                                  Obx(() => isReply.value
+                                  Obx(() => isReply.value != null
                                       ? InkWell(
-                                          onTap: () => isReply.value = false,
+                                          onTap: () => isReply.value = null,
                                           child: Center(
                                             child: Padding(
                                               padding:
@@ -648,19 +648,30 @@ class MovieDetailScreen extends StatelessWidget {
                                   ),
 
                                   // comments
-                                  Column(
-                                    children: List.generate(
-                                        controller.movieModel?.data?.comment
-                                                ?.length ??
-                                            0,
-                                        (index) => CommentWidget(
-                                              onReplyTap: () =>
-                                                  isReply.value = true,
-                                              commentModel: controller
-                                                  .movieModel
-                                                  ?.data
-                                                  ?.comment?[index],
-                                            )),
+                                  GetBuilder<MovieViewModel>(
+                                    init: controller,
+                                    id: 'comment',
+                                    builder: (controller) => Column(
+                                        children: List.generate(
+                                            controller.movieModel?.data?.comment
+                                                    ?.length ??
+                                                0,
+                                            (index) => CommentWidget(
+                                                  onReplyTap: (id) =>
+                                                      isReply.value = id,
+                                                  commentModel: controller
+                                                      .movieModel
+                                                      ?.data
+                                                      ?.comment?[index]
+                                                      ,
+                                                  onLikeTap: (id) =>
+                                                      controller.likeComment(
+                                                          id: id, way: 'like'),
+                                                  onDislikeTap: (id) =>
+                                                      controller.likeComment(
+                                                          id: id,
+                                                          way: 'dislike'),
+                                                ))),
                                   )
                                 ],
                               ),

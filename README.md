@@ -65,8 +65,8 @@
 
 ### all tasks
 - [x] open download url
+- [x] like and dislike comment
 - [ ] comment movie
 - [ ] reply comment
-- [ ] like and dislike comment
 - [ ] download series widget and download it
 - [ ] subtitle configuration 

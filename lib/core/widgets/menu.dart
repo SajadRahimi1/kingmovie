@@ -121,10 +121,14 @@ class Menu extends StatelessWidget {
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        const ListTile(
+        ListTile(
+          onTap: () {
+            exit();
+            Scaffold.of(context).closeDrawer();
+          },
           textColor: Colors.white,
-          title: Text("خروج"),
-          trailing: Icon(
+          title: const Text("خروج"),
+          trailing: const Icon(
             Icons.exit_to_app,
             color: Colors.white,
           ),

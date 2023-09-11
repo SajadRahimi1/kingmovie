@@ -3,9 +3,15 @@ import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/models/movie_model.dart';
 
 class CommentWidget extends StatelessWidget {
-  const CommentWidget({super.key, this.onReplyTap, required this.commentModel});
-  final void Function()? onReplyTap;
+  const CommentWidget(
+      {super.key,
+      this.onReplyTap,
+      required this.commentModel,
+      required this.onLikeTap,
+      required this.onDislikeTap});
+  final void Function(String id)? onReplyTap;
   final Comment? commentModel;
+  final void Function(String id) onLikeTap, onDislikeTap;
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +70,14 @@ class CommentWidget extends StatelessWidget {
                         ),
                         // reply icon
                         InkWell(
-                          onTap: onReplyTap,
+                          onTap: () => onReplyTap!(commentModel?.id ?? ""),
                           child: const Icon(
                             Icons.reply,
                             color: redColor,
                           ),
                         ),
                         InkWell(
-                          onTap: onReplyTap,
+                          onTap: () => onReplyTap!(commentModel?.id ?? ""),
                           child: const Text(
                             "ثبت پاسخ",
                             style: TextStyle(color: redColor, fontSize: 12),
@@ -86,6 +92,9 @@ class CommentWidget extends StatelessWidget {
                   ? const SizedBox()
                   : ReplyCommentWidget(
                       commentModel: commentModel?.reply?[0],
+                      onDislikeTap: onDislikeTap,
+                      onLikeTap: onLikeTap,
+                      onReplyTap: onReplyTap,
                     )
             ],
           ),
@@ -114,14 +123,18 @@ class CommentWidget extends StatelessWidget {
                                 13 * MediaQuery.of(context).textScaleFactor),
                       )),
                     ),
-                    const Icon(
-                      Icons.thumb_up,
-                      color: yellowColor,
-                    ),
-                    const Icon(
-                      Icons.thumb_down,
-                      color: Color(0xffffffff),
-                    ),
+                    InkWell(
+                        onTap: () => onLikeTap(commentModel?.id ?? ""),
+                        child: const Icon(
+                          Icons.thumb_up,
+                          color: Color(0xffffffff),
+                        )),
+                    InkWell(
+                        onTap: () => onDislikeTap(commentModel?.id ?? ""),
+                        child: const Icon(
+                          Icons.thumb_down,
+                          color: Color(0xffffffff),
+                        )),
                     CircleAvatar(
                         radius: MediaQuery.sizeOf(context).width / 28,
                         backgroundColor: const Color(0xff7a7a9e),
@@ -145,9 +158,14 @@ class CommentWidget extends StatelessWidget {
 
 class ReplyCommentWidget extends StatelessWidget {
   const ReplyCommentWidget(
-      {super.key, this.onReplyTap, required this.commentModel});
-  final void Function()? onReplyTap;
+      {super.key,
+      this.onReplyTap,
+      required this.commentModel,
+      required this.onLikeTap,
+      required this.onDislikeTap});
+  final void Function(String id)? onReplyTap;
   final Comment? commentModel;
+  final void Function(String id) onLikeTap, onDislikeTap;
 
   @override
   Widget build(BuildContext context) {
@@ -210,14 +228,14 @@ class ReplyCommentWidget extends StatelessWidget {
                           ),
                           // reply icon
                           InkWell(
-                            onTap: onReplyTap,
+                            onTap: () => onReplyTap!(commentModel?.id ?? ""),
                             child: const Icon(
                               Icons.reply,
                               color: redColor,
                             ),
                           ),
                           InkWell(
-                            onTap: onReplyTap,
+                            onTap: () => onReplyTap!(commentModel?.id ?? ""),
                             child: const Text(
                               "ثبت پاسخ",
                               style: TextStyle(color: redColor, fontSize: 12),
@@ -233,6 +251,9 @@ class ReplyCommentWidget extends StatelessWidget {
                   ? const SizedBox()
                   : SecondReplyWidget(
                       commentModel: commentModel?.reply?[0],
+                      onDislikeTap: onDislikeTap,
+                      onLikeTap: onLikeTap,
+                      onReplyTap: onReplyTap,
                     )
             ],
           ),
@@ -261,14 +282,18 @@ class ReplyCommentWidget extends StatelessWidget {
                                 13 * MediaQuery.of(context).textScaleFactor),
                       )),
                     ),
-                    const Icon(
-                      Icons.thumb_up,
-                      color: yellowColor,
-                    ),
-                    const Icon(
-                      Icons.thumb_down,
-                      color: Color(0xffffffff),
-                    ),
+                    InkWell(
+                        onTap: () => onLikeTap(commentModel?.id ?? ""),
+                        child: const Icon(
+                          Icons.thumb_up,
+                          color: Color(0xffffffff),
+                        )),
+                    InkWell(
+                        onTap: () => onDislikeTap(commentModel?.id ?? ""),
+                        child: const Icon(
+                          Icons.thumb_down,
+                          color: Color(0xffffffff),
+                        )),
                     CircleAvatar(
                         radius: MediaQuery.sizeOf(context).width / 28,
                         backgroundColor: const Color(0xff7a7a9e),
@@ -292,9 +317,14 @@ class ReplyCommentWidget extends StatelessWidget {
 
 class SecondReplyWidget extends StatelessWidget {
   const SecondReplyWidget(
-      {super.key, this.onReplyTap, required this.commentModel});
-  final void Function()? onReplyTap;
+      {super.key,
+      this.onReplyTap,
+      required this.commentModel,
+      required this.onLikeTap,
+      required this.onDislikeTap});
+  final void Function(String id)? onReplyTap;
   final Comment? commentModel;
+  final void Function(String id) onLikeTap, onDislikeTap;
 
   @override
   Widget build(BuildContext context) {
@@ -357,14 +387,14 @@ class SecondReplyWidget extends StatelessWidget {
                           ),
                           // reply icon
                           InkWell(
-                            onTap: onReplyTap,
+                            onTap: () => onReplyTap!(commentModel?.id ?? ""),
                             child: const Icon(
                               Icons.reply,
                               color: redColor,
                             ),
                           ),
                           InkWell(
-                            onTap: onReplyTap,
+                            onTap: () => onReplyTap!(commentModel?.id ?? ""),
                             child: const Text(
                               "ثبت پاسخ",
                               style: TextStyle(color: redColor, fontSize: 12),
@@ -380,6 +410,9 @@ class SecondReplyWidget extends StatelessWidget {
                   ? const SizedBox()
                   : SecondReplyWidget(
                       commentModel: commentModel?.reply?[0],
+                      onDislikeTap: onDislikeTap,
+                      onLikeTap: onLikeTap,
+                      onReplyTap: onReplyTap,
                     )
             ],
           ),
@@ -408,14 +441,18 @@ class SecondReplyWidget extends StatelessWidget {
                                 13 * MediaQuery.of(context).textScaleFactor),
                       )),
                     ),
-                    const Icon(
-                      Icons.thumb_up,
-                      color: yellowColor,
-                    ),
-                    const Icon(
-                      Icons.thumb_down,
-                      color: Color(0xffffffff),
-                    ),
+                    InkWell(
+                        onTap: () => onLikeTap(commentModel?.id ?? ""),
+                        child: const Icon(
+                          Icons.thumb_up,
+                          color: Color(0xffffffff),
+                        )),
+                    InkWell(
+                        onTap: () => onDislikeTap(commentModel?.id ?? ""),
+                        child: const Icon(
+                          Icons.thumb_down,
+                          color: Color(0xffffffff),
+                        )),
                     CircleAvatar(
                         radius: MediaQuery.sizeOf(context).width / 28,
                         backgroundColor: const Color(0xff7a7a9e),
