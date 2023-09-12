@@ -24,7 +24,7 @@ class MovieViewModel extends GetxController with StateMixin {
   RxBool isInitialVideo = false.obs;
   RxInt commentUpdate = 1.obs;
   final TextEditingController commentController = TextEditingController();
-  Rx<String?> replyId = null.obs;
+  Rx<String> replyId = "".obs;
 
   late final player = Player();
   // Create a [VideoController] to handle video output from [Player].
@@ -33,7 +33,7 @@ class MovieViewModel extends GetxController with StateMixin {
         enableHardwareAcceleration: false,
       ));
 
-  final ScrollController pageScrollController = ScrollController();
+  final ScrollController pageScrollController = ScrollController(),commentScrollController = ScrollController();
   Rx<SubtitleViewConfiguration> subtitleViewConfiguration =
       const SubtitleViewConfiguration().obs;
 
@@ -186,7 +186,7 @@ class MovieViewModel extends GetxController with StateMixin {
 
   Future<void> comment() async {
     final request = await comment_service.comment(
-        parent: replyId.value,
+        parent: replyId.isEmpty?null:replyId.value,
         id: movieId,
         text: commentController.text,
         token: token);

@@ -7,7 +7,6 @@
 - signup api
 - rate movie api
 - get message of ticket api
-- delete favorite list
 
 
 
@@ -67,6 +66,7 @@
 - [x] open download url
 - [x] like and dislike comment
 - [x] comment movie
-- [ ] reply comment
+- [x] reply comment
 - [ ] download series widget and download it
 - [ ] subtitle configuration 
+- [ ] select default player or in app player

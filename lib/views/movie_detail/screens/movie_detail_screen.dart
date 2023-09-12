@@ -575,13 +575,14 @@ class MovieDetailScreen extends StatelessWidget {
                             // comments
                             SizedBox(
                               child: ListView(
+                                controller: controller.commentScrollController,
                                 physics: const BouncingScrollPhysics(
                                     parent: BouncingScrollPhysics()),
                                 children: [
-                                  Obx(() => controller.replyId.value != null
+                                  Obx(() => controller.replyId.value.isNotEmpty
                                       ? InkWell(
                                           onTap: () =>
-                                              controller.replyId.value = null,
+                                              controller.replyId.value = "",
                                           child: Center(
                                             child: Padding(
                                               padding:
@@ -666,9 +667,19 @@ class MovieDetailScreen extends StatelessWidget {
                                                         ?.comment?.length ??
                                                     0,
                                                 (index) => CommentWidget(
-                                                      onReplyTap: (id) =>
-                                                          controller.replyId
-                                                              .value = id,
+                                                      onReplyTap: (id) {
+                                                        controller
+                                                            .replyId.value = id;
+                                                        controller
+                                                            .commentScrollController
+                                                            .animateTo(0.0,
+                                                                duration:
+                                                                    const Duration(
+                                                                        microseconds:
+                                                                            50),
+                                                                curve: Curves
+                                                                    .easeIn);
+                                                      },
                                                       commentModel: controller
                                                           .movieModel
                                                           ?.data
