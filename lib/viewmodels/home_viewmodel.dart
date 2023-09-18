@@ -2,7 +2,9 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:king_movie/core/constants/singleton_class.dart';
 import 'package:king_movie/core/services/home_service.dart' as service;
+import 'package:king_movie/core/services/search_service.dart';
 import 'package:king_movie/models/home_model.dart';
+import 'package:king_movie/models/search_model.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 class HomeViewModel extends GetxController with StateMixin {
@@ -49,5 +51,13 @@ class HomeViewModel extends GetxController with StateMixin {
     // List of each day as DateTime
     return List.generate(lastDay.difference(firstDay).inDays + 1,
         (index) => firstDay.add(Duration(days: index)).toJalali());
+  }
+
+  Future<SearchModel?> search(String text) async {
+    final request = await simpleSearch(searchText: text, page: 1);
+    if (request.statusCode == 200 && request.body['error'] == 'false') {
+      return SearchModel.fromJson(request.body);
+    }
+    return null;
   }
 }

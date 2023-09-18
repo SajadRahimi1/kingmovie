@@ -29,3 +29,11 @@ Future<Response<dynamic>> newTicket(
   EasyLoading.dismiss();
   return returnData;
 }
+
+Future<Response<dynamic>> getTicketMessage(
+    {required String code, required String token}) async {
+  return await getConnect.post("$baseUrl=view", {
+    'userSalt': '2y10mskNZdLoKYHfSm0OinL4guJxHEH6zHttKTOnwj82VwxMH2HCW83I',
+    'code': code
+  });
+}

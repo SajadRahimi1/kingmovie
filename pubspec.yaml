@@ -23,6 +23,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   android_intent_plus: ^4.0.2
   device_apps: ^2.2.0
+  flutter_typeahead: ^4.7.0
   
 
 dev_dependencies:
