@@ -45,7 +45,8 @@ class MainScreen extends StatelessWidget {
                 },
                 suggestionsBoxDecoration: SuggestionsBoxDecoration(
                     borderRadius: BorderRadius.circular(10)),
-                onSuggestionSelected: (suggestion) {},
+                onSuggestionSelected: (suggestion) => Get.to(
+                    () => MovieDetailScreen(movieId: suggestion.id ?? "")),
                 // hideKeyboardOnDrag: true,
                 // hideSuggestionsOnKeyboardHide: false,
                 itemBuilder: (context, itemData) => Container(

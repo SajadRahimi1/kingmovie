@@ -6,6 +6,7 @@ import 'package:king_movie/viewmodels/movie_viewmodel.dart';
 import 'package:king_movie/views/login/screens/login_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 import 'package:king_movie/core/extensions/string_extension.dart';
+import 'package:king_movie/views/movie_detail/widgets/seies_tiles_widget.dart';
 import 'package:king_movie/views/movie_detail/widgets/setting_bottom_sheet.dart';
 import 'package:king_movie/views/movie_detail/widgets/top_video_widget.dart';
 import 'package:media_kit_video/media_kit_video.dart';
@@ -20,6 +21,8 @@ class MovieDetailScreen extends StatelessWidget {
 
     RxInt starSelected = (-1).obs;
     RxInt openEexpansionIndex = (-1).obs;
+    RxInt openSeriesEexpansionIndex = (-1).obs;
+    RxInt openSeriesEexpansionIndex2 = (-1).obs;
 
     return WillPopScope(
       onWillPop: () async {
@@ -398,48 +401,100 @@ class MovieDetailScreen extends StatelessWidget {
                                                         textColor: Colors.white,
                                                         title: Text(
                                                             '${controller.movieModel?.data?.link?.data?[index].title ?? ""} ${controller.movieModel?.data?.link?.data?[index].des ?? ""}')),
-                                                body: Column(
-                                                  children: List.generate(
-                                                    controller
-                                                            .movieModel
-                                                            ?.data
-                                                            ?.link
-                                                            ?.data?[index]
-                                                            .list
-                                                            ?.length ??
-                                                        0,
-                                                    (listIndex) => Padding(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          vertical: 8.0),
-                                                      child: ListTile(
-                                                        textColor: Colors.white,
-                                                        iconColor: Colors.white,
-                                                        titleTextStyle:
-                                                            const TextStyle(
-                                                                fontSize: 16),
-                                                        trailing: SizedBox(
-                                                          width: Get.width / 7,
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              controller
+                                                body: controller.movieModel
+                                                            ?.data?.way ==
+                                                        "1"
+                                                    ? Column(
+                                                        children: List.generate(
+                                                            controller
+                                                                    .movieModel
+                                                                    ?.data
+                                                                    ?.link
+                                                                    ?.data?[
+                                                                        index]
+                                                                    .list
+                                                                    ?.length ??
+                                                                0,
+                                                            (secondIndex) =>
+                                                                ListTile(
+                                                                  title: Text(
+                                                                    controller
+                                                                            .movieModel
+                                                                            ?.data
+                                                                            ?.link
+                                                                            ?.data?[index]
+                                                                            .list?[secondIndex]
+                                                                            .title ??
+                                                                        "",
+                                                                    style: const TextStyle(
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
+                                                                  onTap: () => Get.dialog(SeriesDialog(
+                                                                      downloadList: controller
                                                                           .movieModel
                                                                           ?.data
                                                                           ?.link
                                                                           ?.data?[
                                                                               index]
-                                                                          .list?[
-                                                                              listIndex]
-                                                                          .format ==
-                                                                      'movie'
-                                                                  ? InkWell(
-                                                                      onTap: () => controller.initVideo(controller
+                                                                          .list?[secondIndex],
+                                                                      initVideo: (initVideo) => controller.initVideo(initVideo),
+                                                                      download: (download) => controller.openUrl(download))),
+                                                                )))
+                                                    : Column(
+                                                        children: List.generate(
+                                                          controller
+                                                                  .movieModel
+                                                                  ?.data
+                                                                  ?.link
+                                                                  ?.data?[index]
+                                                                  .list
+                                                                  ?.length ??
+                                                              0,
+                                                          (listIndex) =>
+                                                              Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    vertical:
+                                                                        8.0),
+                                                            child: ListTile(
+                                                              textColor:
+                                                                  Colors.white,
+                                                              iconColor:
+                                                                  Colors.white,
+                                                              titleTextStyle:
+                                                                  const TextStyle(
+                                                                      fontSize:
+                                                                          16),
+                                                              trailing:
+                                                                  SizedBox(
+                                                                width:
+                                                                    Get.width /
+                                                                        7,
+                                                                child: Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceBetween,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    controller.movieModel?.data?.link?.data?[index].list?[listIndex].format ==
+                                                                            'movie'
+                                                                        ? InkWell(
+                                                                            onTap: () =>
+                                                                                controller.initVideo(controller.movieModel?.data?.link?.data?[index].list?[listIndex]),
+                                                                            child:
+                                                                                Icon(
+                                                                              Icons.play_arrow,
+                                                                              color: Colors.blue,
+                                                                              size: Get.width / 14,
+                                                                            ),
+                                                                          )
+                                                                        : const SizedBox(),
+                                                                    InkWell(
+                                                                      onTap: () => controller.openUrl(controller
                                                                           .movieModel
                                                                           ?.data
                                                                           ?.link
@@ -447,51 +502,32 @@ class MovieDetailScreen extends StatelessWidget {
                                                                               index]
                                                                           .list?[listIndex]),
                                                                       child:
-                                                                          Icon(
+                                                                          const Icon(
                                                                         Icons
-                                                                            .play_arrow,
+                                                                            .download,
                                                                         color: Colors
-                                                                            .blue,
-                                                                        size: Get.width /
-                                                                            14,
+                                                                            .white,
                                                                       ),
-                                                                    )
-                                                                  : const SizedBox(),
-                                                              InkWell(
-                                                                onTap: () => controller
-                                                                    .openUrl(controller
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              title: Text(
+                                                                controller
                                                                         .movieModel
                                                                         ?.data
                                                                         ?.link
                                                                         ?.data?[
                                                                             index]
-                                                                        .list?[listIndex]),
-                                                                child:
-                                                                    const Icon(
-                                                                  Icons
-                                                                      .download,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
+                                                                        .list?[
+                                                                            listIndex]
+                                                                        .title ??
+                                                                    "",
                                                               ),
-                                                            ],
+                                                            ),
                                                           ),
                                                         ),
-                                                        title: Text(
-                                                          controller
-                                                                  .movieModel
-                                                                  ?.data
-                                                                  ?.link
-                                                                  ?.data?[index]
-                                                                  .list?[
-                                                                      listIndex]
-                                                                  .title ??
-                                                              "",
-                                                        ),
                                                       ),
-                                                    ),
-                                                  ),
-                                                ),
                                               ),
                                             ),
                                           ),

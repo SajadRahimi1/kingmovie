@@ -67,6 +67,6 @@
 - [x] like and dislike comment
 - [x] comment movie
 - [x] reply comment
-- [ ] download series widget and download it
+- [x] download series widget and download it
 - [ ] subtitle configuration 
 - [ ] select default player or in app player
