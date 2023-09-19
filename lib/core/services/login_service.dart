@@ -23,6 +23,24 @@ Future<Response<dynamic>> login(
   return returnData;
 }
 
+Future<Response<dynamic>> forget(
+    {required String email}) async {
+  EasyLoading.show(
+    status: 'در حال ارسال',
+  ).timeout(const Duration(seconds: 5), onTimeout: () {
+    EasyLoading.dismiss();
+  });
+  FormData formData = FormData({ 'email': email});
+
+  var returnData = await getConnect.post(forgetUrl, formData,
+      headers: {}).timeout(const Duration(seconds: 5), onTimeout: () {
+    EasyLoading.dismiss();
+    return const Response(statusCode: 500);
+  });
+  EasyLoading.dismiss();
+  return returnData;
+}
+
 Future<Response<dynamic>> signup(
     {required SignupModel signupModel}) async {
   EasyLoading.show(

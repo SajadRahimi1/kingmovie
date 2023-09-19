@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:king_movie/core/services/login_service.dart' as service;
 import 'package:get_storage/get_storage.dart';
+import 'package:king_movie/core/services/message_service.dart';
 import 'package:king_movie/views/home/screens/main_screen.dart';
 
 class LoginViewModel extends GetxController with StateMixin {
@@ -25,5 +26,13 @@ class LoginViewModel extends GetxController with StateMixin {
       // TODO: show error message
       print(request.body['message']);
     }
+  }
+
+  Future<void> forget() async {
+    final request = await service.forget(
+      email: email,
+    );
+    Get.back();
+    showMessage(message: request.body['message'], type: MessageType.info);
   }
 }

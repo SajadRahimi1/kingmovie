@@ -3,11 +3,10 @@ import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
 import 'package:king_movie/viewmodels/login_viewmodel.dart';
-import 'package:king_movie/views/login/screens/forget_screen.dart';
 import 'package:king_movie/views/menu/widgets/profile_text_input.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class ForgetScreen extends StatelessWidget {
+  const ForgetScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,25 +23,9 @@ class LoginScreen extends StatelessWidget {
                 label: "ایمیل",
                 onChanged: (value) => controller.email = value,
               )),
-          Padding(
-              padding: const EdgeInsets.all(10),
-              child: ProfileTextInput(
-                label: "رمز عبور",
-                onChanged: (value) => controller.password = value,
-              )),
-          SizedBox(
-            height: MediaQuery.sizeOf(context).height / 20,
-          ),
-          InkWell(
-            onTap: () => Get.to(() => const ForgetScreen()),
-            child: const Text(
-              "اگر رمز عبور خود را فراموش کرده اید اینجا کلیک نمایید",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
           const Spacer(),
           InkWell(
-            onTap: controller.login,
+            onTap: controller.forget,
             child: Container(
               width: MediaQuery.sizeOf(context).width,
               height: MediaQuery.sizeOf(context).height / 13,
@@ -54,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                   color: redColor),
               alignment: Alignment.center,
               child: const Text(
-                "ورود",
+                "ثبت",
                 style: TextStyle(color: Colors.white),
               ),
             ),
