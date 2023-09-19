@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video_controls/media_kit_video_controls.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 
 class SubtitleWidget extends StatelessWidget {
   const SubtitleWidget({super.key, required this.player});
@@ -11,9 +12,9 @@ class SubtitleWidget extends StatelessWidget {
     List<SubtitleTrack> subtitles = [];
     return MaterialCustomButton(
       onPressed: () async {
-        subtitles = player.state.tracks.subtitle
-            .where((element) => element.title != null)
-            .toList();
+        subtitles = player.state.tracks.subtitle;
+        // .where((element) => element.title != null)
+        // .toList();
         SubtitleTrack? trackSelected = await showModalBottomSheet(
             context: context,
             shape: const RoundedRectangleBorder(
@@ -28,7 +29,8 @@ class SubtitleWidget extends StatelessWidget {
                               print("tap");
                               Navigator.of(context).pop(subtitles[index]);
                             },
-                            title: Text(subtitles[index].title ?? ""),
+                            title: Text(subtitles[index].title ??
+                                "زیرنویس ${index + 1}".toPersianDigit()),
                             leading: subtitles[index].id ==
                                     player.state.track.subtitle.id
                                 ? const Icon(Icons.done)

@@ -22,8 +22,6 @@ class MovieDetailScreen extends StatelessWidget {
 
     RxInt starSelected = (-1).obs;
     RxInt openEexpansionIndex = (-1).obs;
-    RxInt openSeriesEexpansionIndex = (-1).obs;
-    RxInt openSeriesEexpansionIndex2 = (-1).obs;
 
     return WillPopScope(
       onWillPop: () async {
@@ -764,9 +762,23 @@ class MovieDetailScreen extends StatelessWidget {
                                 itemCount: controller
                                         .movieModel?.data?.trailer?.length ??
                                     0,
-                                itemBuilder: (_, index) => TrailerWidget(
-                                    trailerModel: controller
-                                        .movieModel?.data?.trailer?[index]),
+                                itemBuilder: (_, index) => InkWell(
+                                  onTap: () async {
+                                    if (controller.movieModel?.data
+                                            ?.trailer?[index].type ==
+                                        'trailer') {
+                                      await controller.initTrailer(controller
+                                              .movieModel
+                                              ?.data
+                                              ?.trailer?[index]
+                                              .view ??
+                                          "");
+                                    }
+                                  },
+                                  child: TrailerWidget(
+                                      trailerModel: controller
+                                          .movieModel?.data?.trailer?[index]),
+                                ),
                               ),
                             ),
                           ])),

@@ -117,6 +117,16 @@ class MovieViewModel extends GetxController with StateMixin {
     }
   }
 
+  Future<void> initTrailer(String? downloadLink) async {
+    if (downloadLink != null) {
+      await player.open(Media(downloadLink));
+      isInitialVideo.value = true;
+
+      pageScrollController.animateTo(0.0,
+          duration: const Duration(milliseconds: 100), curve: Curves.bounceIn);
+    }
+  }
+
   Future<void> addFavorite() async {
     final request = await watch_service.addFavorite(token, movieId);
     showMessage(
@@ -133,9 +143,9 @@ class MovieViewModel extends GetxController with StateMixin {
   }
 
   List<SubtitleTrack> subtitles() {
-    return player.state.tracks.subtitle
-        .where((element) => element.title != null)
-        .toList();
+    return player.state.tracks.subtitle;
+    // .where((element) => element.title != null)
+    // .toList();
   }
 
   Future<void> openUrl(DownloadList? url) async {

@@ -70,8 +70,8 @@
 - [x] download series widget and download it
 - [x] show cast videos
 - [x] advance search
-- [ ] play trailers
+- [x] buy vip
+- [x] play trailers
 - [ ] subtitle configuration 
 - [ ] select default player or in app player
 - [ ] singup
-- [ ] buy
