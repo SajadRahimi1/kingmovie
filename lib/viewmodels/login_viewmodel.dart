@@ -23,8 +23,10 @@ class LoginViewModel extends GetxController with StateMixin {
             isLogedIn: true,
           ));
     } else {
-      // TODO: show error message
-      print(request.body['message']);
+      showMessage(
+          title: 'خطا',
+          message: request.body['message'],
+          type: MessageType.error);
     }
   }
 

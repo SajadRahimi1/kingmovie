@@ -72,7 +72,7 @@
 - [x] advance search
 - [x] buy vip
 - [x] play trailers
+- [x] forgot password
+- [x] singup
 - [ ] subtitle configuration 
 - [ ] select default player or in app player
-- [ ] singup
-- [ ] forgot password

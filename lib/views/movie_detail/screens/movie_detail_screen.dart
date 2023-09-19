@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
+import 'package:king_movie/core/constants/singleton_class.dart';
 import 'package:king_movie/core/widgets/trailer_widget.dart';
 import 'package:king_movie/viewmodels/movie_viewmodel.dart';
 import 'package:king_movie/views/home/screens/search_screen.dart';
 import 'package:king_movie/views/login/screens/login_screen.dart';
+import 'package:king_movie/views/login/screens/singup_screen.dart';
+import 'package:king_movie/views/menu/screens/vip_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 import 'package:king_movie/core/extensions/string_extension.dart';
 import 'package:king_movie/views/movie_detail/widgets/series_tiles_widget.dart';
@@ -324,55 +327,91 @@ class MovieDetailScreen extends StatelessWidget {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             Text(
-                                              "برای استفاده از خدمات ابتدا وارد اپ شوید\n",
+                                              SingletonClass.instance.user ==
+                                                      null
+                                                  ? "برای استفاده از خدمات ابتدا وارد اپ شوید\n"
+                                                  : "برای پخش یا دانلود باید اشتراک خریداری کنید\n",
                                               style: TextStyle(
                                                   fontSize: 17 *
                                                       MediaQuery.of(context)
                                                           .textScaleFactor,
                                                   color: Colors.white),
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                InkWell(
-                                                  onTap: () => Get.to(() =>
-                                                      const LoginScreen()),
-                                                  child: Container(
-                                                    padding:
-                                                        const EdgeInsets.all(7),
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10)),
-                                                    child: const Text(
-                                                      "وارد شوید",
-                                                      style: TextStyle(),
+                                            SingletonClass.instance.user == null
+                                                ? Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () => Get.to(() =>
+                                                            const LoginScreen()),
+                                                        child: Container(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(7),
+                                                          decoration: BoxDecoration(
+                                                              color:
+                                                                  Colors.white,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                          child: const Text(
+                                                            "وارد شوید",
+                                                            style: TextStyle(),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () => Get.to(() =>
+                                                            const SingupScreen()),
+                                                        child: Container(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(7),
+                                                          margin:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration: BoxDecoration(
+                                                              color:
+                                                                  Colors.white,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10)),
+                                                          child: const Text(
+                                                            "ثبت نام کنید",
+                                                            style: TextStyle(),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  )
+                                                : InkWell(
+                                                    onTap: () => Get.to(() =>
+                                                        const VipScreen()),
+                                                    child: Container(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              7),
+                                                      margin: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 10),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10)),
+                                                      child: const Text(
+                                                        "خرید اشتراک",
+                                                        style: TextStyle(),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                InkWell(
-                                                  onTap: () {},
-                                                  child: Container(
-                                                    padding:
-                                                        const EdgeInsets.all(7),
-                                                    margin: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 10),
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10)),
-                                                    child: const Text(
-                                                      "ثبت نام کنید",
-                                                      style: TextStyle(),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            )
                                           ],
                                         )
                                       : Obx(
