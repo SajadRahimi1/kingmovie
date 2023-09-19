@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/trailer_widget.dart';
 import 'package:king_movie/viewmodels/movie_viewmodel.dart';
+import 'package:king_movie/views/home/screens/search_screen.dart';
 import 'package:king_movie/views/login/screens/login_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 import 'package:king_movie/core/extensions/string_extension.dart';
@@ -547,70 +548,84 @@ class MovieDetailScreen extends StatelessWidget {
                                     itemCount: controller
                                             .movieModel?.data?.cast?.length ??
                                         0,
-                                    itemBuilder: (_, index) => Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 5),
-                                          width: Get.width,
-                                          height: Get.height / 11,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              color: blackColor,
-                                              border: Border.all(
-                                                  color:
-                                                      const Color(0xff3f3f3f))),
-                                          child: Row(
-                                              textDirection: TextDirection.ltr,
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  child: Image.network(
-                                                    controller
-                                                            .movieModel
-                                                            ?.data
-                                                            ?.cast?[index]
-                                                            .image ??
-                                                        "",
-                                                    fit: BoxFit.fill,
+                                    itemBuilder: (_, index) => InkWell(
+                                          onTap: () =>
+                                              Get.to(() => SearchScreen(
+                                                    title: "",
+                                                    cast: controller
+                                                        .movieModel
+                                                        ?.data
+                                                        ?.cast?[index]
+                                                        .name,
+                                                  )),
+                                          child: Container(
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 5),
+                                            width: Get.width,
+                                            height: Get.height / 11,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                color: blackColor,
+                                                border: Border.all(
+                                                    color: const Color(
+                                                        0xff3f3f3f))),
+                                            child: Row(
+                                                textDirection:
+                                                    TextDirection.ltr,
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    child: Image.network(
+                                                      controller
+                                                              .movieModel
+                                                              ?.data
+                                                              ?.cast?[index]
+                                                              .image ??
+                                                          "",
+                                                      fit: BoxFit.fill,
+                                                    ),
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(horizontal: 8),
-                                                  child: Text(
-                                                    controller
-                                                            .movieModel
-                                                            ?.data
-                                                            ?.cast?[index]
-                                                            .name ??
-                                                        "",
-                                                    textDirection:
-                                                        TextDirection.ltr,
-                                                    style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 15),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8),
+                                                    child: Text(
+                                                      controller
+                                                              .movieModel
+                                                              ?.data
+                                                              ?.cast?[index]
+                                                              .name ??
+                                                          "",
+                                                      textDirection:
+                                                          TextDirection.ltr,
+                                                      style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 15),
+                                                    ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  child: Text(
-                                                    controller
-                                                            .movieModel
-                                                            ?.data
-                                                            ?.cast?[index]
-                                                            .simple ??
-                                                        "",
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    textDirection:
-                                                        TextDirection.ltr,
-                                                    style: const TextStyle(
-                                                        color:
-                                                            Color(0xff5f5f5f),
-                                                        fontSize: 14),
+                                                  Expanded(
+                                                    child: Text(
+                                                      controller
+                                                              .movieModel
+                                                              ?.data
+                                                              ?.cast?[index]
+                                                              .simple ??
+                                                          "",
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      textDirection:
+                                                          TextDirection.ltr,
+                                                      style: const TextStyle(
+                                                          color:
+                                                              Color(0xff5f5f5f),
+                                                          fontSize: 14),
+                                                    ),
                                                   ),
-                                                ),
-                                              ]),
+                                                ]),
+                                          ),
                                         ))),
 
                             // comments

@@ -7,16 +7,20 @@ import 'package:king_movie/viewmodels/search_viewmodel.dart';
 import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key, required this.title, this.advanceSearchModel});
+  const SearchScreen(
+      {super.key, required this.title, this.advanceSearchModel, this.cast});
   final String title;
+  final String? cast;
   final AdvanceSearchModel? advanceSearchModel;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(SearchViewModel(title, advanceSearchModel));
+    final controller =
+        Get.put(SearchViewModel(title, advanceSearchModel, cast));
 
     return Scaffold(
-      appBar: menuAppBar(context: context),
+      appBar: menuAppBar(
+          context: context, title: cast ?? advanceSearchModel?.title ?? title),
       backgroundColor: blackColor,
       body: controller.obx((state) => ListView.builder(
           padding: const EdgeInsets.all(5),
@@ -25,7 +29,9 @@ class SearchScreen extends StatelessWidget {
           itemCount: (controller.searchModel?.data?.dataList?.length ?? 0) + 1,
           itemBuilder: (_, index) => index ==
                   controller.searchModel?.data?.dataList?.length
-              ?controller.isLastPage?SizedBox(): const Center(child: CircularProgressIndicator())
+              ? controller.isLastPage
+                  ? const SizedBox()
+                  : const Center(child: CircularProgressIndicator())
               : InkWell(
                   onTap: () => Get.to(() => MovieDetailScreen(
                       movieId:

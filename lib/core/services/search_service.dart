@@ -17,3 +17,9 @@ Future<Response<dynamic>> advanceSearch(
   final FormData formData = FormData(body);
   return await getConnect.post(searchUrl, formData);
 }
+
+Future<Response<dynamic>> castSearch(
+    {required String cast, int page = 1}) async {
+  final FormData formData = FormData({'cast': cast, 'page': page});
+  return await getConnect.post(searchUrl, formData);
+}
