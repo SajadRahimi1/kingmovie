@@ -118,20 +118,26 @@ class VipScreen extends StatelessWidget {
                         ))),
               ),
             ),
-            Container(
-              alignment: Alignment.center,
-              width: MediaQuery.sizeOf(context).width,
-              height: MediaQuery.sizeOf(context).height / 12,
-              decoration: const BoxDecoration(
-                  color: redColor,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15))),
-              child: Text(
-                "خرید سرویس",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18 * MediaQuery.of(context).textScaleFactor),
+            InkWell(
+              onTap: () async {
+                await controller.buy(
+                    controller.homeModel?.pack?[planSelected.value].id ?? 0);
+              },
+              child: Container(
+                alignment: Alignment.center,
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height / 12,
+                decoration: const BoxDecoration(
+                    color: redColor,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15))),
+                child: Text(
+                  "خرید سرویس",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18 * MediaQuery.of(context).textScaleFactor),
+                ),
               ),
             )
           ])),

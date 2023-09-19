@@ -15,3 +15,4 @@ const String updatePasswordUrl = '$baseUrl=change';
 const String addFavoriteUrl = '$baseUrl=addWatch';
 const String likeCommentUrl = '$baseUrl=addLike';
 const String commentUrl = '$baseUrl=addComment';
+const String buyVipUrl = '$baseUrl=vip';

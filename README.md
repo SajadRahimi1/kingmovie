@@ -41,7 +41,7 @@
 - [x] connect request movie to backend
 - [x] connect simple search (except pagination)
 - [x] connect movie detail to backend (except load more comment and show video and download and show trailer)
-- [ ] connect new ticket to backend
+- [x] connect new ticket to backend
 
 ### 27 Augest 
 - [x] connect download page to model
@@ -68,5 +68,10 @@
 - [x] comment movie
 - [x] reply comment
 - [x] download series widget and download it
+- [x] show cast videos
+- [x] advance search
+- [ ] play trailers
 - [ ] subtitle configuration 
 - [ ] select default player or in app player
+- [ ] singup
+- [ ] buy
