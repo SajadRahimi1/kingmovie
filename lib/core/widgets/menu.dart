@@ -36,96 +36,131 @@ class Menu extends StatelessWidget {
             style: const TextStyle(color: Colors.white, fontSize: 18),
           ),
         ),
-        const Divider(
-          color: Color(0xff5f5f5f),
-        ),
+        if (SingletonClass.instance.user != null)
+          const Divider(
+            color: Color(0xff5f5f5f),
+          ),
         SingletonClass.instance.user == null
-            ? const ListTile(
+            ? ListTile(
                 onTap: loginTap,
                 textColor: Colors.white,
-                title: Text("ورود / ثبت نام"),
-                trailing: Icon(
+                title: Text(
+                  "ورود / ثبت نام",
+                  style: TextStyle(
+                      fontSize: 12 * MediaQuery.of(context).textScaleFactor),
+                ),
+                trailing: const Icon(
                   Icons.login,
                   color: Colors.white,
                 ),
               )
-            : const ListTile(
+            : ListTile(
                 onTap: toProfileScreen,
                 textColor: Colors.white,
-                title: Text("تنظیمات کاربری"),
-                trailing: Icon(
+                title: Text(
+                  "تنظیمات کاربری",
+                  style: TextStyle(
+                      fontSize: 12 * MediaQuery.of(context).textScaleFactor),
+                ),
+                trailing: const Icon(
                   Icons.settings,
                   color: Colors.white,
                 ),
               ),
-        const Divider(
-          color: Color(0xff5f5f5f),
-        ),
         if (SingletonClass.instance.user != null)
-          const ListTile(
+          const Divider(
+            color: Color(0xff5f5f5f),
+          ),
+        if (SingletonClass.instance.user != null)
+          ListTile(
             onTap: toVipScreen,
             textColor: Colors.white,
-            title: Text("اشتراک ویژه دانلود"),
-            trailing: Icon(
+            title: Text(
+              "اشتراک ویژه دانلود",
+              style: TextStyle(
+                  fontSize: 12 * MediaQuery.of(context).textScaleFactor),
+            ),
+            trailing: const Icon(
               Icons.downloading_rounded,
               color: Colors.white,
             ),
           ),
-        const Divider(
-          color: Color(0xff5f5f5f),
-        ),
         if (SingletonClass.instance.user != null)
-          const ListTile(
+          const Divider(
+            color: Color(0xff5f5f5f),
+          ),
+        if (SingletonClass.instance.user != null)
+          ListTile(
             onTap: toReuestScreen,
             textColor: Colors.white,
-            title: Text("درخواست ها"),
-            trailing: Icon(
+            title: Text(
+              "درخواست ها",
+              style: TextStyle(
+                  fontSize: 12 * MediaQuery.of(context).textScaleFactor),
+            ),
+            trailing: const Icon(
               Icons.movie,
               color: Colors.white,
             ),
           ),
-        const Divider(
-          color: Color(0xff5f5f5f),
-        ),
         if (SingletonClass.instance.user != null)
-          const ListTile(
+          const Divider(
+            color: Color(0xff5f5f5f),
+          ),
+        if (SingletonClass.instance.user != null)
+          ListTile(
             onTap: toFavoriteScreen,
             textColor: Colors.white,
-            title: Text("لیست مورد علاقه"),
-            trailing: Icon(
+            title: Text(
+              "لیست مورد علاقه",
+              style: TextStyle(
+                  fontSize: 12 * MediaQuery.of(context).textScaleFactor),
+            ),
+            trailing: const Icon(
               Icons.star,
               color: Colors.white,
             ),
           ),
-        const Divider(
-          color: Color(0xff5f5f5f),
-        ),
         if (SingletonClass.instance.user != null)
-          const ListTile(
+          const Divider(
+            color: Color(0xff5f5f5f),
+          ),
+        if (SingletonClass.instance.user != null)
+          ListTile(
             onTap: toTransactionScreen,
             textColor: Colors.white,
-            title: Text("سوابق پرداخت"),
-            trailing: Icon(
+            title: Text(
+              "سوابق پرداخت",
+              style: TextStyle(
+                  fontSize: 12 * MediaQuery.of(context).textScaleFactor),
+            ),
+            trailing: const Icon(
               Icons.payment,
               color: Colors.white,
             ),
           ),
-        const Divider(
-          color: Color(0xff5f5f5f),
-        ),
         if (SingletonClass.instance.user != null)
-          const ListTile(
+          const Divider(
+            color: Color(0xff5f5f5f),
+          ),
+        if (SingletonClass.instance.user != null)
+          ListTile(
             onTap: toTicketsScreen,
             textColor: Colors.white,
-            title: Text("تیکت و پشتیبانی"),
-            trailing: Icon(
+            title: Text(
+              "تیکت و پشتیبانی",
+              style: TextStyle(
+                  fontSize: 12 * MediaQuery.of(context).textScaleFactor),
+            ),
+            trailing: const Icon(
               Icons.support_agent,
               color: Colors.white,
             ),
           ),
-        const Divider(
-          color: Color(0xff5f5f5f),
-        ),
+        if (SingletonClass.instance.user != null)
+          const Divider(
+            color: Color(0xff5f5f5f),
+          ),
         if (SingletonClass.instance.user != null)
           ListTile(
             onTap: () {
@@ -133,7 +168,11 @@ class Menu extends StatelessWidget {
               Scaffold.of(context).closeDrawer();
             },
             textColor: Colors.white,
-            title: const Text("خروج"),
+            title: Text(
+              "خروج",
+              style: TextStyle(
+                  fontSize: 12 * MediaQuery.of(context).textScaleFactor),
+            ),
             trailing: const Icon(
               Icons.exit_to_app,
               color: Colors.white,

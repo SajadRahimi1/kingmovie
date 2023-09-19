@@ -155,9 +155,10 @@ class MovieDetailScreen extends StatelessWidget {
                                 controller.movieModel?.data?.title ?? "",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    color: Color(0xffffffff),
-                                    fontSize: 19,
+                                style: TextStyle(
+                                    color: const Color(0xffffffff),
+                                    fontSize: 17 *
+                                        MediaQuery.of(context).textScaleFactor,
                                     fontWeight: FontWeight.bold),
                               ),
 
@@ -248,10 +249,13 @@ class MovieDetailScreen extends StatelessWidget {
                               ),
                               Text(
                                 controller.movieModel?.data?.story ?? "",
-                                maxLines: 3,
+                                maxLines: 4,
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.justify,
-                                style: const TextStyle(color: Colors.white),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12 *
+                                        MediaQuery.of(context).textScaleFactor),
                               ),
                               // tabs
                               Expanded(
@@ -299,7 +303,11 @@ class MovieDetailScreen extends StatelessWidget {
                                     (controller.movieModel?.data?.text ?? "")
                                         .replaceAll('<br>', '\n')
                                         .replaceAll('&quot;', ''),
-                                    style: const TextStyle(color: Colors.white),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 13 *
+                                            MediaQuery.of(context)
+                                                .textScaleFactor),
                                   ),
                                 ),
                               ),

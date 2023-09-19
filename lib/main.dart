@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:king_movie/views/home/screens/main_screen.dart';
+import 'package:king_movie/views/check_login.dart';
 import 'package:media_kit/media_kit.dart';
 
 void main() {
@@ -29,7 +29,7 @@ class MainApp extends StatelessWidget {
             builder: (context, child) => Directionality(
                 textDirection: TextDirection.rtl,
                 child: child ?? const SizedBox())),
-        home: const MainScreen());
+        home: const FirstPage());
   }
 }
 

@@ -75,3 +75,4 @@
 - [ ] subtitle configuration 
 - [ ] select default player or in app player
 - [ ] singup
+- [ ] forgot password

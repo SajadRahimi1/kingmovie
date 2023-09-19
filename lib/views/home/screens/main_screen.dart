@@ -12,7 +12,6 @@ import 'package:king_movie/views/home/screens/show_all_screen.dart';
 import 'package:king_movie/views/home/widgets/advance_search_dialog.dart';
 import 'package:king_movie/views/home/widgets/new_movie_widget.dart';
 import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
-import 'package:persian_number_utility/persian_number_utility.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key, this.isLogedIn = false});
@@ -22,16 +21,15 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(HomeViewModel());
     if (isLogedIn) controller.getData();
-    final daysList = controller.getDaysOfCurrentWeek();
 
     return SafeArea(
-        child: controller.obx(
-      (status) => Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: blackColor,
-        appBar: homeAppBar(context: context),
-        drawer: const Menu(),
-        body: ListView(children: [
+        child: Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: blackColor,
+      appBar: homeAppBar(context: context),
+      drawer: const Menu(),
+      body: controller.obx(
+        (status) => ListView(children: [
           // search text form field
           Padding(
             padding: EdgeInsets.symmetric(
@@ -110,8 +108,9 @@ class MainScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           InkWell(
-                            onTap: () =>
-                                Get.dialog( AdvanceSearchDialog(model: controller.homeModel,)),
+                            onTap: () => Get.dialog(AdvanceSearchDialog(
+                              model: controller.homeModel,
+                            )),
                             child: const Icon(
                               Icons.settings,
                               color: Colors.white,
@@ -150,7 +149,7 @@ class MainScreen extends StatelessWidget {
           // banners
           SizedBox(
             width: Get.width,
-            height: Get.height / 2.8,
+            height: Get.height / 3.3,
             child: CarouselSlider(
                 items: List.generate(
                     controller.homeModel?.data?.slider?.length ?? 0,
@@ -204,7 +203,7 @@ class MainScreen extends StatelessWidget {
           // new series and movies
           Container(
             width: Get.width,
-            height: Get.height / 2,
+            height: Get.height / 2.3,
             color: darkBlue,
             child: DefaultTabController(
               length: 2,
@@ -360,6 +359,7 @@ class MainScreen extends StatelessWidget {
           ),
 
           // Time line
+          /*
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: SizedBox(
@@ -552,6 +552,7 @@ class MainScreen extends StatelessWidget {
           ),
 
           // time line widgets
+          
           SizedBox(
             height: Get.height / 35,
           ),
@@ -621,7 +622,7 @@ class MainScreen extends StatelessWidget {
                       ]),
                     )),
           ),
-
+*/
           SizedBox(
             height: Get.height / 35,
           ),
@@ -629,7 +630,7 @@ class MainScreen extends StatelessWidget {
           // new dub series and movies
           Container(
             width: Get.width,
-            height: Get.height / 2,
+            height: Get.height / 2.3,
             color: darkBlue,
             child: DefaultTabController(
               length: 2,
