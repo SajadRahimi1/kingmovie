@@ -32,8 +32,6 @@ Future<Response<dynamic>> newTicket(
 
 Future<Response<dynamic>> getTicketMessage(
     {required String code, required String token}) async {
-  return await getConnect.post("$baseUrl=view", {
-    'userSalt': '2y10mskNZdLoKYHfSm0OinL4guJxHEH6zHttKTOnwj82VwxMH2HCW83I',
-    'code': code
-  });
+  FormData formData = FormData({'userSalt': token, 'code': code});
+  return await getConnect.post(ticketMessageUrl, formData);
 }

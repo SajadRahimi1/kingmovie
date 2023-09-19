@@ -2,43 +2,53 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
+import 'package:king_movie/viewmodels/ticket_message_viewmodel.dart';
 import 'package:king_movie/views/menu/widgets/message_widget.dart';
+import 'package:king_movie/core/extensions/string_extension.dart';
 
 class ShowTicketScreen extends StatelessWidget {
-  const ShowTicketScreen({Key? key}) : super(key: key);
+  const ShowTicketScreen({Key? key, required this.code, required this.token})
+      : super(key: key);
+  final String code, token;
 
   @override
   Widget build(BuildContext context) {
+    final controller =
+        Get.put(TicketMessageViewmModel(code: code, token: token));
     return Scaffold(
         backgroundColor: darkBlue,
         appBar: menuAppBar(context: context, title: "« مشاهده تیکت »"),
-        body: SizedBox(
-          width: Get.width,
-          height: Get.height,
-          child: Column(children: [
-            Expanded(
-                child: ListView.builder(
-                    padding: const EdgeInsets.only(top: 15),
-                    physics: const BouncingScrollPhysics(),
-                    reverse: false,
-                    itemCount: 2,
-                    itemBuilder: (BuildContext context, int index) =>
-                        Messagewidget(
-                            isUserSend: index % 2 == 0,
-                            text: [
-                              // "SALAM VIP SUBSCRIBE MAN FAAL NASHODE? CHECK MIKONID MAM NON",
-                              "سلام",
-                              "سلام، حساب شما تا 1401/04/25 23:59:59 شارژ شد"
-                            ][index],
-                            time: "چهارشنبه, 25 خرداد 1401",
-                            messageIcon: Icon(
-                              Icons.check,
-                              color: Colors.white,
-                              size: MediaQuery.sizeOf(context).width / 20,
-                            )))),
-            // const Divider(
-            //   color: Colors.w,
-            // ),
+        body: controller.obx((status) => SizedBox(
+              width: Get.width,
+              height: Get.height,
+              child: Column(children: [
+                Expanded(
+                    child: ListView.builder(
+                        padding: const EdgeInsets.only(top: 15),
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: controller.model?.data?.list?.length ?? 0,
+                        itemBuilder: (BuildContext context, int index) =>
+                            Messagewidget(
+                                isUserSend: (controller
+                                            .model?.data?.list?[index].sender ??
+                                        "") ==
+                                    "توسط شما",
+                                text: (controller
+                                            .model?.data?.list?[index].text ??
+                                        "")
+                                    .removeAllHtmlTags(),
+                                time:
+                                    controller.model?.data?.list?[index].date ??
+                                        "",
+                                messageIcon: Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: MediaQuery.sizeOf(context).width / 20,
+                                )))),
+                // const Divider(
+                //   color: Colors.w,
+                // ),
+                /*
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
@@ -77,8 +87,8 @@ class ShowTicketScreen extends StatelessWidget {
                   const SizedBox(width: 8.0),
                 ],
               ),
-            ),
-          ]),
-        ));
+            ),*/
+              ]),
+            )));
   }
 }

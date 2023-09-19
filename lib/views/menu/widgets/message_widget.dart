@@ -35,27 +35,26 @@ class Messagewidget extends StatelessWidget {
               ? CrossAxisAlignment.start
               : CrossAxisAlignment.end,
           children: [
+            SizedBox(
+              child: Text(
+                (isUserSend ? "شما:" : "مدیریت:"),
+                style: TextStyle(
+                    fontSize: 13 * MediaQuery.of(context).textScaleFactor,
+                    color: Colors.white),
+              ),
+            ),
             Text(
-              (isUserSend ? "شما: " : "مدیریت: ") + text,
+              text,
+              textDirection: TextDirection.ltr,
               style: TextStyle(
                   fontSize: 13 * MediaQuery.of(context).textScaleFactor,
                   color: Colors.white),
             ),
-            Row(
-              mainAxisAlignment:
-                  isUserSend ? MainAxisAlignment.start : MainAxisAlignment.end,
-              children: [
-                messageIcon,
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  time,
-                  style: TextStyle(
-                      fontSize: 11 * MediaQuery.of(context).textScaleFactor,
-                      color: Colors.white),
-                ),
-              ],
+            Text(
+              time,
+              style: TextStyle(
+                  fontSize: 11 * MediaQuery.of(context).textScaleFactor,
+                  color: Colors.white),
             ),
           ],
         ),

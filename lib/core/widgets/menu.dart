@@ -61,7 +61,7 @@ class Menu extends StatelessWidget {
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        if (SingletonClass.instance.user == null)
+        if (SingletonClass.instance.user != null)
           const ListTile(
             onTap: toVipScreen,
             textColor: Colors.white,
@@ -74,7 +74,7 @@ class Menu extends StatelessWidget {
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        if (SingletonClass.instance.user == null)
+        if (SingletonClass.instance.user != null)
           const ListTile(
             onTap: toReuestScreen,
             textColor: Colors.white,
@@ -87,7 +87,7 @@ class Menu extends StatelessWidget {
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        if (SingletonClass.instance.user == null)
+        if (SingletonClass.instance.user != null)
           const ListTile(
             onTap: toFavoriteScreen,
             textColor: Colors.white,
@@ -100,7 +100,7 @@ class Menu extends StatelessWidget {
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        if (SingletonClass.instance.user == null)
+        if (SingletonClass.instance.user != null)
           const ListTile(
             onTap: toTransactionScreen,
             textColor: Colors.white,
@@ -113,7 +113,7 @@ class Menu extends StatelessWidget {
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        if (SingletonClass.instance.user == null)
+        if (SingletonClass.instance.user != null)
           const ListTile(
             onTap: toTicketsScreen,
             textColor: Colors.white,
@@ -126,7 +126,7 @@ class Menu extends StatelessWidget {
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        if (SingletonClass.instance.user == null)
+        if (SingletonClass.instance.user != null)
           ListTile(
             onTap: () {
               exit();

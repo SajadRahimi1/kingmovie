@@ -11,7 +11,6 @@ class TicketsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     final controller = Get.put(TicketViewModel());
 
     return Scaffold(
@@ -59,10 +58,12 @@ class TicketsScreen extends StatelessWidget {
                 children: List.generate(
                   controller.ticketModel?.data?.list?.length ?? 0,
                   (index) => InkWell(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ShowTicketScreen())),
+                    onTap: () => Get.to(() => ShowTicketScreen(
+                          code:
+                              controller.ticketModel?.data?.list?[index].code ??
+                                  "",
+                                  token: controller.token,
+                        )),
                     child: Container(
                       width: MediaQuery.sizeOf(context).width,
                       height: MediaQuery.sizeOf(context).height / 17,
@@ -143,7 +144,9 @@ class TicketsScreen extends StatelessWidget {
                       color: redColor, borderRadius: BorderRadius.circular(8)),
                   alignment: Alignment.center,
                   child: Obx(() => Text(
-                        controller.isClickNew.value ? "ارسال پیام" : "ثبت تیکت جدید",
+                        controller.isClickNew.value
+                            ? "ارسال پیام"
+                            : "ثبت تیکت جدید",
                         style: const TextStyle(color: Colors.white),
                       )),
                 ),

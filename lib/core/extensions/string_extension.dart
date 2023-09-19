@@ -12,4 +12,11 @@ extension DownloadColor on String? {
         return const Color(0xff152333);
     }
   }
+
+  String removeAllHtmlTags() {
+    String htmlText = this ?? "";
+    RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+
+    return htmlText.replaceAll(exp, '');
+  }
 }
