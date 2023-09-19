@@ -30,13 +30,20 @@ class SeriesDialog extends StatelessWidget {
                     itemCount: downloadList?.list?.length ?? 0,
                     itemBuilder: (context, index) => SizedBox(
                           width: MediaQuery.sizeOf(context).width,
-                          height: MediaQuery.sizeOf(context).height /
-                              12 *
-                              (downloadList?.list?[index].list?.length ?? 1),
+                          height:
+                              (downloadList?.list?[index].list?.length ?? 0) < 2
+                                  ? MediaQuery.sizeOf(context).height / 5
+                                  : MediaQuery.sizeOf(context).height /
+                                      12 *
+                                      (downloadList
+                                              ?.list?[index].list?.length ??
+                                          1),
                           child: Column(children: [
                             Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 5),
+                              padding: const EdgeInsets.symmetric(vertical: 3),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.sizeOf(context).width / 4.5),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(13),
                                   color: Colors.white),

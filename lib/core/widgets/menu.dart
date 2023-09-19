@@ -61,78 +61,84 @@ class Menu extends StatelessWidget {
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        const ListTile(
-          onTap: toVipScreen,
-          textColor: Colors.white,
-          title: Text("اشتراک ویژه دانلود"),
-          trailing: Icon(
-            Icons.downloading_rounded,
-            color: Colors.white,
+        if (SingletonClass.instance.user == null)
+          const ListTile(
+            onTap: toVipScreen,
+            textColor: Colors.white,
+            title: Text("اشتراک ویژه دانلود"),
+            trailing: Icon(
+              Icons.downloading_rounded,
+              color: Colors.white,
+            ),
           ),
-        ),
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        const ListTile(
-          onTap: toReuestScreen,
-          textColor: Colors.white,
-          title: Text("درخواست ها"),
-          trailing: Icon(
-            Icons.movie,
-            color: Colors.white,
+        if (SingletonClass.instance.user == null)
+          const ListTile(
+            onTap: toReuestScreen,
+            textColor: Colors.white,
+            title: Text("درخواست ها"),
+            trailing: Icon(
+              Icons.movie,
+              color: Colors.white,
+            ),
           ),
-        ),
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        const ListTile(
-          onTap: toFavoriteScreen,
-          textColor: Colors.white,
-          title: Text("لیست مورد علاقه"),
-          trailing: Icon(
-            Icons.star,
-            color: Colors.white,
+        if (SingletonClass.instance.user == null)
+          const ListTile(
+            onTap: toFavoriteScreen,
+            textColor: Colors.white,
+            title: Text("لیست مورد علاقه"),
+            trailing: Icon(
+              Icons.star,
+              color: Colors.white,
+            ),
           ),
-        ),
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        const ListTile(
-          onTap: toTransactionScreen,
-          textColor: Colors.white,
-          title: Text("سوابق پرداخت"),
-          trailing: Icon(
-            Icons.payment,
-            color: Colors.white,
+        if (SingletonClass.instance.user == null)
+          const ListTile(
+            onTap: toTransactionScreen,
+            textColor: Colors.white,
+            title: Text("سوابق پرداخت"),
+            trailing: Icon(
+              Icons.payment,
+              color: Colors.white,
+            ),
           ),
-        ),
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        const ListTile(
-          onTap: toTicketsScreen,
-          textColor: Colors.white,
-          title: Text("تیکت و پشتیبانی"),
-          trailing: Icon(
-            Icons.support_agent,
-            color: Colors.white,
+        if (SingletonClass.instance.user == null)
+          const ListTile(
+            onTap: toTicketsScreen,
+            textColor: Colors.white,
+            title: Text("تیکت و پشتیبانی"),
+            trailing: Icon(
+              Icons.support_agent,
+              color: Colors.white,
+            ),
           ),
-        ),
         const Divider(
           color: Color(0xff5f5f5f),
         ),
-        ListTile(
-          onTap: () {
-            exit();
-            Scaffold.of(context).closeDrawer();
-          },
-          textColor: Colors.white,
-          title: const Text("خروج"),
-          trailing: const Icon(
-            Icons.exit_to_app,
-            color: Colors.white,
+        if (SingletonClass.instance.user == null)
+          ListTile(
+            onTap: () {
+              exit();
+              Scaffold.of(context).closeDrawer();
+            },
+            textColor: Colors.white,
+            title: const Text("خروج"),
+            trailing: const Icon(
+              Icons.exit_to_app,
+              color: Colors.white,
+            ),
           ),
-        ),
       ]),
     );
   }

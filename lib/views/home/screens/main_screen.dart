@@ -9,6 +9,7 @@ import 'package:king_movie/models/search_model.dart';
 import 'package:king_movie/viewmodels/home_viewmodel.dart';
 import 'package:king_movie/views/home/screens/search_screen.dart';
 import 'package:king_movie/views/home/screens/show_all_screen.dart';
+import 'package:king_movie/views/home/widgets/advance_search_dialog.dart';
 import 'package:king_movie/views/home/widgets/new_movie_widget.dart';
 import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
@@ -100,20 +101,38 @@ class MainScreen extends StatelessWidget {
                   maxLines: 1,
                   textAlignVertical: TextAlignVertical.bottom,
                   onChanged: (value) => controller.searchValue = value,
-                  // onFieldSubmitted: (value) => Get.to(() => SearchScreen(
-                  //       title: value,
-                  //     )),
                   decoration: InputDecoration(
                       focusColor: darkBlue,
                       filled: true,
-                      suffixIcon: InkWell(
-                        onTap: () => Get.to(() => SearchScreen(
-                              title: controller.searchValue,
-                            )),
-                        child: const Icon(
-                          Icons.search,
-                          color: yellowColor,
-                        ),
+                      suffixIcon: Row(
+                        // mainAxisAlignment:
+                        // MainAxisAlignment.spaceBetween, // added line
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          InkWell(
+                            onTap: () =>
+                                Get.dialog( AdvanceSearchDialog(model: controller.homeModel,)),
+                            child: const Icon(
+                              Icons.settings,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          InkWell(
+                            onTap: () => Get.to(() => SearchScreen(
+                                  title: controller.searchValue,
+                                )),
+                            child: const Icon(
+                              Icons.search,
+                              color: yellowColor,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          )
+                        ],
                       ),
                       hintStyle: const TextStyle(
                           color: Color(0xffafafaf), fontSize: 12),
