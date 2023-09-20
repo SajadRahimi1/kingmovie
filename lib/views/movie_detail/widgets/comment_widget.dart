@@ -43,8 +43,11 @@ class CommentWidget extends StatelessWidget {
                       commentModel?.name ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12 * MediaQuery.of(context).textScaleFactor,
+                      ),
                     ),
                     // comment body
                     SizedBox(
@@ -52,8 +55,10 @@ class CommentWidget extends StatelessWidget {
                       child: Text(
                         commentModel?.text ?? "",
                         textAlign: TextAlign.justify,
-                        style: const TextStyle(
-                            color: Color(0xffdfdfdf), fontSize: 12),
+                        style: TextStyle(
+                            color: const Color(0xffdfdfdf),
+                            fontSize:
+                                11 * MediaQuery.of(context).textScaleFactor),
                       ),
                     ),
                     const SizedBox(
@@ -78,9 +83,12 @@ class CommentWidget extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () => onReplyTap!(commentModel?.id ?? ""),
-                          child: const Text(
+                          child: Text(
                             "ثبت پاسخ",
-                            style: TextStyle(color: redColor, fontSize: 12),
+                            style: TextStyle(
+                                color: redColor,
+                                fontSize: 11 *
+                                    MediaQuery.of(context).textScaleFactor),
                           ),
                         ),
                       ],
@@ -201,8 +209,11 @@ class ReplyCommentWidget extends StatelessWidget {
                         commentModel?.name ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize:
+                                12 * MediaQuery.of(context).textScaleFactor),
                       ),
                       // comment body
                       SizedBox(
@@ -210,8 +221,10 @@ class ReplyCommentWidget extends StatelessWidget {
                         child: Text(
                           commentModel?.text ?? "",
                           textAlign: TextAlign.justify,
-                          style: const TextStyle(
-                              color: Color(0xffdfdfdf), fontSize: 12),
+                          style: TextStyle(
+                              color: const Color(0xffdfdfdf),
+                              fontSize:
+                                  11 * MediaQuery.of(context).textScaleFactor),
                         ),
                       ),
                       const SizedBox(
@@ -236,9 +249,12 @@ class ReplyCommentWidget extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () => onReplyTap!(commentModel?.id ?? ""),
-                            child: const Text(
+                            child: Text(
                               "ثبت پاسخ",
-                              style: TextStyle(color: redColor, fontSize: 12),
+                              style: TextStyle(
+                                  color: redColor,
+                                  fontSize: 11 *
+                                      MediaQuery.of(context).textScaleFactor),
                             ),
                           ),
                         ],
@@ -360,8 +376,11 @@ class SecondReplyWidget extends StatelessWidget {
                         commentModel?.name ?? "",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize:
+                                12 * MediaQuery.of(context).textScaleFactor),
                       ),
                       // comment body
                       SizedBox(
@@ -369,8 +388,10 @@ class SecondReplyWidget extends StatelessWidget {
                         child: Text(
                           commentModel?.text ?? "",
                           textAlign: TextAlign.justify,
-                          style: const TextStyle(
-                              color: Color(0xffdfdfdf), fontSize: 12),
+                          style: TextStyle(
+                              color: const Color(0xffdfdfdf),
+                              fontSize:
+                                  11 * MediaQuery.of(context).textScaleFactor),
                         ),
                       ),
                       const SizedBox(
@@ -395,9 +416,12 @@ class SecondReplyWidget extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () => onReplyTap!(commentModel?.id ?? ""),
-                            child: const Text(
+                            child: Text(
                               "ثبت پاسخ",
-                              style: TextStyle(color: redColor, fontSize: 12),
+                              style: TextStyle(
+                                  color: redColor,
+                                  fontSize: 11 *
+                                      MediaQuery.of(context).textScaleFactor),
                             ),
                           ),
                         ],

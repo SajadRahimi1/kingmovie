@@ -15,6 +15,7 @@ import 'package:king_movie/models/movie_model.dart';
 import 'package:king_movie/views/movie_detail/widgets/confirm_button.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class MovieViewModel extends GetxController with StateMixin {
@@ -25,6 +26,8 @@ class MovieViewModel extends GetxController with StateMixin {
   RxInt commentUpdate = 1.obs;
   final TextEditingController commentController = TextEditingController();
   Rx<String> replyId = "".obs;
+  Timer? timer;
+  int? movieDuration;
 
   late final player = Player();
   // Create a [VideoController] to handle video output from [Player].
@@ -33,8 +36,7 @@ class MovieViewModel extends GetxController with StateMixin {
         enableHardwareAcceleration: false,
       ));
 
-  final ScrollController pageScrollController = ScrollController(),
-      commentScrollController = ScrollController();
+  final AutoScrollController pageScrollController = AutoScrollController();
   Rx<SubtitleViewConfiguration> subtitleViewConfiguration =
       const SubtitleViewConfiguration().obs;
 
@@ -42,6 +44,7 @@ class MovieViewModel extends GetxController with StateMixin {
   String token = '';
   bool isSeek = false;
   String moviePlayingId = '';
+  int savedTimer = -1;
 
   @override
   void onInit() async {
@@ -53,22 +56,19 @@ class MovieViewModel extends GetxController with StateMixin {
 
     player.stream.position.listen((event) async {
       if (event.inSeconds > 10) {
-        await getStorage.write(moviePlayingId, event.inMilliseconds);
-      }
-    });
-
-    player.stream.position.listen((event) async {
-      if (event.inSeconds == 1) {
-        int? movieDuration = getStorage.read(moviePlayingId);
-        if (movieDuration != null) {
-          isSeek = true;
-          if (isSeek) {
-            print(movieDuration);
-            await player
-                .seek(Duration(milliseconds: movieDuration))
-                .then((value) => isSeek = false);
+        timer ??= Timer.periodic(const Duration(seconds: 3), (_) async {
+          int playingSecond = player.state.position.inSeconds;
+          if (savedTimer != playingSecond) {
+            print(
+                "moviePlayingId                                $moviePlayingId");
+            await getStorage.write(
+                moviePlayingId, player.state.position.inSeconds);
           }
-        }
+        });
+      }
+      if (isSeek) {
+        await player.seek(Duration(seconds: movieDuration ?? 0));
+        isSeek = false;
       }
     });
 
@@ -78,6 +78,7 @@ class MovieViewModel extends GetxController with StateMixin {
   @override
   void dispose() async {
     super.dispose();
+    if (timer != null) timer?.cancel();
     player.dispose();
   }
 
@@ -98,18 +99,23 @@ class MovieViewModel extends GetxController with StateMixin {
 
   Future<void> initVideo(DownloadList? downloadList) async {
     if (downloadList != null && downloadList.link != null) {
-      int? movieDuration = getStorage.read(moviePlayingId);
-      print(movieDuration);
+      moviePlayingId = downloadList.link ?? "";
+      moviePlayingId = moviePlayingId.split('/').last.split('?').first;
+      movieDuration = getStorage.read(moviePlayingId);
+      print("movie duration:                             $movieDuration");
       if (movieDuration != null) {
-        await Get.defaultDialog(
-          title: "پخش از ادامه",
-          middleText: "آیا میخواهید از ادامه پخش شود؟",
-          confirm: const ConfirmButton(text: "بله"),
-          cancel: const ConfirmButton(text: "خیر"),
-        );
+        isSeek = await Get.defaultDialog<bool>(
+              title: "پخش از ادامه",
+              middleText: "آیا میخواهید از ادامه پخش شود؟",
+              confirm: const ConfirmButton(
+                text: "بله",
+                statusOnClick: true,
+              ),
+              cancel: const ConfirmButton(text: "خیر"),
+            ) ??
+            false;
       }
       await player.open(Media(downloadList.link ?? ""));
-      moviePlayingId = downloadList.link ?? "";
       isInitialVideo.value = true;
 
       pageScrollController.animateTo(0.0,
