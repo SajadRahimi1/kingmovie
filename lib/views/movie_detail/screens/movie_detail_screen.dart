@@ -39,7 +39,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    // controller.dispose();
+    controller.dispose();
   }
 
   @override

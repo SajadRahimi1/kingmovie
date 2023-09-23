@@ -79,7 +79,7 @@ class MovieViewModel extends GetxController with StateMixin {
   void dispose() async {
     super.dispose();
     if (timer != null) timer?.cancel();
-    player.dispose();
+    await player.dispose();
   }
 
   void setSubStyle(SubtitleViewConfiguration config) =>

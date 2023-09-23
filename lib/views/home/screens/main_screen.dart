@@ -269,90 +269,52 @@ class MainScreen extends StatelessWidget {
           ),
 
           // box office
-          Container(
-            width: Get.width,
-            height: Get.height / 2.2,
-            color: darkBlue,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: Text(
-                    "\tباکس آفیس",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17 * MediaQuery.of(context).textScaleFactor),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: List.generate(
-                          3,
-                          (index) => Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 15),
-                                width: Get.width,
-                                height: Get.height / 9,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: blackColor,
-                                ),
-                                child: Row(
-                                    textDirection: TextDirection.ltr,
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: Image.network(
-                                          "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 12,
-                                      ),
-                                      const Expanded(
-                                          child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Text(
-                                            "1. Elemental | المنتال",
-                                            textDirection: TextDirection.ltr,
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          Text(
-                                            "Weekend: \$18.5M",
-                                            textDirection: TextDirection.ltr,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12),
-                                          ),
-                                          Text(
-                                            "All: \$65.5M",
-                                            textDirection: TextDirection.ltr,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12),
-                                          ),
-                                        ],
-                                      )),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            right: Get.width / 25),
-                                        child: Icon(
-                                          Icons.play_arrow,
-                                          color: yellowColor,
-                                          size: Get.width / 13,
-                                        ),
-                                      )
-                                    ]),
-                              ))),
-                )
-              ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            child: Text(
+              "\tباکس آفیس",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 17 * MediaQuery.of(context).textScaleFactor),
             ),
+          ),
+          SizedBox(
+            width: Get.width,
+            height: Get.height / 5,
+            child: CarouselSlider(
+                items: List.generate(
+                    controller.homeModel?.data?.slider?.length ?? 0,
+                    (index) => InkWell(
+                        onTap: () => Get.to(() => MovieDetailScreen(
+                              movieId:
+                                  controller.homeModel?.data?.box?[index].id ??
+                                      "",
+                            )),
+                        child: Container(
+                          width: Get.width / 4,
+                          height: Get.height,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              image: DecorationImage(
+                                  image: NetworkImage(controller.homeModel?.data
+                                          ?.box?[index].poster ??
+                                      ''))),
+                          alignment: Alignment.bottomCenter,
+                          child: CircleAvatar(
+                            radius: Get.width / 22,
+                            backgroundColor: yellowColor,
+                            child: Center(
+                                child: Text(controller
+                                        .homeModel?.data?.box?[index].number
+                                        .toString() ??
+                                    '')),
+                          ),
+                        ))),
+                options: CarouselOptions(
+                    autoPlay: true,
+                    aspectRatio: 1,
+                    enlargeCenterPage: true,
+                    viewportFraction: 0.48)),
           ),
           SizedBox(
             height: Get.height / 20,
