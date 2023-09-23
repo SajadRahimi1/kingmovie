@@ -33,8 +33,8 @@ class MovieViewModel extends GetxController with StateMixin {
   // Create a [VideoController] to handle video output from [Player].
   late final controller = VideoController(player,
       configuration: const VideoControllerConfiguration(
-        enableHardwareAcceleration: false,
-      ));
+          // enableHardwareAcceleration: false,
+          ));
 
   final AutoScrollController pageScrollController = AutoScrollController();
   Rx<SubtitleViewConfiguration> subtitleViewConfiguration =
