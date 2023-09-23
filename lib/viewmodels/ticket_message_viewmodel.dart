@@ -24,6 +24,4 @@ class TicketMessageViewmModel extends GetxController with StateMixin {
       change(null, status: RxStatus.error(request.body['message']));
     }
   }
-   
-  
 }

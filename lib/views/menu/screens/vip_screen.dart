@@ -12,7 +12,7 @@ class VipScreen extends StatelessWidget {
     RxInt planSelected = 3.obs;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: darkBlue,
+        backgroundColor: blackColor,
         centerTitle: true,
         title: const Text(
           "« اشتراک ویژه »",
@@ -28,8 +28,8 @@ class VipScreen extends StatelessWidget {
               color: Colors.white,
             )),
       ),
-      backgroundColor: darkBlue,
-      body: controller.obx((state) => Column(children: [
+      backgroundColor: blackColor,
+      body: controller.obx((state) => ListView(children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: SizedBox(
@@ -96,27 +96,39 @@ class VipScreen extends StatelessWidget {
                 thickness: 2,
               ),
             ),
-            Expanded(
-              child: Theme(
-                data: Theme.of(context).copyWith(
-                  unselectedWidgetColor: redColor,
-                ),
-                child: ListView.builder(
-                    itemCount: controller.homeModel?.pack?.length ?? 0,
-                    itemBuilder: (_, index) => Obx(() => ListTile(
-                          onTap: () => planSelected.value = index,
-                          leading: Radio(
-                            activeColor: Colors.white,
-                            value: planSelected.value,
-                            groupValue: index,
-                            onChanged: <int>(value) {},
-                          ),
-                          title: Text(
-                            controller.homeModel?.pack?[index].title ?? "",
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ))),
+            Theme(
+              data: Theme.of(context).copyWith(
+                unselectedWidgetColor: redColor,
               ),
+              child: Column(
+                  children: List.generate(
+                      controller.homeModel?.pack?.length ?? 0,
+                      (index) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Obx(() => ListTile(
+                                  tileColor: darkBlue,
+                                  onTap: () => planSelected.value = index,
+                                  shape: const RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          color: Colors.white,
+                                          strokeAlign: 0.05)),
+                                  leading: Radio(
+                                    activeColor: Colors.white,
+                                    value: planSelected.value,
+                                    groupValue: index,
+                                    onChanged: <int>(value) {},
+                                  ),
+                                  title: Text(
+                                    controller.homeModel?.pack?[index].title ??
+                                        "",
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 13),
+                                  ),
+                                )),
+                          ))),
+            ),
+            SizedBox(
+              height: Get.height / 35,
             ),
             InkWell(
               onTap: () async {
@@ -126,7 +138,7 @@ class VipScreen extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 width: MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).height / 12,
+                height: MediaQuery.sizeOf(context).height / 15,
                 decoration: const BoxDecoration(
                     color: redColor,
                     borderRadius: BorderRadius.only(

@@ -33,10 +33,12 @@ class SearchScreen extends StatelessWidget {
                   ? const SizedBox()
                   : const Center(child: CircularProgressIndicator())
               : InkWell(
-                  onTap: () => Get.to(() => MovieDetailScreen(
-                      movieId:
-                          controller.searchModel?.data?.dataList?[index].id ??
-                              "")),
+                  onTap: () {
+                    Get.to(() => MovieDetailScreen(
+                        movieId:
+                            controller.searchModel?.data?.dataList?[index].id ??
+                                ""));
+                  },
                   child: Container(
                     width: MediaQuery.sizeOf(context).width,
                     height: MediaQuery.sizeOf(context).height / 4,

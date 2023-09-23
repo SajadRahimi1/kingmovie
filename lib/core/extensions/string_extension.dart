@@ -7,9 +7,9 @@ extension DownloadColor on String? {
       case 'color1':
         return const Color(0xff49461d);
       case 'color2':
-        return const Color(0xff440f2d);
-      default:
         return const Color(0xff152333);
+      default:
+        return const Color(0xff440f2d);
     }
   }
 

@@ -56,9 +56,9 @@ class AudioWidget extends StatelessWidget {
     List<AudioTrack> audios = [];
     return MaterialCustomButton(
       onPressed: () async {
-        audios = player.state.tracks.audio
-            .where((element) => element.title != null)
-            .toList();
+        audios = player.state.tracks.audio;
+        // .where((element) => element.title != null)
+        // .toList();
         AudioTrack? trackSelected = await showModalBottomSheet(
             context: context,
             shape: const RoundedRectangleBorder(
@@ -72,7 +72,8 @@ class AudioWidget extends StatelessWidget {
                             onTap: () {
                               Navigator.pop(context, audios[index]);
                             },
-                            title: Text(audios[index].title ?? ""),
+                            title:
+                                Text(audios[index].title ?? "صوت ${index + 1}"),
                             leading:
                                 audios[index].id == player.state.track.audio.id
                                     ? const Icon(Icons.done)
