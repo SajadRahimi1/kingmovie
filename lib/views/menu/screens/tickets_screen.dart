@@ -20,6 +20,50 @@ class TicketsScreen extends StatelessWidget {
           (status) => ListView(
             padding: const EdgeInsets.all(8),
             children: [
+              // new ticket button
+              InkWell(
+                onTap: () async {
+                  if (controller.isClickNew.value) {
+                    await controller.newTicket();
+                  } else {
+                    controller.isClickNew.value = true;
+                  }
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  margin: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: MediaQuery.sizeOf(context).width / 3.2),
+                  decoration: BoxDecoration(
+                      color: redColor, borderRadius: BorderRadius.circular(8)),
+                  alignment: Alignment.center,
+                  child: Obx(() => Text(
+                        controller.isClickNew.value
+                            ? "ارسال پیام"
+                            : "ثبت تیکت جدید",
+                        style: const TextStyle(color: Colors.white),
+                      )),
+                ),
+              ),
+
+              Obx(() => controller.isClickNew.value
+                  ? Column(
+                      children: [
+                        ProfileTextInput(
+                          label: "عنوان تیکت جدید",
+                          onChanged: (value) => controller.ticketTitle = value,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        ProfileTextInput(
+                          label: "متن پیام",
+                          onChanged: (value) => controller.ticketText = value,
+                        ),
+                      ],
+                    )
+                  : const SizedBox()),
+
               // table header
               Container(
                 width: MediaQuery.sizeOf(context).width,
@@ -62,7 +106,7 @@ class TicketsScreen extends StatelessWidget {
                           code:
                               controller.ticketModel?.data?.list?[index].code ??
                                   "",
-                                  token: controller.token,
+                          token: controller.token,
                         )),
                     child: Container(
                       width: MediaQuery.sizeOf(context).width,
@@ -105,50 +149,6 @@ class TicketsScreen extends StatelessWidget {
                       ]),
                     ),
                   ),
-                ),
-              ),
-
-              Obx(() => controller.isClickNew.value
-                  ? Column(
-                      children: [
-                        ProfileTextInput(
-                          label: "عنوان تیکت جدید",
-                          onChanged: (value) => controller.ticketTitle = value,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        ProfileTextInput(
-                          label: "متن پیام",
-                          onChanged: (value) => controller.ticketText = value,
-                        ),
-                      ],
-                    )
-                  : const SizedBox()),
-
-              // new ticket button
-              InkWell(
-                onTap: () async {
-                  if (controller.isClickNew.value) {
-                    await controller.newTicket();
-                  } else {
-                    controller.isClickNew.value = true;
-                  }
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  margin: EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: MediaQuery.sizeOf(context).width / 3.2),
-                  decoration: BoxDecoration(
-                      color: redColor, borderRadius: BorderRadius.circular(8)),
-                  alignment: Alignment.center,
-                  child: Obx(() => Text(
-                        controller.isClickNew.value
-                            ? "ارسال پیام"
-                            : "ثبت تیکت جدید",
-                        style: const TextStyle(color: Colors.white),
-                      )),
                 ),
               ),
             ],
