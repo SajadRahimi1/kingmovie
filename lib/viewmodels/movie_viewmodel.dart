@@ -3,7 +3,13 @@ import 'dart:async';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart'
-    show Colors, Curves, ScrollController, TextEditingController, TextStyle;
+    show
+        Colors,
+        Curves,
+        
+        TextEditingController,
+        TextStyle,
+        debugPrint;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:king_movie/core/services/message_service.dart';
@@ -29,7 +35,11 @@ class MovieViewModel extends GetxController with StateMixin {
   Timer? timer;
   int? movieDuration;
 
-  late final player = Player();
+  late final player = Player(
+      configuration: const PlayerConfiguration(logLevel: MPVLogLevel.debug))
+    ..stream.log.listen((event) {
+      debugPrint(event.toString());
+    });
   // Create a [VideoController] to handle video output from [Player].
   late final controller = VideoController(player,
       configuration: const VideoControllerConfiguration(
