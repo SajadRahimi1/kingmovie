@@ -74,7 +74,8 @@
 - [x] play trailers
 - [x] forgot password
 - [x] singup
+- [x] fix cast page bug
+- [ ] open subtitle from storage
 - [ ] subtitle configuration 
 - [ ] select default player or in app player
 - [ ] put player in another app
-- [x] fix cast page bug

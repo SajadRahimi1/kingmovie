@@ -8,6 +8,7 @@ import 'package:king_movie/views/home/screens/search_screen.dart';
 import 'package:king_movie/views/login/screens/login_screen.dart';
 import 'package:king_movie/views/login/screens/singup_screen.dart';
 import 'package:king_movie/views/menu/screens/vip_screen.dart';
+import 'package:king_movie/views/movie_detail/screens/play_movie_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 import 'package:king_movie/views/movie_detail/widgets/series_tiles_widget.dart';
 import 'package:king_movie/views/movie_detail/widgets/setting_bottom_sheet.dart';
@@ -60,60 +61,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                     Center(
                       child: Obx(
                         () => controller.isInitialVideo.value
-                            ? AspectRatio(
-                                aspectRatio: 16 / 9,
-                                child: MaterialVideoControlsTheme(
-                                    normal: MaterialVideoControlsThemeData(
-                                        // Modify theme options:
-                                        buttonBarButtonSize: 24.0,
-                                        buttonBarButtonColor: Colors.white,
-                                        // Modify top button bar:
-                                        topButtonBar: [
-                                          const Spacer(),
-                                          SubtitleWidget(
-                                              player: controller.player),
-                                          AudioWidget(
-                                              player: controller.player),
-                                          IconButton(
-                                              onPressed: () async {
-                                                TextStyle? subtitleStyle =
-                                                    await showModalBottomSheet(
-                                                        context: context,
-                                                        builder: (context) =>
-                                                            const SettingBottomSheet());
-                                                if (subtitleStyle != null) {
-                                                  controller.setSubStyle(
-                                                      SubtitleViewConfiguration(
-                                                          style:
-                                                              subtitleStyle));
-                                                }
-                                              },
-                                              icon: const Icon(
-                                                Icons.settings,
-                                                color: Colors.white,
-                                              ))
-                                        ]),
-                                    fullscreen: MaterialVideoControlsThemeData(
-                                      // Modify theme options:
-                                      displaySeekBar: true,
-                                      shiftSubtitlesOnControlsVisibilityChange:
-                                          true,
-
-                                      topButtonBar: [
-                                        const Spacer(),
-                                        SubtitleWidget(
-                                            player: controller.player),
-                                        AudioWidget(player: controller.player)
-                                      ],
-                                      automaticallyImplySkipNextButton: false,
-                                      automaticallyImplySkipPreviousButton:
-                                          false,
-                                    ),
-                                    child: Obx(() => Video(
-                                          controller: controller.controller,
-                                          subtitleViewConfiguration: controller
-                                              .subtitleViewConfiguration.value,
-                                        ))))
+                            ? const SizedBox()
                             : Stack(
                                 children: [
                                   Center(
@@ -576,13 +524,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                                       .format ==
                                                                   'movie'
                                                               ? InkWell(
-                                                                  onTap: () => controller.initVideo(controller
+                                                                  onTap: () => Get.to(()=>PlayMovieScreen(downloadList: controller
                                                                       .movieModel
                                                                       ?.data
                                                                       ?.link
                                                                       ?.data?[
                                                                           index]
-                                                                      .list?[listIndex]),
+                                                                      .list?[listIndex])),
                                                                   child: Icon(
                                                                     Icons
                                                                         .play_arrow,
