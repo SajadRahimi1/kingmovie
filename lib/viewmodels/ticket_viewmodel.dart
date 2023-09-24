@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:king_movie/core/services/message_service.dart';
 import 'package:king_movie/core/services/ticket_service.dart' as service;
-import 'package:king_movie/ticket_model.dart';
+import 'package:king_movie/models/ticket_model.dart';
 
 class TicketViewModel extends GetxController with StateMixin {
   final GetStorage getStorage = GetStorage();

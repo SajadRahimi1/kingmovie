@@ -76,3 +76,5 @@
 - [x] singup
 - [ ] subtitle configuration 
 - [ ] select default player or in app player
+- [ ] put player in another app
+- [x] fix cast page bug

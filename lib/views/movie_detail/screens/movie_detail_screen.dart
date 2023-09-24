@@ -33,6 +33,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     super.initState();
     print("init state");
     controller = Get.put(MovieViewModel(widget.movieId));
+    if (controller.movieModel != null) controller.getData();
   }
 
   @override
@@ -45,7 +46,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   @override
   Widget build(BuildContext context) {
     RxInt starSelected = (-1).obs;
-    RxInt openEexpansionIndex = (-1).obs;
 
     return DefaultTabController(
         length: 5,
@@ -816,10 +816,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                   controller.movieModel?.data?.cast?.length ??
                                       0,
                                   (index) => InkWell(
-                                        onTap: () => Get.to(() => SearchScreen(
+                                        onTap: () => Get.off(() => SearchScreen(
                                               title: "",
                                               cast: controller.movieModel?.data
                                                   ?.cast?[index].name,
+                                              movieId: widget.movieId,
                                             )),
                                         child: Container(
                                           margin: const EdgeInsets.symmetric(

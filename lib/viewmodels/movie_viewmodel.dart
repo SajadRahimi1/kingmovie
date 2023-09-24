@@ -3,13 +3,7 @@ import 'dart:async';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart'
-    show
-        Colors,
-        Curves,
-        
-        TextEditingController,
-        TextStyle,
-        debugPrint;
+    show Colors, Curves, TextEditingController, TextStyle, debugPrint;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:king_movie/core/services/message_service.dart';
@@ -97,6 +91,9 @@ class MovieViewModel extends GetxController with StateMixin {
           const SubtitleViewConfiguration(style: TextStyle(color: Colors.red));
 
   Future<void> getData() async {
+    if (status != RxStatus.loading()) {
+      // change(null, status: RxStatus.loading());
+    }
     final request = await movie_service.getMovie(token, movieId);
     if (request.statusCode == 200 && request.body['error'] == 'false') {
       movieModel = MovieModel.fromJson(request.body);
