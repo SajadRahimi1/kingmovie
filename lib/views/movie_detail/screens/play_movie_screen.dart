@@ -63,14 +63,21 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
                                     builder: (context) =>
                                         const SettingBottomSheet());
                             if (subtitleStyle != null) {
-                              controller.setSubStyle(SubtitleViewConfiguration(
-                                  style: subtitleStyle));
+                              controller.subtitleViewConfiguration.value =
+                                  SubtitleViewConfiguration(
+                                      style: subtitleStyle);
                             }
                           },
                           icon: const Icon(
                             Icons.settings,
                             color: Colors.white,
-                          ))
+                          )),
+                      IconButton(
+                          onPressed: () => Get.back(),
+                          icon: const Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white,
+                          )),
                     ]),
                 fullscreen: MaterialVideoControlsThemeData(
                   // Modify theme options:
@@ -80,16 +87,29 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
                   topButtonBar: [
                     const Spacer(),
                     SubtitleWidget(player: controller.player),
-                    AudioWidget(player: controller.player)
+                    AudioWidget(player: controller.player),
+                    IconButton(
+                        onPressed: () async {
+                          TextStyle? subtitleStyle = await showModalBottomSheet(
+                              context: context,
+                              builder: (context) => const SettingBottomSheet());
+                          if (subtitleStyle != null) {
+                            controller.subtitleViewConfiguration.value =
+                                SubtitleViewConfiguration(style: subtitleStyle);
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                        )),
                   ],
                   automaticallyImplySkipNextButton: false,
                   automaticallyImplySkipPreviousButton: false,
                 ),
                 child: Obx(() => Video(
-                      controller: controller.controller,
-                      subtitleViewConfiguration:
-                          controller.subtitleViewConfiguration.value,
-                    )))),
+                    controller: controller.controller,
+                    subtitleViewConfiguration:
+                        controller.subtitleViewConfiguration.value)))),
       ),
     );
   }

@@ -31,7 +31,7 @@ class SearchScreen extends StatelessWidget {
         return true;
       },
       child: Scaffold(
-        appBar: menuAppBar(
+        appBar: screenAppBar(
             context: context,
             title: cast ?? advanceSearchModel?.title ?? title),
         backgroundColor: blackColor,

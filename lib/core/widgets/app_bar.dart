@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
+import 'package:king_movie/views/home/screens/main_screen.dart';
 
 AppBar homeAppBar({required BuildContext context}) => AppBar(
       backgroundColor: darkBlue,
@@ -38,11 +40,14 @@ AppBar screenAppBar({required BuildContext context, String title = ""}) =>
         style: const TextStyle(color: Colors.white),
       ),
       centerTitle: true,
-      actions: const [
-        Padding(
-          padding: EdgeInsets.only(left: 8.0),
-          child: Icon(
-            Icons.home,
+      actions: [
+        InkWell(
+          onTap: () => Get.offAll(() => const MainScreen()),
+          child: const Padding(
+            padding: EdgeInsets.only(left: 8.0),
+            child: Icon(
+              Icons.home,
+            ),
           ),
         )
       ],
@@ -50,21 +55,22 @@ AppBar screenAppBar({required BuildContext context, String title = ""}) =>
         color: Colors.white,
         size: MediaQuery.sizeOf(context).width / 13,
       ),
-      leading: Builder(builder: (context) {
-        return InkWell(
-          onTap: () => Scaffold.of(context).openDrawer(),
-          child: const Icon(
-            Icons.menu_rounded,
-          ),
-        );
-      }),
+
+      // leading: Builder(builder: (context) {
+      //   return InkWell(
+      //     onTap: () => Scaffold.of(context).openDrawer(),
+      //     child: const Icon(
+      //       Icons.menu_rounded,
+      //     ),
+      //   );
+      // }),
     );
 
 AppBar menuAppBar({required BuildContext context, String? title}) => AppBar(
       backgroundColor: darkBlue,
       centerTitle: true,
-      title:  Text(
-        title??"",
+      title: Text(
+        title ?? "",
         textAlign: TextAlign.center,
         style: const TextStyle(color: Colors.white),
       ),

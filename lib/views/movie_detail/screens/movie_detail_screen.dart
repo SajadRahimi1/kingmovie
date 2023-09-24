@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/constants/singleton_class.dart';
+import 'package:king_movie/core/widgets/app_bar.dart';
 import 'package:king_movie/core/widgets/trailer_widget.dart';
 import 'package:king_movie/viewmodels/movie_viewmodel.dart';
 import 'package:king_movie/views/home/screens/search_screen.dart';
@@ -49,6 +50,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         length: 5,
         child: Scaffold(
             backgroundColor: blackColor,
+            appBar: screenAppBar(context: context),
             body: controller.obx(
               (status) => ListView(
                   controller: controller.pageScrollController,
@@ -522,14 +524,21 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                                       .format ==
                                                                   'movie'
                                                               ? InkWell(
-                                                                  onTap: () => Get.to(() => PlayMovieScreen(
-                                                                      downloadList: controller
-                                                                          .movieModel
-                                                                          ?.data
-                                                                          ?.link
-                                                                          ?.data?[
-                                                                              index]
-                                                                          .list?[listIndex])),
+                                                                  onTap: () => controller.openExternalApp(controller
+                                                                      .movieModel
+                                                                      ?.data
+                                                                      ?.link
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .list?[listIndex]),
+                                                                  // onTap: () => Get.to(() => PlayMovieScreen(
+                                                                  //     downloadList: controller
+                                                                  //         .movieModel
+                                                                  //         ?.data
+                                                                  //         ?.link
+                                                                  //         ?.data?[
+                                                                  //             index]
+                                                                  //         .list?[listIndex])),
                                                                   child: Icon(
                                                                     Icons
                                                                         .play_arrow,

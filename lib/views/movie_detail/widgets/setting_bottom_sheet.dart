@@ -7,7 +7,7 @@ class SettingBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RxInt colorSelected = (-1).obs, fontSize = 34.obs;
+    RxInt colorSelected = (1).obs, fontSize = 34.obs;
     return Wrap(
       children: [
         ListTile(
@@ -76,15 +76,15 @@ class SettingBottomSheet extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: ()=>Get.back(
-            result: TextStyle(fontSize: fontSize.value.toDouble(),color: [
-                                Colors.blue,
-                                Colors.black,
-                                Colors.yellow,
-                                Colors.red
-                              ][colorSelected.value]),
-
-            
+          onTap: () => Get.back(
+            result: TextStyle(
+                fontSize: fontSize.value.toDouble(),
+                color: [
+                  Colors.blue,
+                  Colors.black,
+                  Colors.yellow,
+                  Colors.red
+                ][colorSelected.value]),
           ),
           child: Container(
             width: Get.width,

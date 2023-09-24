@@ -76,6 +76,7 @@
 - [x] singup
 - [x] fix cast page bug
 - [x] put player in another app
+- [x] select default player or in app player
+- [x] home appicon in app bar
 - [ ] open subtitle from storage
-- [ ] subtitle configuration 
-- [ ] select default player or in app player
+- [ ] subtitle configuration (bug in package)

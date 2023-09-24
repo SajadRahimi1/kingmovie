@@ -54,8 +54,8 @@ class PlayMovieViewModel extends GetxController with StateMixin {
         });
       }
       if (isSeek) {
-        await player.seek(Duration(seconds: movieDuration ?? 0));
         isSeek = false;
+        await player.seek(Duration(seconds: movieDuration ?? 0));
       }
     });
   }
@@ -90,7 +90,6 @@ class PlayMovieViewModel extends GetxController with StateMixin {
     }
   }
 
-  void setSubStyle(SubtitleViewConfiguration config) {}
-  // subtitleViewConfiguration.value =
-  //     const SubtitleViewConfiguration(style: TextStyle(color: Colors.red));
+  void setSubStyle(SubtitleViewConfiguration config) =>
+      subtitleViewConfiguration.value = config;
 }

@@ -12,6 +12,7 @@ import 'package:king_movie/core/services/watch_service.dart' as watch_service;
 import 'package:king_movie/core/services/comment_service.dart'
     as comment_service;
 import 'package:king_movie/models/movie_model.dart';
+import 'package:king_movie/views/movie_detail/screens/play_movie_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/confirm_button.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
@@ -224,6 +225,31 @@ class MovieViewModel extends GetxController with StateMixin {
           title: 'خطا',
           message: request.body['message'],
           type: MessageType.error);
+    }
+  }
+
+  Future<void> openExternalApp(DownloadList? downloadList) async {
+    isSeek = await Get.defaultDialog<bool>(
+          title: "پخش کننده",
+          middleText: "با کدوم پخش کننده میخواهید پخش شود؟",
+          confirm: const ConfirmButton(
+            text: "پخش کننده کینگ مووی",
+            statusOnClick: true,
+          ), 
+          cancel: const ConfirmButton(text: "باقی پخش کننده ها"),
+        ) ??
+        true;
+
+    if (isSeek) {
+      Get.to(() => PlayMovieScreen(downloadList: downloadList));
+      return;
+    } else {
+      AndroidIntent intent = AndroidIntent(
+        action: 'action_view',
+        type: "video/*",
+        data: downloadList?.link,
+      );
+      await intent.launch();
     }
   }
 }
