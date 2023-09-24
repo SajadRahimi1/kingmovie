@@ -34,7 +34,7 @@ class SeriesDialog extends StatelessWidget {
                               (downloadList?.list?[index].list?.length ?? 0) < 2
                                   ? MediaQuery.sizeOf(context).height / 5
                                   : MediaQuery.sizeOf(context).height /
-                                      12 *
+                                      11 *
                                       (downloadList
                                               ?.list?[index].list?.length ??
                                           1),

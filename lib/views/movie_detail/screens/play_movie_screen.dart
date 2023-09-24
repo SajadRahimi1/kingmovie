@@ -39,54 +39,58 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      padding: const EdgeInsets.only(bottom: 5),
-      child: AspectRatio(
-          aspectRatio: 16 / 8,
-          child: MaterialVideoControlsTheme(
-              normal: MaterialVideoControlsThemeData(
+    return SafeArea(
+      child: Container(
+        color: Colors.black,
+        padding: const EdgeInsets.only(bottom: 5),
+        child: AspectRatio(
+            aspectRatio: 16 / 8,
+            child: MaterialVideoControlsTheme(
+                normal: MaterialVideoControlsThemeData(
+                    // Modify theme options:
+                    buttonBarButtonSize: 24.0,
+                    buttonBarButtonColor: Colors.white,
+                    // Modify top button bar:
+                    topButtonBar: [
+                      const Spacer(),
+                      SubtitleWidget(player: controller.player),
+                      AudioWidget(player: controller.player),
+                      IconButton(
+                          onPressed: () async {
+                            TextStyle? subtitleStyle =
+                                await showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) =>
+                                        const SettingBottomSheet());
+                            if (subtitleStyle != null) {
+                              controller.setSubStyle(SubtitleViewConfiguration(
+                                  style: subtitleStyle));
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.settings,
+                            color: Colors.white,
+                          ))
+                    ]),
+                fullscreen: MaterialVideoControlsThemeData(
                   // Modify theme options:
-                  buttonBarButtonSize: 24.0,
-                  buttonBarButtonColor: Colors.white,
-                  // Modify top button bar:
+                  displaySeekBar: true,
+                  shiftSubtitlesOnControlsVisibilityChange: true,
+
                   topButtonBar: [
                     const Spacer(),
                     SubtitleWidget(player: controller.player),
-                    AudioWidget(player: controller.player),
-                    IconButton(
-                        onPressed: () async {
-                          TextStyle? subtitleStyle = await showModalBottomSheet(
-                              context: context,
-                              builder: (context) => const SettingBottomSheet());
-                          if (subtitleStyle != null) {
-                            controller.setSubStyle(SubtitleViewConfiguration(
-                                style: subtitleStyle));
-                          }
-                        },
-                        icon: const Icon(
-                          Icons.settings,
-                          color: Colors.white,
-                        ))
-                  ]),
-              fullscreen: MaterialVideoControlsThemeData(
-                // Modify theme options:
-                displaySeekBar: true,
-                shiftSubtitlesOnControlsVisibilityChange: true,
-
-                topButtonBar: [
-                  const Spacer(),
-                  SubtitleWidget(player: controller.player),
-                  AudioWidget(player: controller.player)
-                ],
-                automaticallyImplySkipNextButton: false,
-                automaticallyImplySkipPreviousButton: false,
-              ),
-              child: Obx(() => Video(
-                    controller: controller.controller,
-                    subtitleViewConfiguration:
-                        controller.subtitleViewConfiguration.value,
-                  )))),
+                    AudioWidget(player: controller.player)
+                  ],
+                  automaticallyImplySkipNextButton: false,
+                  automaticallyImplySkipPreviousButton: false,
+                ),
+                child: Obx(() => Video(
+                      controller: controller.controller,
+                      subtitleViewConfiguration:
+                          controller.subtitleViewConfiguration.value,
+                    )))),
+      ),
     );
   }
 }

@@ -11,9 +11,6 @@ import 'package:king_movie/views/menu/screens/vip_screen.dart';
 import 'package:king_movie/views/movie_detail/screens/play_movie_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 import 'package:king_movie/views/movie_detail/widgets/series_tiles_widget.dart';
-import 'package:king_movie/views/movie_detail/widgets/setting_bottom_sheet.dart';
-import 'package:king_movie/views/movie_detail/widgets/top_video_widget.dart';
-import 'package:media_kit_video/media_kit_video.dart';
 import 'package:king_movie/core/extensions/string_extension.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
@@ -473,9 +470,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                                     .list?[
                                                                 secondIndex],
                                                             initVideo: (initVideo) =>
-                                                                controller
-                                                                    .initVideo(
-                                                                        initVideo),
+                                                                Get.to(() =>
+                                                                    PlayMovieScreen(
+                                                                        downloadList:
+                                                                            initVideo)),
                                                             download: (download) =>
                                                                 controller.openUrl(
                                                                     download))),
@@ -524,13 +522,14 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                                       .format ==
                                                                   'movie'
                                                               ? InkWell(
-                                                                  onTap: () => Get.to(()=>PlayMovieScreen(downloadList: controller
-                                                                      .movieModel
-                                                                      ?.data
-                                                                      ?.link
-                                                                      ?.data?[
-                                                                          index]
-                                                                      .list?[listIndex])),
+                                                                  onTap: () => Get.to(() => PlayMovieScreen(
+                                                                      downloadList: controller
+                                                                          .movieModel
+                                                                          ?.data
+                                                                          ?.link
+                                                                          ?.data?[
+                                                                              index]
+                                                                          .list?[listIndex])),
                                                                   child: Icon(
                                                                     Icons
                                                                         .play_arrow,

@@ -75,7 +75,7 @@
 - [x] forgot password
 - [x] singup
 - [x] fix cast page bug
+- [x] put player in another app
 - [ ] open subtitle from storage
 - [ ] subtitle configuration 
 - [ ] select default player or in app player
-- [ ] put player in another app
