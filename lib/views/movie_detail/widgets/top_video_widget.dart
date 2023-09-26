@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video_controls/media_kit_video_controls.dart';
@@ -21,29 +24,55 @@ class SubtitleWidget extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10))),
-            builder: (context) => Wrap(
+            builder: (context) => ListView(
                   children: List.generate(
-                      subtitles.length,
+                      subtitles.length + 1,
                       (index) => ListTile(
-                            onTap: () {
+                            onTap: () async {
                               print("tap");
-                              Navigator.of(context).pop(subtitles[index]);
+                              if (index == subtitles.length) {
+                                var pickedTrack = await pickSubtitle();
+                                if (pickedTrack != null) {
+                                  try {
+                                    subtitles.add(pickedTrack);
+                                  } catch (_) {}
+                                  Navigator.of(context).pop(pickedTrack);
+                                }
+                              } else {
+                                Navigator.of(context).pop(subtitles[index]);
+                              }
                             },
-                            title: Text(subtitles[index].title ??
-                                "زیرنویس ${index + 1}".toPersianDigit()),
-                            leading: subtitles[index].id ==
-                                    player.state.track.subtitle.id
-                                ? const Icon(Icons.done)
-                                : const SizedBox(),
+                            title: Text(index == subtitles.length
+                                ? 'باز کردن زیرنویس'
+                                : subtitles[index].title ??
+                                    "زیرنویس ${index + 1}".toPersianDigit()),
+                            leading: index == subtitles.length
+                                ? const SizedBox()
+                                : subtitles[index].id ==
+                                        player.state.track.subtitle.id
+                                    ? const Icon(Icons.done)
+                                    : const SizedBox(),
                           )),
                 )) as SubtitleTrack?;
-        print("closed");
         if (trackSelected != null) {
           await player.setSubtitleTrack(trackSelected);
         }
       },
       icon: const Icon(Icons.subtitles),
     );
+  }
+
+  Future<SubtitleTrack?> pickSubtitle() async {
+    FilePickerResult? result = await FilePicker.platform
+        .pickFiles(type: FileType.custom, allowedExtensions: ['srt', 'vvt']);
+    if (result != null && result.files.first.path != null) {
+      String data = await File(result.files.first.path ?? "").readAsString();
+      SubtitleTrack track =
+          SubtitleTrack.data(data, title: result.files.first.name);
+      return track;
+      // player.setSubtitleTrack();
+    }
+    return null;
   }
 }
 

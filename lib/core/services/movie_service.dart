@@ -8,10 +8,11 @@ Future<Response<dynamic>> getMovie(String token, String id) async {
   return await getConnect.post(getMovieUrl, formData);
 }
 
-Future<Response<dynamic>> getNewMovies(
+Future<Response<dynamic>> getNewMovies( 
     int page, bool isMovie, bool? dub) async {
   final FormData formData = FormData(
       {'way': isMovie ? 0 : 1, 'page': page, 'double': dub == null ? 0 : 1});
   return await getConnect.post(searchUrl, formData);
 }
+
 

@@ -24,4 +24,15 @@ class TicketMessageViewmModel extends GetxController with StateMixin {
       change(null, status: RxStatus.error(request.body['message']));
     }
   }
+
+  String? getBetweenQuotes(String text) {
+    RegExp exp = RegExp(r'"(.*?)"', multiLine: true);
+
+    var match = exp.firstMatch(text);
+    if (match != null) {
+      return match.group(1)!;
+    }
+
+    return null;
+  }
 }

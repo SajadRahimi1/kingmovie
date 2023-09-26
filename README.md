@@ -78,5 +78,5 @@
 - [x] put player in another app
 - [x] select default player or in app player
 - [x] home appicon in app bar
-- [ ] open subtitle from storage
+- [x] open subtitle from storage
 - [ ] subtitle configuration (bug in package)

@@ -9,7 +9,6 @@ import 'package:king_movie/views/home/screens/search_screen.dart';
 import 'package:king_movie/views/login/screens/login_screen.dart';
 import 'package:king_movie/views/login/screens/singup_screen.dart';
 import 'package:king_movie/views/menu/screens/vip_screen.dart';
-import 'package:king_movie/views/movie_detail/screens/play_movie_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 import 'package:king_movie/views/movie_detail/widgets/series_tiles_widget.dart';
 import 'package:king_movie/core/extensions/string_extension.dart';
@@ -472,10 +471,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                                     .list?[
                                                                 secondIndex],
                                                             initVideo: (initVideo) =>
-                                                                Get.to(() =>
-                                                                    PlayMovieScreen(
-                                                                        downloadList:
-                                                                            initVideo)),
+                                                                controller
+                                                                    .choosePlayer(
+                                                                        initVideo),
                                                             download: (download) =>
                                                                 controller.openUrl(
                                                                     download))),
@@ -524,7 +522,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                                       .format ==
                                                                   'movie'
                                                               ? InkWell(
-                                                                  onTap: () => controller.openExternalApp(controller
+                                                                  onTap: () => controller.choosePlayer(controller
                                                                       .movieModel
                                                                       ?.data
                                                                       ?.link

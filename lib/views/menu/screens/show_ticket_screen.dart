@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/widgets/app_bar.dart';
 import 'package:king_movie/viewmodels/ticket_message_viewmodel.dart';
+import 'package:king_movie/views/menu/widgets/hero_image.dart';
 import 'package:king_movie/views/menu/widgets/message_widget.dart';
 import 'package:king_movie/core/extensions/string_extension.dart';
 
@@ -27,16 +28,20 @@ class ShowTicketScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 15),
                         physics: const BouncingScrollPhysics(),
                         itemCount: controller.model?.data?.list?.length ?? 0,
-                        itemBuilder: (BuildContext context, int index) =>
-                            Messagewidget(
+                        itemBuilder: (BuildContext context, int index) => controller
+                                    .getBetweenQuotes((controller
+                                            .model?.data?.list?[index].text ??
+                                        "")) ==
+                                null
+                            ? Messagewidget(
                                 isUserSend: (controller
                                             .model?.data?.list?[index].sender ??
                                         "") ==
                                     "توسط شما",
-                                text: (controller
-                                            .model?.data?.list?[index].text ??
-                                        "")
-                                    .removeAllHtmlTags(),
+                                text:
+                                    (controller.model?.data?.list?[index].text ??
+                                            "")
+                                        .removeAllHtmlTags(),
                                 time:
                                     controller.model?.data?.list?[index].date ??
                                         "",
@@ -44,7 +49,25 @@ class ShowTicketScreen extends StatelessWidget {
                                   Icons.check,
                                   color: Colors.white,
                                   size: MediaQuery.sizeOf(context).width / 20,
-                                )))),
+                                ))
+                            : ImageMessageWidget(
+                                onImageTap: () => Get.to(() => HeroImage(
+                                    tag: index.toString(),
+                                    src: controller.getBetweenQuotes((controller
+                                                .model
+                                                ?.data
+                                                ?.list?[index]
+                                                .text ??
+                                            "")) ??
+                                        '')),
+                                tag: index.toString(),
+                                text: controller.getBetweenQuotes((controller
+                                        .model?.data?.list?[index].text ??
+                                    "")),
+                                time:
+                                    controller.model?.data?.list?[index].date ??
+                                        "",
+                              ))),
                 // const Divider(
                 //   color: Colors.w,
                 // ),

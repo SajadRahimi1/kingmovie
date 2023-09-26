@@ -62,3 +62,62 @@ class Messagewidget extends StatelessWidget {
     );
   }
 }
+
+class ImageMessageWidget extends StatelessWidget {
+  const ImageMessageWidget({
+    Key? key,
+    required this.text,
+    required this.time,
+    required this.tag, this.onImageTap,
+  }) : super(key: key);
+  final String? text, time;
+  final String tag;
+  final void Function()? onImageTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+        padding: const EdgeInsets.all(12.0),
+        // padding: const EdgeInsets.all(12.0),
+        decoration: const BoxDecoration(
+          color: Color(0xff26313e),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10.0),
+            topRight: Radius.circular(10.0),
+            bottomRight: Radius.circular(10.0),
+            bottomLeft: Radius.zero,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment:
+              RegExp(r'^[\u0600-\u06FF\s]+$').hasMatch(text ?? '')
+                  ? CrossAxisAlignment.start
+                  : CrossAxisAlignment.end,
+          children: [
+            if (text != null)
+              InkWell(
+                onTap: onImageTap,
+                child: Hero(
+                  tag: tag,
+                  child: Image.network(
+                    text ?? '',
+                    width: MediaQuery.sizeOf(context).width / 3,
+                    height: MediaQuery.sizeOf(context).height / 5,
+                  ),
+                ),
+              ),
+            Text(
+              '\n${time ?? ''}',
+              style: TextStyle(
+                  fontSize: 11 * MediaQuery.of(context).textScaleFactor,
+                  color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

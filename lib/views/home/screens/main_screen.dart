@@ -314,7 +314,7 @@ class MainScreen extends StatelessWidget {
                     autoPlay: true,
                     aspectRatio: 1,
                     enlargeCenterPage: true,
-                    viewportFraction: 0.48)),
+                    viewportFraction: 0.33)),
           ),
           SizedBox(
             height: Get.height / 20,

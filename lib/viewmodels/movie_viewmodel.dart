@@ -228,14 +228,14 @@ class MovieViewModel extends GetxController with StateMixin {
     }
   }
 
-  Future<void> openExternalApp(DownloadList? downloadList) async {
+  Future<void> choosePlayer(DownloadList? downloadList) async {
     isSeek = await Get.defaultDialog<bool>(
           title: "پخش کننده",
           middleText: "با کدوم پخش کننده میخواهید پخش شود؟",
           confirm: const ConfirmButton(
             text: "پخش کننده کینگ مووی",
             statusOnClick: true,
-          ), 
+          ),
           cancel: const ConfirmButton(text: "باقی پخش کننده ها"),
         ) ??
         true;

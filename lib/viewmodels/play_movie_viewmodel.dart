@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:king_movie/models/movie_model.dart';
@@ -92,4 +94,6 @@ class PlayMovieViewModel extends GetxController with StateMixin {
 
   void setSubStyle(SubtitleViewConfiguration config) =>
       subtitleViewConfiguration.value = config;
+
+  
 }
