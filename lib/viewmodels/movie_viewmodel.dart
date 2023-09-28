@@ -108,12 +108,28 @@ class MovieViewModel extends GetxController with StateMixin {
   }
 
   Future<void> initTrailer(String? downloadLink) async {
-    if (downloadLink != null) {
-      await player.open(Media(downloadLink));
-      isInitialVideo.value = true;
+    DownloadList downloadList = DownloadList(link: downloadLink);
+    isSeek = await Get.defaultDialog<bool>(
+          title: "پخش کننده",
+          middleText: "با کدوم پخش کننده میخواهید پخش شود؟",
+          confirm: const ConfirmButton(
+            text: "پخش کننده کینگ مووی",
+            statusOnClick: true,
+          ),
+          cancel: const ConfirmButton(text: "باقی پخش کننده ها"),
+        ) ??
+        true;
 
-      pageScrollController.animateTo(0.0,
-          duration: const Duration(milliseconds: 100), curve: Curves.bounceIn);
+    if (isSeek) {
+      Get.to(() => PlayMovieScreen(downloadList: downloadList));
+      return;
+    } else {
+      AndroidIntent intent = AndroidIntent(
+        action: 'action_view',
+        type: "video/*",
+        data: downloadList.link,
+      );
+      await intent.launch();
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
@@ -9,6 +10,7 @@ import 'package:king_movie/views/home/screens/search_screen.dart';
 import 'package:king_movie/views/login/screens/login_screen.dart';
 import 'package:king_movie/views/login/screens/singup_screen.dart';
 import 'package:king_movie/views/menu/screens/vip_screen.dart';
+import 'package:king_movie/views/movie_detail/screens/screen_shot_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 import 'package:king_movie/views/movie_detail/widgets/series_tiles_widget.dart';
 import 'package:king_movie/core/extensions/string_extension.dart';
@@ -884,6 +886,42 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       controller: controller.pageScrollController,
                       index: 10,
                       child: SizedBox(
+                        width: Get.width,
+                        height: Get.height / 4.5,
+                        child: CarouselSlider(
+                            options: CarouselOptions(
+                                aspectRatio: 1, viewportFraction: 0.8),
+                            items: List.generate(
+                                controller.movieModel?.data?.trailer?.length ??
+                                    0,
+                                (index) => InkWell(
+                                  onTap: () {
+                                    if (controller.movieModel?.data
+                                            ?.trailer?[index].type ==
+                                        'trailer') {
+                                      controller.initTrailer(controller
+                                          .movieModel
+                                          ?.data
+                                          ?.trailer?[index]
+                                          .view);
+                                    } else {
+                                      Get.to(() => ScreenShotScreen(
+                                          src: controller.movieModel?.data
+                                              ?.trailer?[index].image));
+                                    }
+                                  },
+                                  child: TrailerWidget(
+                                      trailerModel: controller.movieModel
+                                          ?.data?.trailer?[index]),
+                                ))),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.grey,
+                      height: Get.height / 18,
+                    ),
+
+                    /*SizedBox(
                           child: Column(
                         children: List.generate(
                           controller.movieModel?.data?.trailer?.length ?? 0,
@@ -905,8 +943,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     .movieModel?.data?.trailer?[index]),
                           ),
                         ),
-                      )),
-                    ),
+                      )),*/
+                    // ),
 
                     // comments
                     AutoScrollTag(
