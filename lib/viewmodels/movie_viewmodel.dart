@@ -13,6 +13,7 @@ import 'package:king_movie/core/services/comment_service.dart'
     as comment_service;
 import 'package:king_movie/models/movie_model.dart';
 import 'package:king_movie/views/movie_detail/screens/play_movie_screen.dart';
+import 'package:king_movie/views/movie_detail/screens/screen_shot_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/confirm_button.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
@@ -143,6 +144,11 @@ class MovieViewModel extends GetxController with StateMixin {
 
   Future<void> openUrl(DownloadList? url) async {
     if (url?.link != null) {
+      if (url?.link?.split('?').first.split('.').last == 'jpg' ||
+          url?.link?.split('?').first.split('.').last == 'png') {
+        Get.to(() => ScreenShotScreen(src: url?.link));
+        return;
+      }
       bool isInstalled = await DeviceApps.isAppInstalled('com.dv.adm');
 
       if (isInstalled) {
@@ -231,6 +237,4 @@ class MovieViewModel extends GetxController with StateMixin {
       await intent.launch();
     }
   }
-
-  
 }

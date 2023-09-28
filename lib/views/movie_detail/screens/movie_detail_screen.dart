@@ -262,13 +262,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     break;
                                   case 3:
                                     controller.pageScrollController
-                                        .scrollToIndex(8,
+                                        .scrollToIndex(10,
                                             duration: Duration(seconds: index));
                                     break;
                                   case 4:
                                     controller.pageScrollController
                                         .scrollToIndex(
-                                            10,
+                                            8,
                                             duration:
                                                 const Duration(seconds: 3));
                                     break;
@@ -293,8 +293,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                           "توضیحات",
                                           "دانلود",
                                           "عوامل",
+                                          "تریلر",
                                           "نظرات",
-                                          "تریلر"
                                         ][index],
                                       )),
                             ))
@@ -878,9 +878,39 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       height: Get.height / 18,
                     ),
 
+                    // trailer
+                    AutoScrollTag(
+                      key: const ValueKey(8),
+                      controller: controller.pageScrollController,
+                      index: 10,
+                      child: SizedBox(
+                          child: Column(
+                        children: List.generate(
+                          controller.movieModel?.data?.trailer?.length ?? 0,
+                          (index) => InkWell(
+                            onTap: () async {
+                              if (controller
+                                      .movieModel?.data?.trailer?[index].type ==
+                                  'trailer') {
+                                await controller.initTrailer(controller
+                                        .movieModel
+                                        ?.data
+                                        ?.trailer?[index]
+                                        .view ??
+                                    "");
+                              }
+                            },
+                            child: TrailerWidget(
+                                trailerModel: controller
+                                    .movieModel?.data?.trailer?[index]),
+                          ),
+                        ),
+                      )),
+                    ),
+
                     // comments
                     AutoScrollTag(
-                        key: const ValueKey(8),
+                        key: const ValueKey(10),
                         controller: controller.pageScrollController,
                         index: 8,
                         child: SizedBox(
@@ -1000,36 +1030,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       color: Colors.grey,
                       height: Get.height / 18,
                     ),
-
-                    // trailer
-                    AutoScrollTag(
-                      key: const ValueKey(10),
-                      controller: controller.pageScrollController,
-                      index: 10,
-                      child: SizedBox(
-                          child: Column(
-                        children: List.generate(
-                          controller.movieModel?.data?.trailer?.length ?? 0,
-                          (index) => InkWell(
-                            onTap: () async {
-                              if (controller
-                                      .movieModel?.data?.trailer?[index].type ==
-                                  'trailer') {
-                                await controller.initTrailer(controller
-                                        .movieModel
-                                        ?.data
-                                        ?.trailer?[index]
-                                        .view ??
-                                    "");
-                              }
-                            },
-                            child: TrailerWidget(
-                                trailerModel: controller
-                                    .movieModel?.data?.trailer?[index]),
-                          ),
-                        ),
-                      )),
-                    )
                   ]),
             )));
   }
