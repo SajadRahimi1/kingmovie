@@ -28,7 +28,7 @@ class TrailerWidget extends StatelessWidget {
                 ? Container(
                     width: MediaQuery.sizeOf(context).width,
                     height: MediaQuery.sizeOf(context).height / 4.5,
-                    color: const Color.fromRGBO(0, 0, 0, 0.4),
+                    color: const Color.fromRGBO(0, 0, 0, 0.2),
                     child: FittedBox(
                       fit: BoxFit.scaleDown,
                       child: CircleAvatar(

@@ -17,7 +17,7 @@ class SubtitleWidget extends StatelessWidget {
       onPressed: () async {
         subtitles = player.state.tracks.subtitle
             .where((element) =>
-                element != SubtitleTrack.no() ||
+                element != SubtitleTrack.no() &&
                 element != SubtitleTrack.auto())
             .toList();
         // .where((element) => element.title != null)
