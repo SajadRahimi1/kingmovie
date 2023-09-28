@@ -23,7 +23,7 @@ class MovieViewModel extends GetxController with StateMixin {
   MovieViewModel(this.movieId);
   final String movieId;
   MovieModel? movieModel;
-  RxBool isInitialVideo = false.obs;
+  RxBool isInitialVideo = false.obs, isBookmarked = false.obs;
   RxInt commentUpdate = 1.obs;
   final TextEditingController commentController = TextEditingController();
   Rx<String> replyId = "".obs;
@@ -98,36 +98,11 @@ class MovieViewModel extends GetxController with StateMixin {
     final request = await movie_service.getMovie(token, movieId);
     if (request.statusCode == 200 && request.body['error'] == 'false') {
       movieModel = MovieModel.fromJson(request.body);
+      isBookmarked.value = movieModel?.data?.watch == 'true';
       change(null, status: RxStatus.success());
     } else {
       showMessage(message: request.body['message'], type: MessageType.error);
       change(null, status: RxStatus.error(request.body['message']));
-    }
-  }
-
-  Future<void> initVideo(DownloadList? downloadList) async {
-    if (downloadList != null && downloadList.link != null) {
-      moviePlayingId = downloadList.link ?? "";
-      moviePlayingId = moviePlayingId.split('/').last.split('?').first;
-      movieDuration = getStorage.read(moviePlayingId);
-      print("movie duration:                             $movieDuration");
-      if (movieDuration != null) {
-        isSeek = await Get.defaultDialog<bool>(
-              title: "پخش از ادامه",
-              middleText: "آیا میخواهید از ادامه پخش شود؟",
-              confirm: const ConfirmButton(
-                text: "بله",
-                statusOnClick: true,
-              ),
-              cancel: const ConfirmButton(text: "خیر"),
-            ) ??
-            false;
-      }
-      await player.open(Media(downloadList.link ?? ""));
-      isInitialVideo.value = true;
-
-      pageScrollController.animateTo(0.0,
-          duration: const Duration(milliseconds: 100), curve: Curves.bounceIn);
     }
   }
 
@@ -148,6 +123,10 @@ class MovieViewModel extends GetxController with StateMixin {
         type: request.body['error'] == 'false'
             ? MessageType.success
             : MessageType.error);
+    if (request.body['error'] == 'false') {
+      // reverse bookmark value
+      isBookmarked.value = !isBookmarked.value;
+    }
   }
 
   List<AudioTrack> audios() {

@@ -1,4 +1,4 @@
-const String baseUrl = 'https://40kingmovi.xyz/api/?type';
+const String baseUrl = 'https://41kingmovi.xyz/api/?type';
 const String homeUrl = '$baseUrl=home';
 const String loginUrl = '$baseUrl=login';
 const String ticketUrl = '$baseUrl=ticket';

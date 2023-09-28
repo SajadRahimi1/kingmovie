@@ -55,7 +55,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                   controller: controller.pageScrollController,
                   cacheExtent: Get.height * 20,
                   children: [
-                    // video and poster
+                    //  poster
                     Center(
                       child: Obx(
                         () => controller.isInitialVideo.value
@@ -78,16 +78,19 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                       child: Padding(
                                         padding:
                                             const EdgeInsets.only(left: 8.0),
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.bookmark_add_outlined,
-                                            color: Colors.white,
-                                            size: MediaQuery.sizeOf(context)
-                                                    .width /
-                                                10,
-                                          ),
-                                          onPressed: controller.addFavorite,
-                                        ),
+                                        child: Obx(() => IconButton(
+                                              icon: Icon(
+                                                controller.isBookmarked.value
+                                                    ? Icons.bookmark
+                                                    : Icons
+                                                        .bookmark_add_outlined,
+                                                color: Colors.white,
+                                                size: MediaQuery.sizeOf(context)
+                                                        .width /
+                                                    10,
+                                              ),
+                                              onPressed: controller.addFavorite,
+                                            )),
                                       ))
                                 ],
                               ),
