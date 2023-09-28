@@ -20,19 +20,7 @@ class RequestMovieModel {
     data = json["data"] == null ? null : Data.fromJson(json["data"]);
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["status"] = status;
-    _data["forceOut"] = forceOut;
 
-    _data["error"] = error;
-    _data["message"] = message;
-    if (data != null) {
-      _data["data"] = data?.toJson();
-    }
-
-    return _data;
-  }
 }
 
 class Data {
@@ -47,11 +35,11 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (list != null) {
-      _data["list"] = list?.map((e) => e.toJson()).toList();
+      data["list"] = list?.map((e) => e.toJson()).toList();
     }
-    return _data;
+    return data;
   }
 }
 
@@ -73,14 +61,14 @@ class ListData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["title"] = title;
-    _data["reply"] = reply;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["title"] = title;
+    data["reply"] = reply;
     if (replyArray != null) {
-      _data["replyArray"] = replyArray?.toJson();
+      data["replyArray"] = replyArray?.toJson();
     }
-    _data["active"] = active;
-    return _data;
+    data["active"] = active;
+    return data;
   }
 }
 
@@ -96,10 +84,10 @@ class ReplyArray {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["text"] = text;
-    _data["code"] = code;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["text"] = text;
+    data["code"] = code;
+    return data;
   }
 }
 
@@ -121,12 +109,12 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["email"] = email;
-    _data["name"] = name;
-    _data["vipDate"] = vipDate;
-    _data["mobile"] = mobile;
-    _data["vip"] = vip;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["email"] = email;
+    data["name"] = name;
+    data["vipDate"] = vipDate;
+    data["mobile"] = mobile;
+    data["vip"] = vip;
+    return data;
   }
 }

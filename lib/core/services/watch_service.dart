@@ -25,3 +25,4 @@ Future<Response<dynamic>> addFavorite(String token, String id) async {
   EasyLoading.dismiss();
   return returnData;
 }
+

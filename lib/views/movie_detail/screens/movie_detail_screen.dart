@@ -890,30 +890,34 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         height: Get.height / 4.5,
                         child: CarouselSlider(
                             options: CarouselOptions(
-                                aspectRatio: 1, viewportFraction: 0.8),
+                                initialPage: (controller
+                                        .movieModel?.data?.trailer?.length??1) -
+                                    1,
+                                aspectRatio: 1,
+                                viewportFraction: 0.8),
                             items: List.generate(
                                 controller.movieModel?.data?.trailer?.length ??
                                     0,
                                 (index) => InkWell(
-                                  onTap: () {
-                                    if (controller.movieModel?.data
-                                            ?.trailer?[index].type ==
-                                        'trailer') {
-                                      controller.initTrailer(controller
-                                          .movieModel
-                                          ?.data
-                                          ?.trailer?[index]
-                                          .view);
-                                    } else {
-                                      Get.to(() => ScreenShotScreen(
-                                          src: controller.movieModel?.data
-                                              ?.trailer?[index].image));
-                                    }
-                                  },
-                                  child: TrailerWidget(
-                                      trailerModel: controller.movieModel
-                                          ?.data?.trailer?[index]),
-                                ))),
+                                      onTap: () {
+                                        if (controller.movieModel?.data
+                                                ?.trailer?[index].type ==
+                                            'trailer') {
+                                          controller.initTrailer(controller
+                                              .movieModel
+                                              ?.data
+                                              ?.trailer?[index]
+                                              .view);
+                                        } else {
+                                          Get.to(() => ScreenShotScreen(
+                                              src: controller.movieModel?.data
+                                                  ?.trailer?[index].image));
+                                        }
+                                      },
+                                      child: TrailerWidget(
+                                          trailerModel: controller.movieModel
+                                              ?.data?.trailer?[index]),
+                                    ))),
                       ),
                     ),
                     Divider(

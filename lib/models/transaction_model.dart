@@ -34,20 +34,20 @@ class TransactionModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["status"] = status;
-    _data["forceOut"] = forceOut;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["status"] = status;
+    data["forceOut"] = forceOut;
     if (user != null) {
-      _data["user"] = user?.toJson();
+      data["user"] = user?.toJson();
     }
-    _data["error"] = error;
-    _data["message"] = message;
+    data["error"] = error;
+    data["message"] = message;
    
 
-    _data["homeAddress"] = homeAddress;
-    _data["buy"] = buy;
-    _data["buyText"] = buyText;
-    return _data;
+    data["homeAddress"] = homeAddress;
+    data["buy"] = buy;
+    data["buyText"] = buyText;
+    return data;
   }
 }
 
@@ -63,10 +63,10 @@ class Pack {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["title"] = title;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["title"] = title;
+    return data;
   }
 }
 
@@ -82,10 +82,10 @@ class Award {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["slug"] = slug;
-    _data["title"] = title;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["slug"] = slug;
+    data["title"] = title;
+    return data;
   }
 }
 
@@ -101,10 +101,10 @@ class Best {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["title"] = title;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["title"] = title;
+    return data;
   }
 }
 
@@ -132,10 +132,10 @@ class ListData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["title"] = title;
-    _data["date"] = date;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["title"] = title;
+    data["date"] = date;
+    return data;
   }
 }
 
@@ -157,12 +157,12 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["email"] = email;
-    _data["name"] = name;
-    _data["vipDate"] = vipDate;
-    _data["mobile"] = mobile;
-    _data["vip"] = vip;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["email"] = email;
+    data["name"] = name;
+    data["vipDate"] = vipDate;
+    data["mobile"] = mobile;
+    data["vip"] = vip;
+    return data;
   }
 }

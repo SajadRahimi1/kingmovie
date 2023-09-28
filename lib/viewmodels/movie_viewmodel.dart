@@ -219,6 +219,8 @@ class MovieViewModel extends GetxController with StateMixin {
     if (request.statusCode == 200 && request.body['error'] == 'false') {
       commentController.clear();
       showMessage(message: request.body['message'], type: MessageType.success);
+      await getData();
+      commentUpdate.value++;
     } else if (request.statusCode == 500) {
       networkErrorMessage();
     } else {

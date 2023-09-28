@@ -1,4 +1,3 @@
-
 class SearchModel {
   String? status;
   String? forceOut;
@@ -7,7 +6,13 @@ class SearchModel {
   String? message;
   Data? data;
 
-  SearchModel({this.status, this.forceOut, this.user, this.error, this.message, this.data});
+  SearchModel(
+      {this.status,
+      this.forceOut,
+      this.user,
+      this.error,
+      this.message,
+      this.data});
 
   SearchModel.fromJson(Map<String, dynamic> json) {
     status = json["status"];
@@ -17,21 +22,6 @@ class SearchModel {
     message = json["message"];
     data = json["data"] == null ? null : Data.fromJson(json["data"]);
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["status"] = status;
-    _data["forceOut"] = forceOut;
-    if(user != null) {
-      _data["user"] = user;
-    }
-    _data["error"] = error;
-    _data["message"] = message;
-    if(data != null) {
-      _data["data"] = data?.toJson();
-    }
-    return _data;
-  }
 }
 
 class Data {
@@ -40,15 +30,17 @@ class Data {
   Data({this.dataList});
 
   Data.fromJson(Map<String, dynamic> json) {
-    dataList = json["list"] == null ? null : (json["list"] as List).map((e) => DataList.fromJson(e)).toList();
+    dataList = json["list"] == null
+        ? null
+        : (json["list"] as List).map((e) => DataList.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    if(dataList != null) {
-      _data["dataList"] = dataList?.map((e) => e.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (dataList != null) {
+      data["dataList"] = dataList?.map((e) => e.toJson()).toList();
     }
-    return _data;
+    return data;
   }
 }
 
@@ -67,7 +59,20 @@ class DataList {
   String? story;
   String? genre;
 
-  DataList({this.id, this.title, this.year, this.poster, this.vote, this.lang, this.double, this.subtitle, this.like, this.age, this.time, this.story, this.genre});
+  DataList(
+      {this.id,
+      this.title,
+      this.year,
+      this.poster,
+      this.vote,
+      this.lang,
+      this.double,
+      this.subtitle,
+      this.like,
+      this.age,
+      this.time,
+      this.story,
+      this.genre});
 
   DataList.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -86,20 +91,20 @@ class DataList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["title"] = title;
-    _data["year"] = year;
-    _data["poster"] = poster;
-    _data["vote"] = vote;
-    _data["lang"] = lang;
-    _data["double"] = double;
-    _data["subtitle"] = subtitle;
-    _data["like"] = like;
-    _data["age"] = age;
-    _data["time"] = time;
-    _data["story"] = story;
-    _data["genre"] = genre;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["title"] = title;
+    data["year"] = year;
+    data["poster"] = poster;
+    data["vote"] = vote;
+    data["lang"] = lang;
+    data["double"] = double;
+    data["subtitle"] = subtitle;
+    data["like"] = like;
+    data["age"] = age;
+    data["time"] = time;
+    data["story"] = story;
+    data["genre"] = genre;
+    return data;
   }
 }

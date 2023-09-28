@@ -14,6 +14,5 @@ class SingletonClass {
   User? user;
 
   SubtitleViewConfiguration subtitleViewConfiguration =
-      SubtitleViewConfiguration();
-
+      const SubtitleViewConfiguration();
 }
