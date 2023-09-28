@@ -1,4 +1,5 @@
 import 'package:king_movie/models/home_model.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 
 class SingletonClass {
   // Private constructor
@@ -10,6 +11,9 @@ class SingletonClass {
   // Public getter to get instance
   static SingletonClass get instance => _instance;
 
-
   User? user;
+
+  SubtitleViewConfiguration subtitleViewConfiguration =
+      SubtitleViewConfiguration();
+
 }

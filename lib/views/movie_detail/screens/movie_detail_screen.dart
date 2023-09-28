@@ -12,6 +12,8 @@ import 'package:king_movie/views/menu/screens/vip_screen.dart';
 import 'package:king_movie/views/movie_detail/widgets/comment_widget.dart';
 import 'package:king_movie/views/movie_detail/widgets/series_tiles_widget.dart';
 import 'package:king_movie/core/extensions/string_extension.dart';
+import 'package:king_movie/views/movie_detail/widgets/setting_bottom_sheet.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
 class MovieDetailScreen extends StatefulWidget {
@@ -91,7 +93,28 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                               ),
                                               onPressed: controller.addFavorite,
                                             )),
-                                      ))
+                                      )),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: IconButton(
+                                        onPressed: () async {
+                                          TextStyle? subtitleStyle =
+                                              await showModalBottomSheet(
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      const SettingBottomSheet());
+                                          if (subtitleStyle != null) {
+                                            SingletonClass.instance
+                                                    .subtitleViewConfiguration =
+                                                SubtitleViewConfiguration(
+                                                    style: subtitleStyle);
+                                          }
+                                        },
+                                        icon: const Icon(
+                                          Icons.settings,
+                                          color: Colors.white,
+                                        )),
+                                  )
                                 ],
                               ),
                       ),
@@ -283,14 +306,17 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         key: const ValueKey(2),
                         controller: controller.pageScrollController,
                         index: 2,
-                        child: Text(
-                          (controller.movieModel?.data?.text ?? "")
-                              .replaceAll('<br>', '\n')
-                              .replaceAll('&quot;', ''),
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize:
-                                  13 * MediaQuery.of(context).textScaleFactor),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            (controller.movieModel?.data?.text ?? "")
+                                .replaceAll('<br>', '\n')
+                                .replaceAll('&quot;', ''),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13 *
+                                    MediaQuery.of(context).textScaleFactor),
+                          ),
                         )),
                     Divider(
                       color: Colors.grey,
@@ -431,60 +457,10 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                           ],
                                         ),
                                       ),
-                                      controller.movieModel?.data?.way == "1"
-                                          ? Column(
-                                              children: List.generate(
-                                                  controller
-                                                          .movieModel
-                                                          ?.data
-                                                          ?.link
-                                                          ?.data?[index]
-                                                          .list
-                                                          ?.length ??
-                                                      0,
-                                                  (secondIndex) => ListTile(
-                                                        tileColor: controller
-                                                            .movieModel
-                                                            ?.data
-                                                            ?.link
-                                                            ?.data?[index]
-                                                            .color
-                                                            .downloadColor(),
-                                                        title: Text(
-                                                          controller
-                                                                  .movieModel
-                                                                  ?.data
-                                                                  ?.link
-                                                                  ?.data?[index]
-                                                                  .list?[
-                                                                      secondIndex]
-                                                                  .title ??
-                                                              "",
-                                                          style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .white),
-                                                        ),
-                                                        onTap: () => Get.dialog(SeriesDialog(
-                                                            downloadList: controller
-                                                                    .movieModel
-                                                                    ?.data
-                                                                    ?.link
-                                                                    ?.data?[index]
-                                                                    .list?[
-                                                                secondIndex],
-                                                            initVideo: (initVideo) =>
-                                                                controller
-                                                                    .choosePlayer(
-                                                                        initVideo),
-                                                            download: (download) =>
-                                                                controller.openUrl(
-                                                                    download))),
-                                                      )))
-                                          : Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: List.generate(
+                                      if (controller.movieModel?.data?.way ==
+                                          "1")
+                                        Column(
+                                            children: List.generate(
                                                 controller
                                                         .movieModel
                                                         ?.data
@@ -493,19 +469,86 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                         .list
                                                         ?.length ??
                                                     0,
-                                                (listIndex) => Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 8.0),
-                                                  child: ListTile(
-                                                    textColor: Colors.white,
-                                                    iconColor: Colors.white,
-                                                    tileColor: darkBlue,
-                                                    titleTextStyle:
-                                                        const TextStyle(
-                                                            fontSize: 16),
-                                                    trailing: SizedBox(
-                                                      width: Get.width / 7,
+                                                (secondIndex) => ListTile(
+                                                      tileColor: controller
+                                                          .movieModel
+                                                          ?.data
+                                                          ?.link
+                                                          ?.data?[index]
+                                                          .color
+                                                          .downloadColor(),
+                                                      title: Text(
+                                                        controller
+                                                                .movieModel
+                                                                ?.data
+                                                                ?.link
+                                                                ?.data?[index]
+                                                                .list?[
+                                                                    secondIndex]
+                                                                .title ??
+                                                            "",
+                                                        style: const TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                      onTap: () => Get.dialog(SeriesDialog(
+                                                          downloadList: controller
+                                                                  .movieModel
+                                                                  ?.data
+                                                                  ?.link
+                                                                  ?.data?[index]
+                                                                  .list?[
+                                                              secondIndex],
+                                                          initVideo: (initVideo) =>
+                                                              controller
+                                                                  .choosePlayer(
+                                                                      initVideo),
+                                                          download: (download) =>
+                                                              controller.openUrl(
+                                                                  download))),
+                                                    )))
+                                      else
+                                        SizedBox(
+                                          width: Get.width,
+                                          height: Get.height / 15,
+                                          child: ListView(
+                                            scrollDirection: Axis.horizontal,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8),
+                                            children: List.generate(
+                                              controller
+                                                      .movieModel
+                                                      ?.data
+                                                      ?.link
+                                                      ?.data?[index]
+                                                      .list
+                                                      ?.length ??
+                                                  0,
+                                              (listIndex) => Container(
+                                                height: Get.height,
+                                                margin: const EdgeInsets.only(
+                                                    left: 8),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 5),
+                                                decoration: BoxDecoration(
+                                                    color: darkBlue,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      '${controller.movieModel?.data?.link?.data?[index].list?[listIndex].title ?? ""}  ',
+                                                      style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 12),
+                                                    ),
+                                                    SizedBox(
+                                                      // width: Get.width / 7,
                                                       child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -532,14 +575,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                                       ?.data?[
                                                                           index]
                                                                       .list?[listIndex]),
-                                                                  // onTap: () => Get.to(() => PlayMovieScreen(
-                                                                  //     downloadList: controller
-                                                                  //         .movieModel
-                                                                  //         ?.data
-                                                                  //         ?.link
-                                                                  //         ?.data?[
-                                                                  //             index]
-                                                                  //         .list?[listIndex])),
                                                                   child: Icon(
                                                                     Icons
                                                                         .play_arrow,
@@ -570,20 +605,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                         ],
                                                       ),
                                                     ),
-                                                    title: Text(
-                                                      controller
-                                                              .movieModel
-                                                              ?.data
-                                                              ?.link
-                                                              ?.data?[index]
-                                                              .list?[listIndex]
-                                                              .title ??
-                                                          "",
-                                                    ),
-                                                  ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
+                                          ),
+                                        ),
                                     ]),
                                   )
                                     /*

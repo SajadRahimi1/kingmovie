@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:king_movie/core/constants/singleton_class.dart';
 import 'package:king_movie/models/movie_model.dart';
 import 'package:king_movie/viewmodels/play_movie_viewmodel.dart';
 import 'package:king_movie/views/movie_detail/widgets/setting_bottom_sheet.dart';
@@ -88,28 +89,14 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
                     const Spacer(),
                     SubtitleWidget(player: controller.player),
                     AudioWidget(player: controller.player),
-                    IconButton(
-                        onPressed: () async {
-                          TextStyle? subtitleStyle = await showModalBottomSheet(
-                              context: context,
-                              builder: (context) => const SettingBottomSheet());
-                          if (subtitleStyle != null) {
-                            controller.subtitleViewConfiguration.value =
-                                SubtitleViewConfiguration(style: subtitleStyle);
-                          }
-                        },
-                        icon: const Icon(
-                          Icons.settings,
-                          color: Colors.white,
-                        )),
                   ],
                   automaticallyImplySkipNextButton: false,
                   automaticallyImplySkipPreviousButton: false,
                 ),
-                child: Obx(() => Video(
+                child: Video(
                     controller: controller.controller,
                     subtitleViewConfiguration:
-                        controller.subtitleViewConfiguration.value)))),
+                        SingletonClass.instance.subtitleViewConfiguration))),
       ),
     );
   }

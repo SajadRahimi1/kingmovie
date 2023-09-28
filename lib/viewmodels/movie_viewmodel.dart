@@ -231,4 +231,6 @@ class MovieViewModel extends GetxController with StateMixin {
       await intent.launch();
     }
   }
+
+  
 }
