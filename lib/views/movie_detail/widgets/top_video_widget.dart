@@ -15,7 +15,11 @@ class SubtitleWidget extends StatelessWidget {
     List<SubtitleTrack> subtitles = [];
     return MaterialCustomButton(
       onPressed: () async {
-        subtitles = player.state.tracks.subtitle;
+        subtitles = player.state.tracks.subtitle
+            .where((element) =>
+                element != SubtitleTrack.no() ||
+                element != SubtitleTrack.auto())
+            .toList();
         // .where((element) => element.title != null)
         // .toList();
         SubtitleTrack? trackSelected = await showModalBottomSheet(
@@ -85,7 +89,9 @@ class AudioWidget extends StatelessWidget {
     List<AudioTrack> audios = [];
     return MaterialCustomButton(
       onPressed: () async {
-        audios = player.state.tracks.audio;
+        audios = player.state.tracks.audio
+            .where((element) => element.id != 'no' && element.id != 'auto')
+            .toList();
         // .where((element) => element.title != null)
         // .toList();
         AudioTrack? trackSelected = await showModalBottomSheet(
