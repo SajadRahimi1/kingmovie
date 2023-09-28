@@ -20,6 +20,28 @@ class TicketsScreen extends StatelessWidget {
           (status) => ListView(
             padding: const EdgeInsets.all(8),
             children: [
+              Obx(() => controller.isClickNew.value
+                  ? Column(
+                      children: [
+                        ProfileTextInput(
+                          label: "عنوان تیکت جدید",
+                          onChanged: (value) => controller.ticketTitle = value,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: Get.height / 6,
+                          child: ProfileTextInput(
+                            label: "متن پیام",
+                            onChanged: (value) => controller.ticketText = value,
+                            maxLines: 4,
+                          ),
+                        ),
+                      ],
+                    )
+                  : const SizedBox()),
+
               // new ticket button
               InkWell(
                 onTap: () async {
@@ -45,24 +67,6 @@ class TicketsScreen extends StatelessWidget {
                       )),
                 ),
               ),
-
-              Obx(() => controller.isClickNew.value
-                  ? Column(
-                      children: [
-                        ProfileTextInput(
-                          label: "عنوان تیکت جدید",
-                          onChanged: (value) => controller.ticketTitle = value,
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        ProfileTextInput(
-                          label: "متن پیام",
-                          onChanged: (value) => controller.ticketText = value,
-                        ),
-                      ],
-                    )
-                  : const SizedBox()),
 
               // table header
               Container(

@@ -7,11 +7,12 @@ class ProfileTextInput extends StatelessWidget {
       required this.label,
       this.textEditingController,
       this.isEnable = true,
-      this.onChanged});
+      this.onChanged,this.maxLines});
   final String label;
   final TextEditingController? textEditingController;
   final void Function(String)? onChanged;
   final bool isEnable;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class ProfileTextInput extends StatelessWidget {
           onChanged: onChanged,
           controller: textEditingController,
           style: const TextStyle(color: Colors.white, fontSize: 12),
+          maxLines: maxLines,
           decoration: InputDecoration(
             fillColor: blackColor,
             labelStyle: const TextStyle(color: Colors.white, fontSize: 12),

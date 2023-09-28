@@ -160,7 +160,7 @@ class MovieViewModel extends GetxController with StateMixin {
             'android.intent.extra.TEXT': url?.link,
           },
         );
-        await intent.launch().then((value) => null).catchError((e) => print(e));
+        await intent.launch().then((value) => null);
       } else {
         launchUrlString(url?.link ?? "", mode: LaunchMode.externalApplication);
       }
