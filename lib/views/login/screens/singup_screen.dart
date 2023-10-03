@@ -7,7 +7,8 @@ import 'package:king_movie/views/login/screens/login_screen.dart';
 import 'package:king_movie/views/menu/widgets/profile_text_input.dart';
 
 class SingupScreen extends StatelessWidget {
-  const SingupScreen({super.key});
+  const SingupScreen({super.key, this.onDone});
+  final void Function()? onDone;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class SingupScreen extends StatelessWidget {
           ),
           const Spacer(),
           InkWell(
-            onTap: controller.sendData,
+            onTap: ()=>controller.sendData(onDone),
             child: Container(
               width: MediaQuery.sizeOf(context).width,
               height: MediaQuery.sizeOf(context).height / 13,

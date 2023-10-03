@@ -7,7 +7,8 @@ import 'package:king_movie/views/login/screens/forget_screen.dart';
 import 'package:king_movie/views/menu/widgets/profile_text_input.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, this.onDone});
+  final void Function()? onDone;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class LoginScreen extends StatelessWidget {
           ),
           const Spacer(),
           InkWell(
-            onTap: controller.login,
+            onTap: ()=>controller.login(onDone),
             child: Container(
               width: MediaQuery.sizeOf(context).width,
               height: MediaQuery.sizeOf(context).height / 13,

@@ -16,12 +16,16 @@ class SignupViewModel extends GetxController {
     await GetStorage.init();
   }
 
-  Future<void> sendData() async {
+  Future<void> sendData(final void Function()? onDone) async {
     if (validate()) {
       final request = await signup(signupModel: model);
       if (request.statusCode == 200 && request.body['error'] == 'false') {
         await getStorage.write('token', request.body['salt']);
-        Get.offAll(() => const MainScreen());
+        if (onDone == null) {
+          Get.offAll(() => const MainScreen());
+        } else {
+          onDone();
+        }
       } else {
         showMessage(
             title: 'خطا',

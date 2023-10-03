@@ -5,7 +5,9 @@ import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart'
     show Colors, Curves, TextEditingController, TextStyle, debugPrint;
 import 'package:get/get.dart';
+import 'package:king_movie/models/home_model.dart' as user_model;
 import 'package:get_storage/get_storage.dart';
+import 'package:king_movie/core/constants/singleton_class.dart';
 import 'package:king_movie/core/services/message_service.dart';
 import 'package:king_movie/core/services/movie_service.dart' as movie_service;
 import 'package:king_movie/core/services/watch_service.dart' as watch_service;
@@ -43,8 +45,8 @@ class MovieViewModel extends GetxController with StateMixin {
           ));
 
   final AutoScrollController pageScrollController = AutoScrollController();
-  Rx<SubtitleViewConfiguration> subtitleViewConfiguration =
-      const SubtitleViewConfiguration().obs;
+  SubtitleViewConfiguration subtitleViewConfiguration =
+      const SubtitleViewConfiguration();
 
   final GetStorage getStorage = GetStorage();
   String token = '';
@@ -88,18 +90,19 @@ class MovieViewModel extends GetxController with StateMixin {
     await player.dispose();
   }
 
-  void setSubStyle(SubtitleViewConfiguration config) =>
-      subtitleViewConfiguration.value =
-          const SubtitleViewConfiguration(style: TextStyle(color: Colors.red));
-
-  Future<void> getData() async {
-    if (status != RxStatus.loading()) {
-      // change(null, status: RxStatus.loading());
+  Future<void> getData({bool? isReload}) async {
+    fillToken();
+    if (isReload ?? false) {
+      change(null, status: RxStatus.loading());
     }
     final request = await movie_service.getMovie(token, movieId);
     if (request.statusCode == 200 && request.body['error'] == 'false') {
       movieModel = MovieModel.fromJson(request.body);
       isBookmarked.value = movieModel?.data?.watch == 'true';
+      if (isReload ?? false) {
+        SingletonClass.instance.user =
+            user_model.User.fromJson(request.body['user']);
+      }
       change(null, status: RxStatus.success());
     } else {
       showMessage(message: request.body['message'], type: MessageType.error);
@@ -121,7 +124,10 @@ class MovieViewModel extends GetxController with StateMixin {
         true;
 
     if (isSeek) {
-      Get.to(() => PlayMovieScreen(downloadList: downloadList));
+      Get.to(() => PlayMovieScreen(
+            downloadList: downloadList,
+            subtitleViewConfiguration: subtitleViewConfiguration,
+          ));
       return;
     } else {
       AndroidIntent intent = AndroidIntent(
@@ -244,7 +250,10 @@ class MovieViewModel extends GetxController with StateMixin {
         true;
 
     if (isSeek) {
-      Get.to(() => PlayMovieScreen(downloadList: downloadList));
+      Get.to(() => PlayMovieScreen(
+            downloadList: downloadList,
+            subtitleViewConfiguration: subtitleViewConfiguration,
+          ));
       return;
     } else {
       AndroidIntent intent = AndroidIntent(
@@ -254,5 +263,9 @@ class MovieViewModel extends GetxController with StateMixin {
       );
       await intent.launch();
     }
+  }
+
+  void fillToken() {
+    if (token.isEmpty) token = getStorage.read('token') ?? "";
   }
 }

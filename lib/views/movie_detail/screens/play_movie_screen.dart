@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:king_movie/core/constants/singleton_class.dart';
 import 'package:king_movie/models/movie_model.dart';
 import 'package:king_movie/viewmodels/play_movie_viewmodel.dart';
 import 'package:king_movie/views/movie_detail/widgets/setting_bottom_sheet.dart';
@@ -9,8 +8,12 @@ import 'package:king_movie/views/movie_detail/widgets/top_video_widget.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
 class PlayMovieScreen extends StatefulWidget {
-  const PlayMovieScreen({super.key, required this.downloadList});
+  const PlayMovieScreen(
+      {super.key,
+      required this.downloadList,
+      required this.subtitleViewConfiguration});
   final DownloadList? downloadList;
+  final SubtitleViewConfiguration subtitleViewConfiguration;
 
   @override
   State<PlayMovieScreen> createState() => _PlayMovieScreenState();
@@ -23,7 +26,12 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
 
     controller = Get.put(PlayMovieViewModel(widget.downloadList));
   }
@@ -96,7 +104,7 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
                 child: Video(
                     controller: controller.controller,
                     subtitleViewConfiguration:
-                        SingletonClass.instance.subtitleViewConfiguration))),
+                        widget.subtitleViewConfiguration))),
       ),
     );
   }

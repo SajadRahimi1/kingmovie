@@ -106,7 +106,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                   builder: (context) =>
                                                       const SettingBottomSheet());
                                           if (subtitleStyle != null) {
-                                            SingletonClass.instance
+                                            controller
                                                     .subtitleViewConfiguration =
                                                 SubtitleViewConfiguration(
                                                     style: subtitleStyle);
@@ -320,12 +320,334 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     MediaQuery.of(context).textScaleFactor),
                           ),
                         )),
+
                     Divider(
                       color: Colors.grey,
                       height: Get.height / 18,
                     ),
 
                     // downloads
+                    AutoScrollTag(
+                        key: const ValueKey(4),
+                        controller: controller.pageScrollController,
+                        index: 4,
+                        child: SizedBox(
+                            child: SingleChildScrollView(
+                                child: (controller.movieModel?.data?.link?.data
+                                            ?.isEmpty ??
+                                        true)
+                                    ? Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                            SingletonClass.instance.user == null
+                                                ? "برای استفاده از خدمات ابتدا وارد اپ شوید\n"
+                                                : "برای پخش یا دانلود باید اشتراک خریداری کنید\n",
+                                            style: TextStyle(
+                                                fontSize: 17 *
+                                                    MediaQuery.of(context)
+                                                        .textScaleFactor,
+                                                color: Colors.white),
+                                          ),
+                                          SingletonClass.instance.user == null
+                                              ? Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () => Get.to(
+                                                          () => LoginScreen(
+                                                                onDone: () {
+                                                                  Get.back();
+                                                                  controller.getData(
+                                                                      isReload:
+                                                                          true);
+                                                                },
+                                                              )),
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(7),
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10)),
+                                                        child: const Text(
+                                                          "وارد شوید",
+                                                          style: TextStyle(),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () => Get.to(
+                                                          () => SingupScreen(
+                                                                onDone: () {
+                                                                  Get.back();
+                                                                  controller.getData(
+                                                                      isReload:
+                                                                          true);
+                                                                },
+                                                              )),
+                                                      child: Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(7),
+                                                        margin: const EdgeInsets
+                                                                .symmetric(
+                                                            horizontal: 10),
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10)),
+                                                        child: const Text(
+                                                          "ثبت نام کنید",
+                                                          style: TextStyle(),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              : InkWell(
+                                                  onTap: () => Get.to(
+                                                      () => const VipScreen()),
+                                                  child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(7),
+                                                    margin: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 10),
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10)),
+                                                    child: const Text(
+                                                      "خرید اشتراک",
+                                                      style: TextStyle(),
+                                                    ),
+                                                  ),
+                                                ),
+                                        ],
+                                      )
+                                    : Column(
+                                        children: List.generate(
+                                        controller.movieModel?.data?.link?.data
+                                                ?.length ??
+                                            0,
+                                        (index) => Column(children: [
+                                          Container(
+                                            width: Get.width,
+                                            height: Get.height / 12,
+                                            margin: EdgeInsets.only(
+                                                top: Get.height / 18),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: controller.movieModel?.data
+                                                  ?.link?.data?[index].color
+                                                  .downloadColor(),
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  controller
+                                                          .movieModel
+                                                          ?.data
+                                                          ?.link
+                                                          ?.data?[index]
+                                                          .title ??
+                                                      "",
+                                                  style: const TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                Text(
+                                                  controller
+                                                          .movieModel
+                                                          ?.data
+                                                          ?.link
+                                                          ?.data?[index]
+                                                          .des ??
+                                                      "",
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 12),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          controller.movieModel?.data?.way ==
+                                                  "1"
+                                              ? Column(
+                                                  children: List.generate(
+                                                      controller
+                                                              .movieModel
+                                                              ?.data
+                                                              ?.link
+                                                              ?.data?[index]
+                                                              .list
+                                                              ?.length ??
+                                                          0,
+                                                      (secondIndex) => ListTile(
+                                                            tileColor: controller
+                                                                .movieModel
+                                                                ?.data
+                                                                ?.link
+                                                                ?.data?[index]
+                                                                .color
+                                                                .downloadColor(),
+                                                            title: Text(
+                                                              controller
+                                                                      .movieModel
+                                                                      ?.data
+                                                                      ?.link
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .list?[
+                                                                          secondIndex]
+                                                                      .title ??
+                                                                  "",
+                                                              style: const TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            onTap: () => Get.dialog(SeriesDialog(
+                                                                downloadList: controller
+                                                                        .movieModel
+                                                                        ?.data
+                                                                        ?.link
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .list?[
+                                                                    secondIndex],
+                                                                initVideo: (initVideo) =>
+                                                                    controller
+                                                                        .choosePlayer(
+                                                                            initVideo),
+                                                                download: (download) =>
+                                                                    controller
+                                                                        .openUrl(
+                                                                            download))),
+                                                          )))
+                                              : Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: List.generate(
+                                                    controller
+                                                            .movieModel
+                                                            ?.data
+                                                            ?.link
+                                                            ?.data?[index]
+                                                            .list
+                                                            ?.length ??
+                                                        0,
+                                                    (listIndex) => Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 8.0),
+                                                      child: ListTile(
+                                                        textColor: Colors.white,
+                                                        iconColor: Colors.white,
+                                                        tileColor: darkBlue,
+                                                        titleTextStyle:
+                                                            const TextStyle(
+                                                                fontSize: 16),
+                                                        trailing: SizedBox(
+                                                          width: Get.width / 7,
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              controller
+                                                                          .movieModel
+                                                                          ?.data
+                                                                          ?.link
+                                                                          ?.data?[
+                                                                              index]
+                                                                          .list?[
+                                                                              listIndex]
+                                                                          .format ==
+                                                                      'movie'
+                                                                  ? InkWell(
+                                                                      onTap: () => controller.choosePlayer(controller
+                                                                          .movieModel
+                                                                          ?.data
+                                                                          ?.link
+                                                                          ?.data?[
+                                                                              index]
+                                                                          .list?[listIndex]),
+                                                                      // onTap: () => Get.to(() => PlayMovieScreen(
+                                                                      //     downloadList: controller
+                                                                      //         .movieModel
+                                                                      //         ?.data
+                                                                      //         ?.link
+                                                                      //         ?.data?[
+                                                                      //             index]
+                                                                      //         .list?[listIndex])),
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .play_arrow,
+                                                                        color: Colors
+                                                                            .white,
+                                                                        size: Get.width /
+                                                                            14,
+                                                                      ),
+                                                                    )
+                                                                  : const SizedBox(),
+                                                              InkWell(
+                                                                onTap: () => controller
+                                                                    .openUrl(controller
+                                                                        .movieModel
+                                                                        ?.data
+                                                                        ?.link
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .list?[listIndex]),
+                                                                child:
+                                                                    const Icon(
+                                                                  Icons
+                                                                      .download,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        title: Text(
+                                                          controller
+                                                                  .movieModel
+                                                                  ?.data
+                                                                  ?.link
+                                                                  ?.data?[index]
+                                                                  .list?[
+                                                                      listIndex]
+                                                                  .title ??
+                                                              "",
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                        ]),
+                                      ))))),
+
+                    /*
                     AutoScrollTag(
                         key: const ValueKey(4),
                         controller: controller.pageScrollController,
@@ -785,7 +1107,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                     ),
                           ),
                         )),
-
+*/
                     Divider(
                       color: Colors.grey,
                       height: Get.height / 18,

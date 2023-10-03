@@ -14,7 +14,9 @@ class Menu extends StatelessWidget {
       decoration: const BoxDecoration(color: blackColor),
       child: Column(children: [
         InkWell(
-          onTap: toLoginScreen,
+          onTap: SingletonClass.instance.user == null
+              ? toLoginScreen
+              : toProfileScreen,
           child: SizedBox(
             width: MediaQuery.sizeOf(context).width,
             height: MediaQuery.sizeOf(context).height / 5,
@@ -40,33 +42,34 @@ class Menu extends StatelessWidget {
           const Divider(
             color: Color(0xff5f5f5f),
           ),
-        SingletonClass.instance.user == null
-            ? ListTile(
-                onTap: loginTap,
-                textColor: Colors.white,
-                title: Text(
-                  "ورود / ثبت نام",
-                  style: TextStyle(
-                      fontSize: 12 * MediaQuery.of(context).textScaleFactor),
-                ),
-                trailing: const Icon(
-                  Icons.login,
-                  color: Colors.white,
-                ),
-              )
-            : ListTile(
-                onTap: toProfileScreen,
-                textColor: Colors.white,
-                title: Text(
-                  "تنظیمات کاربری",
-                  style: TextStyle(
-                      fontSize: 12 * MediaQuery.of(context).textScaleFactor),
-                ),
-                trailing: const Icon(
-                  Icons.settings,
-                  color: Colors.white,
-                ),
-              ),
+        if (SingletonClass.instance.user == null)
+          ListTile(
+            onTap: loginTap,
+            textColor: Colors.white,
+            title: Text(
+              "ورود / ثبت نام",
+              style: TextStyle(
+                  fontSize: 12 * MediaQuery.of(context).textScaleFactor),
+            ),
+            trailing: const Icon(
+              Icons.login,
+              color: Colors.white,
+            ),
+          )
+        else
+          ListTile(
+            onTap: toProfileScreen,
+            textColor: Colors.white,
+            title: Text(
+              "تنظیمات کاربری",
+              style: TextStyle(
+                  fontSize: 12 * MediaQuery.of(context).textScaleFactor),
+            ),
+            trailing: const Icon(
+              Icons.settings,
+              color: Colors.white,
+            ),
+          ),
         if (SingletonClass.instance.user != null)
           const Divider(
             color: Color(0xff5f5f5f),
