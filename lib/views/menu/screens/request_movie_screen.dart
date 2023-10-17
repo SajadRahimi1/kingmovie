@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
+import 'package:king_movie/core/extensions/string_extension.dart';
 import 'package:king_movie/viewmodels/request_movie_viewmodel.dart';
 import 'package:king_movie/views/menu/widgets/profile_text_input.dart';
 
@@ -101,50 +102,77 @@ class RequestMovieScreen extends StatelessWidget {
                           Column(
                             children: List.generate(
                               controller.movieModel?.data?.list?.length ?? 0,
-                              (index) => Container(
-                                width: MediaQuery.sizeOf(context).width,
-                                height: MediaQuery.sizeOf(context).height / 17,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: const Color(0xff26313e)),
-                                    borderRadius: const BorderRadius.only(
-                                        bottomLeft: Radius.circular(8),
-                                        bottomRight: Radius.circular(8))),
-                                child: Row(children: [
-                                  SizedBox(
-                                    width:
-                                        MediaQuery.sizeOf(context).width / 1.7,
-                                    height: MediaQuery.sizeOf(context).height,
-                                    child: Center(
-                                      child: Text(
+                              (index) => Column(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.sizeOf(context).width,
+                                    height:
+                                        MediaQuery.sizeOf(context).height / 17,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: const Color(0xff26313e)),
+                                        borderRadius: const BorderRadius.only(
+                                            bottomLeft: Radius.circular(8),
+                                            bottomRight: Radius.circular(8))),
+                                    child: Row(children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.sizeOf(context).width /
+                                                1.7,
+                                        height:
+                                            MediaQuery.sizeOf(context).height,
+                                        child: Center(
+                                          child: Text(
+                                            controller.movieModel?.data
+                                                    ?.list?[index].title ??
+                                                "",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 13 *
+                                                    MediaQuery.of(context)
+                                                        .textScaleFactor),
+                                          ),
+                                        ),
+                                      ),
+                                      const VerticalDivider(
+                                        color: Color(0xff26313e),
+                                        thickness: 3,
+                                      ),
+                                      Expanded(
+                                          child: Text(
                                         controller.movieModel?.data
-                                                ?.list?[index].title ??
+                                                ?.list?[index].active ??
                                             "",
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 13 *
                                                 MediaQuery.of(context)
                                                     .textScaleFactor),
-                                      ),
+                                      ))
+                                    ]),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: MediaQuery.sizeOf(context).width,
+                                    height:
+                                        MediaQuery.sizeOf(context).height / 17,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: const Color(0xff26313e)),
+                                        borderRadius: const BorderRadius.only(
+                                            bottomLeft: Radius.circular(8),
+                                            bottomRight: Radius.circular(8))),
+                                    child: Text(
+                                      "پاسخ: ${controller.movieModel?.data?.list?[index].reply.removeAllHtmlTags()}",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 13 *
+                                              MediaQuery.of(context)
+                                                  .textScaleFactor),
                                     ),
                                   ),
-                                  const VerticalDivider(
-                                    color: Color(0xff26313e),
-                                    thickness: 3,
-                                  ),
-                                  Expanded(
-                                      child: Text(
-                                    controller.movieModel?.data?.list?[index]
-                                            .active ??
-                                        "",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13 *
-                                            MediaQuery.of(context)
-                                                .textScaleFactor),
-                                  ))
-                                ]),
+                                ],
                               ),
                             ),
                           )
