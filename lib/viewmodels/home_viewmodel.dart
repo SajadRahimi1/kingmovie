@@ -34,13 +34,13 @@ class HomeViewModel extends GetxController with StateMixin {
       await updateTable(index);
     });
 
-    print(token);
     await getData();
     await updateTable(0);
   }
 
   Future<void> getData() async {
     token = getStorage.read('token') ?? '';
+    print(token);
     final request = await service.homeService(token);
     if (request.statusCode == 200) {
       homeModel = HomeModel.fromJson(request.body);
@@ -84,5 +84,9 @@ class HomeViewModel extends GetxController with StateMixin {
   Future<void> updateTable(int index) async {
     tableModel = await getTable(daysList[index].toDateTime().toPersianDate());
     update(['table']);
+  }
+
+  Future<void> seenAlert() async {
+    await service.seenAlert();
   }
 }

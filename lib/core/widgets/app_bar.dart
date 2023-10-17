@@ -3,20 +3,35 @@ import 'package:get/route_manager.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/views/home/screens/main_screen.dart';
 
-AppBar homeAppBar({required BuildContext context}) => AppBar(
+AppBar homeAppBar(
+        {required BuildContext context,
+        bool isAlert = false,
+        void Function()? onAlarmTap}) =>
+    AppBar(
       backgroundColor: darkBlue,
       title: const Text(
         'کینگ مووی',
         style: TextStyle(color: Colors.white),
       ),
       centerTitle: true,
-      actions: const [
-        Padding(
-          padding: EdgeInsets.only(left: 8.0),
-          child: Icon(
-            Icons.public,
+      actions: [
+        if (isAlert)
+          InkWell(
+            onTap: onAlarmTap,
+            child: const Padding(
+              padding: EdgeInsets.only(left: 5.0),
+              child: Icon(Icons.notifications_active),
+            ),
           ),
-        )
+        const Padding(
+          padding: EdgeInsets.only(left: 8.0),
+          child: InkWell(
+            // onTap: onAlarmTap,
+            child: Icon(
+              Icons.public,
+            ),
+          ),
+        ),
       ],
       iconTheme: IconThemeData(
         color: Colors.white,

@@ -219,6 +219,7 @@ class Data {
   List<Series>? series;
   List<SeriesDouble>? seriesDouble;
   List<Movie>? movie;
+  List<Alert>? alert;
   List<MovieDouble>? movieDouble;
   List<Suggest>? suggest;
 
@@ -226,6 +227,7 @@ class Data {
       {this.box,
       this.slider,
       this.series,
+      this.alert,
       this.seriesDouble,
       this.movie,
       this.movieDouble,
@@ -238,6 +240,9 @@ class Data {
     slider = json["slider"] == null
         ? null
         : (json["slider"] as List).map((e) => Slider.fromJson(e)).toList();
+    alert = json["alerts"] == null
+        ? null
+        : (json["alerts"] as List).map((e) => Alert.fromJson(e)).toList();
     series = json["series"] == null
         ? null
         : (json["series"] as List).map((e) => Series.fromJson(e)).toList();
@@ -375,14 +380,13 @@ class MovieDouble {
     genre = json["genre"];
     action = json["action"] == null ? null : Action4.fromJson(json["action"]);
   }
-MovieWidgetModel toWidgetModel()=>MovieWidgetModel(
-    genre: genre,
-    double: double,
-    id: id,
-    poster: poster,
-    title: title,
-    year: year
-  );
+  MovieWidgetModel toWidgetModel() => MovieWidgetModel(
+      genre: genre,
+      double: double,
+      id: id,
+      poster: poster,
+      title: title,
+      year: year);
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data["id"] = id;
@@ -443,18 +447,15 @@ class Movie {
     poster = json["poster"];
     genre = json["genre"];
     action = json["action"] == null ? null : Action3.fromJson(json["action"]);
-
-  
   }
 
-  MovieWidgetModel toWidgetModel()=>MovieWidgetModel(
-    double: double,
-    id: id,
-    genre: genre,
-    poster: poster,
-    title: title,
-    year: year
-  );
+  MovieWidgetModel toWidgetModel() => MovieWidgetModel(
+      double: double,
+      id: id,
+      genre: genre,
+      poster: poster,
+      title: title,
+      year: year);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -516,14 +517,14 @@ class SeriesDouble {
     double = json["double"];
     genre = json["genre"];
     action = json["action"] == null ? null : Action2.fromJson(json["action"]);
-  }MovieWidgetModel toWidgetModel()=>MovieWidgetModel(
-    double: double,
-    id: id,
-    genre: genre,
-    poster: poster,
-    title: title,
-    year: year
-  );
+  }
+  MovieWidgetModel toWidgetModel() => MovieWidgetModel(
+      double: double,
+      id: id,
+      genre: genre,
+      poster: poster,
+      title: title,
+      year: year);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -585,14 +586,14 @@ class Series {
     poster = json["poster"];
     genre = json["genre"];
     action = json["action"] == null ? null : Action1.fromJson(json["action"]);
-  }MovieWidgetModel toWidgetModel()=>MovieWidgetModel(
-    double: double,
-    id: id,
-    poster: poster,
-    genre: genre,
-    title: title,
-    year: year
-  );
+  }
+  MovieWidgetModel toWidgetModel() => MovieWidgetModel(
+      double: double,
+      id: id,
+      poster: poster,
+      genre: genre,
+      title: title,
+      year: year);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -719,6 +720,28 @@ class Box {
     data["number"] = number;
     data["id"] = id;
     data["poster"] = poster;
+    return data;
+  }
+}
+
+class Alert {
+  String? title;
+  String? link;
+  String? date;
+
+  Alert({this.title, this.link, this.date});
+
+  Alert.fromJson(Map<String, dynamic> json) {
+    title = json["title"];
+    link = json["link"];
+    date = json["date"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["title"] = title;
+    data["link"] = link;
+    data["date"] = date;
     return data;
   }
 }
