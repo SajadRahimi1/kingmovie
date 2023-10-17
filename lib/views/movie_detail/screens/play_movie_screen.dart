@@ -24,7 +24,6 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -38,7 +37,6 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);

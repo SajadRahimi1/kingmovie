@@ -21,13 +21,12 @@ class SearchViewModel extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    // TODO: implement onInit
     super.onInit();
     scrollController.addListener(() async {
       // end of scroll
       if (scrollController.offset >=
               scrollController.position.maxScrollExtent &&
-          !scrollController.position.outOfRange) { 
+          !scrollController.position.outOfRange) {
         page++;
         if (!isLastPage) {
           if (cast != null) {

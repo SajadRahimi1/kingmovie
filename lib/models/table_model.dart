@@ -37,11 +37,11 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (listData != null) {
-      _data["list"] = listData?.map((e) => e.toJson()).toList();
+      data["list"] = listData?.map((e) => e.toJson()).toList();
     }
-    return _data;
+    return data;
   }
 }
 
@@ -63,13 +63,13 @@ class ListData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["title"] = title;
-    _data["time"] = time;
-    _data["poster"] = poster;
-    _data["season"] = season;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["title"] = title;
+    data["time"] = time;
+    data["poster"] = poster;
+    data["season"] = season;
+    return data;
   }
 }
 
@@ -87,10 +87,10 @@ class Week {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["title"] = title;
-    _data["selected"] = selected;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["title"] = title;
+    data["selected"] = selected;
+    return data;
   }
 }

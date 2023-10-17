@@ -17,7 +17,6 @@ class NewAllViewModel extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    // TODO: implement onInit
     super.onInit();
     change(null, status: RxStatus.success());
     scrollController.addListener(() async {

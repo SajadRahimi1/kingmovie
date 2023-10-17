@@ -12,7 +12,6 @@ class FavoriteViewModel extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    // TODO: implement onInit
     super.onInit();
     await GetStorage.init();
     token = getStorage.read('token') ?? '';

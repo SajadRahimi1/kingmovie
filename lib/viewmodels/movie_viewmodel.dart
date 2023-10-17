@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
-import 'package:flutter/material.dart'
-    show Colors, Curves, TextEditingController, TextStyle, debugPrint;
+import 'package:flutter/material.dart' show TextEditingController, debugPrint;
 import 'package:get/get.dart';
 import 'package:king_movie/models/home_model.dart' as user_model;
 import 'package:get_storage/get_storage.dart';
@@ -56,7 +55,6 @@ class MovieViewModel extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    // TODO: implement onInit
     super.onInit();
     await GetStorage.init();
     token = getStorage.read('token') ?? "";

@@ -10,7 +10,6 @@ class LoginViewModel extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    // TODO: implement onInit
     super.onInit();
     await GetStorage.init();
   }

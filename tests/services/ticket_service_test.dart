@@ -15,7 +15,6 @@ void main() {
     final request = await getTicketMessage(
         code: "469785577",
         token: "2y10vz6gcKcO7sPR1kMJMXRF7uHysZBeOMCeGy6rD1cnqyya8vpYpdR8");
-    print(request.body['forceOut']);
     expect(request.body['error'], 'false');
   });
 }

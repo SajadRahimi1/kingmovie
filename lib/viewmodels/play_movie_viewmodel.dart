@@ -36,7 +36,6 @@ class PlayMovieViewModel extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    // TODO: implement onInit
     super.onInit();
     await GetStorage.init();
     await initVideo();
@@ -91,6 +90,4 @@ class PlayMovieViewModel extends GetxController with StateMixin {
 
   void setSubStyle(SubtitleViewConfiguration config) =>
       subtitleViewConfiguration.value = config;
-
-  
 }

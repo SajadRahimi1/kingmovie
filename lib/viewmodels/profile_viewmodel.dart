@@ -18,7 +18,6 @@ class ProfileViewModel extends GetxController {
 
   @override
   void onInit() async {
-    // TODO: implement onInit
     super.onInit();
     await GetStorage.init();
     token = getStorage.read('token') ?? '';
