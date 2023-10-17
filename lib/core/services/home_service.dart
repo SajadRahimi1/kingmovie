@@ -7,3 +7,8 @@ Future<Response<dynamic>> homeService([String? token]) async {
   final FormData formData = FormData({'userSalt': token});
   return await getConnect.post(homeUrl, formData);
 }
+
+Future<Response<dynamic>> tableService({String? token, String? date}) async {
+  final FormData formData = FormData({'userSalt': token, 'table': date});
+  return await getConnect.post(tableUrl, formData);
+}

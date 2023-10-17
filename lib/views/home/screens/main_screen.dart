@@ -12,6 +12,7 @@ import 'package:king_movie/views/home/screens/show_all_screen.dart';
 import 'package:king_movie/views/home/widgets/advance_search_dialog.dart';
 import 'package:king_movie/views/home/widgets/new_movie_widget.dart';
 import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key, this.isLogedIn = false});
@@ -321,7 +322,7 @@ class MainScreen extends StatelessWidget {
           ),
 
           // Time line
-          /*
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: SizedBox(
@@ -332,103 +333,73 @@ class MainScreen extends StatelessWidget {
                     Expanded(
                       child: Row(children: [
                         Expanded(
-                          child: Container(
-                            width: Get.width,
-                            height: Get.height,
-                            margin: const EdgeInsets.all(3),
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                                color: redColor,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "شنبه",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  '${daysList[0].month.toString().toPersianDigit()}/${daysList[0].day.toString().toPersianDigit()}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
+                          child: InkWell(
+                            onTap: () =>
+                                controller.tableSelectedIndex.value = 0,
+                            child: Obx(() => Container(
+                                  width: Get.width,
+                                  height: Get.height,
+                                  margin: const EdgeInsets.all(3),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      color:
+                                          controller.tableSelectedIndex.value ==
+                                                  0
+                                              ? redColor
+                                              : darkBlue,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "شنبه",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Text(
+                                        '${controller.daysList[0].month.toString().toPersianDigit()}/${controller.daysList[0].day.toString().toPersianDigit()}',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                )),
                           ),
                         ),
                         Expanded(
-                          child: Container(
-                            width: Get.width,
-                            height: Get.height,
-                            margin: const EdgeInsets.all(3),
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                                color: darkBlue,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "یکشنبه",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  '${daysList[1].month.toString().toPersianDigit()}/${daysList[1].day.toString().toPersianDigit()}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ]),
-                    ),
-                    Expanded(
-                      child: Row(children: [
-                        Expanded(
-                          child: Container(
-                            width: Get.width,
-                            height: Get.height,
-                            margin: const EdgeInsets.all(3),
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                                color: darkBlue,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "دوشنبه",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  '${daysList[2].month.toString().toPersianDigit()}/${daysList[2].day.toString().toPersianDigit()}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            width: Get.width,
-                            height: Get.height,
-                            margin: const EdgeInsets.all(3),
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                                color: darkBlue,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "سه شنبه",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  '${daysList[3].month.toString().toPersianDigit()}/${daysList[3].day.toString().toPersianDigit()}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
+                          child: InkWell(
+                            onTap: () =>
+                                controller.tableSelectedIndex.value = 1,
+                            child: Obx(() => Container(
+                                  width: Get.width,
+                                  height: Get.height,
+                                  margin: const EdgeInsets.all(3),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      color:
+                                          controller.tableSelectedIndex.value ==
+                                                  1
+                                              ? redColor
+                                              : darkBlue,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "یکشنبه",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Text(
+                                        '${controller.daysList[1].month.toString().toPersianDigit()}/${controller.daysList[1].day.toString().toPersianDigit()}',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                )),
                           ),
                         ),
                       ]),
@@ -436,75 +407,182 @@ class MainScreen extends StatelessWidget {
                     Expanded(
                       child: Row(children: [
                         Expanded(
-                          child: Container(
-                            width: Get.width,
-                            height: Get.height,
-                            margin: const EdgeInsets.all(3),
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                                color: darkBlue,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "چهارشنبه",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  '${daysList[4].month.toString().toPersianDigit()}/${daysList[4].day.toString().toPersianDigit()}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
+                          child: InkWell(
+                            onTap: () =>
+                                controller.tableSelectedIndex.value = 2,
+                            child: Obx(() => Container(
+                                  width: Get.width,
+                                  height: Get.height,
+                                  margin: const EdgeInsets.all(3),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      color:
+                                          controller.tableSelectedIndex.value ==
+                                                  2
+                                              ? redColor
+                                              : darkBlue,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "دوشنبه",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Text(
+                                        '${controller.daysList[2].month.toString().toPersianDigit()}/${controller.daysList[2].day.toString().toPersianDigit()}',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                )),
                           ),
                         ),
                         Expanded(
-                          child: Container(
-                            width: Get.width,
-                            height: Get.height,
-                            margin: const EdgeInsets.all(3),
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                                color: darkBlue,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "پنجشنبه",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  '${daysList[5].month.toString().toPersianDigit()}/${daysList[5].day.toString().toPersianDigit()}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
+                          child: InkWell(
+                            onTap: () =>
+                                controller.tableSelectedIndex.value = 3,
+                            child: Obx(() => Container(
+                                  width: Get.width,
+                                  height: Get.height,
+                                  margin: const EdgeInsets.all(3),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      color:
+                                          controller.tableSelectedIndex.value ==
+                                                  3
+                                              ? redColor
+                                              : darkBlue,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "سه شنبه",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Text(
+                                        '${controller.daysList[3].month.toString().toPersianDigit()}/${controller.daysList[3].day.toString().toPersianDigit()}',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Expanded(
+                      child: Row(children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () =>
+                                controller.tableSelectedIndex.value = 4,
+                            child: Obx(() => Container(
+                                  width: Get.width,
+                                  height: Get.height,
+                                  margin: const EdgeInsets.all(3),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      color:
+                                          controller.tableSelectedIndex.value ==
+                                                  4
+                                              ? redColor
+                                              : darkBlue,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "چهارشنبه",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Text(
+                                        '${controller.daysList[4].month.toString().toPersianDigit()}/${controller.daysList[4].day.toString().toPersianDigit()}',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                )),
                           ),
                         ),
                         Expanded(
-                          child: Container(
-                            width: Get.width,
-                            height: Get.height,
-                            margin: const EdgeInsets.all(3),
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                                color: darkBlue,
-                                borderRadius: BorderRadius.circular(5)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  "جمعه",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Text(
-                                  '${daysList[6].month.toString().toPersianDigit()}/${daysList[6].day.toString().toPersianDigit()}',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
+                          child: InkWell(
+                            onTap: () =>
+                                controller.tableSelectedIndex.value = 5,
+                            child: Obx(() => Container(
+                                  width: Get.width,
+                                  height: Get.height,
+                                  margin: const EdgeInsets.all(3),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      color:
+                                          controller.tableSelectedIndex.value ==
+                                                  5
+                                              ? redColor
+                                              : darkBlue,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "پنجشنبه",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Text(
+                                        '${controller.daysList[5].month.toString().toPersianDigit()}/${controller.daysList[5].day.toString().toPersianDigit()}',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
+                        ),
+                        Expanded(
+                          child: InkWell(
+                            onTap: () =>
+                                controller.tableSelectedIndex.value = 6,
+                            child: Obx(() => Container(
+                                  width: Get.width,
+                                  height: Get.height,
+                                  margin: const EdgeInsets.all(3),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      color:
+                                          controller.tableSelectedIndex.value ==
+                                                  6
+                                              ? redColor
+                                              : darkBlue,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "جمعه",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Text(
+                                        '${controller.daysList[6].month.toString().toPersianDigit()}/${controller.daysList[6].day.toString().toPersianDigit()}',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                )),
                           ),
                         ),
                       ]),
@@ -514,77 +592,95 @@ class MainScreen extends StatelessWidget {
           ),
 
           // time line widgets
-          
+
           SizedBox(
             height: Get.height / 35,
           ),
-          Column(
-            children: List.generate(
-                4,
-                (index) => Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 8),
-                      width: Get.width,
-                      height: Get.height / 8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: darkBlue,
-                      ),
-                      child: Row(textDirection: TextDirection.ltr, children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            "https://www.doostihaa.com/img/uploads/2023/06/Elemental-2023.jpg",
-                            fit: BoxFit.fill,
+          GetBuilder<HomeViewModel>(
+            init: controller,
+            id: 'table',
+            builder: (controller) {
+              return Column(
+                children: List.generate(
+                  controller.tableModel?.data?.listData?.length ?? 0,
+                    (index) => Container(
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 8),
+                          width: Get.width,
+                          height: Get.height / 8,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: darkBlue,
                           ),
-                        ),
-                        const SizedBox(
-                          width: 12,
-                        ),
-                        Expanded(
-                            child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              "1. Elemental | المنتال",
-                              textDirection: TextDirection.ltr,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15 *
-                                      MediaQuery.of(context).textScaleFactor),
+                          child:
+                              Row(textDirection: TextDirection.ltr, children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                controller.tableModel?.data?.listData?[index]
+                                        .poster ??
+                                    '',
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            Row(
-                              textDirection: TextDirection.ltr,
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            Expanded(
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                const Icon(
-                                  Icons.access_time,
-                                  color: yellowColor,
+                                Text(
+                                  controller.tableModel?.data?.listData?[index]
+                                          .title ??
+                                      '',
+                                  textDirection: TextDirection.ltr,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15 *
+                                          MediaQuery.of(context)
+                                              .textScaleFactor),
                                 ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text("07:29",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15 *
-                                            MediaQuery.of(context)
-                                                .textScaleFactor))
+                                Row(
+                                  textDirection: TextDirection.ltr,
+                                  children: [
+                                    const Icon(
+                                      Icons.access_time,
+                                      color: yellowColor,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                        controller.tableModel?.data
+                                                ?.listData?[index].time ??
+                                            '',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15 *
+                                                MediaQuery.of(context)
+                                                    .textScaleFactor))
+                                  ],
+                                )
                               ],
-                            )
-                          ],
+                            )),
+                            Padding(
+                                padding: EdgeInsets.only(right: Get.width / 25),
+                                child: Text(
+                                    controller.tableModel?.data
+                                            ?.listData?[index].season ??
+                                        '',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                    )))
+                          ]),
                         )),
-                        Padding(
-                            padding: EdgeInsets.only(right: Get.width / 25),
-                            child: const Text("فصل 2 قسمت 4",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                )))
-                      ]),
-                    )),
+              );
+            },
           ),
-*/
+
           SizedBox(
             height: Get.height / 35,
           ),

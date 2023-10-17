@@ -121,7 +121,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               ),
                       ),
                     ),
-
+  
                     // bottom of video
                     Container(
                       margin: const EdgeInsets.all(10),
@@ -240,6 +240,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                   fontSize: 12 *
                                       MediaQuery.of(context).textScaleFactor),
                             ),
+                            
+                            
                             // tabs
                             Expanded(
                                 child: TabBar(

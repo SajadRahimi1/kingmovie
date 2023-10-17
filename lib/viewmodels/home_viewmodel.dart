@@ -5,11 +5,18 @@ import 'package:king_movie/core/services/home_service.dart' as service;
 import 'package:king_movie/core/services/search_service.dart';
 import 'package:king_movie/models/home_model.dart';
 import 'package:king_movie/models/search_model.dart';
+import 'package:king_movie/models/table_model.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 class HomeViewModel extends GetxController with StateMixin {
   HomeModel? homeModel;
+  TableModel? tableModel;
   String searchValue = '';
+
+  late final List<Jalali> daysList = getDaysOfCurrentWeek();
+
+  RxInt tableSelectedIndex = 0.obs;
 
   final GetStorage getStorage = GetStorage();
   String token = '';
@@ -23,8 +30,13 @@ class HomeViewModel extends GetxController with StateMixin {
     super.onInit();
     await GetStorage.init();
 
+    tableSelectedIndex.listen((index) async {
+      await updateTable(index);
+    });
+
     print(token);
     await getData();
+    await updateTable(0);
   }
 
   Future<void> getData() async {
@@ -59,5 +71,18 @@ class HomeViewModel extends GetxController with StateMixin {
       return SearchModel.fromJson(request.body);
     }
     return null;
+  }
+
+  Future<TableModel?> getTable(String date) async {
+    final request = await service.tableService(date: date);
+    if (request.statusCode == 200 && request.body['error'] == 'false') {
+      return TableModel.fromJson(request.body);
+    }
+    return null;
+  }
+
+  Future<void> updateTable(int index) async {
+    tableModel = await getTable(daysList[index].toDateTime().toPersianDate());
+    update(['table']);
   }
 }
