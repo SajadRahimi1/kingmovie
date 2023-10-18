@@ -1,7 +1,9 @@
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:king_movie/core/constants/singleton_class.dart';
+import 'package:king_movie/core/constants/url_constant.dart';
 import 'package:king_movie/core/services/message_service.dart';
 import 'package:king_movie/core/services/profile_service.dart' as service;
 import 'package:king_movie/models/home_model.dart';
@@ -38,6 +40,8 @@ class ProfileViewModel extends GetxController {
           title: 'ویرایش اطلاعات',
           message: 'ویرایش اطلاعات را موفقیت انجام شد',
           type: MessageType.success);
+      await DefaultCacheManager().removeFile(
+          '${baseUrl}upload/profile_${SingletonClass.instance.user?.id}.jpg');
     } else {
       networkErrorMessage();
     }
