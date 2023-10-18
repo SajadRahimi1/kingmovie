@@ -6,6 +6,7 @@ import 'package:king_movie/views/home/screens/main_screen.dart';
 AppBar homeAppBar(
         {required BuildContext context,
         int alertLenght = 0,
+        
         void Function()? onAlarmTap}) =>
     AppBar(
       backgroundColor: darkBlue,

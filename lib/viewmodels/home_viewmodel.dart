@@ -13,6 +13,7 @@ import 'package:shamsi_date/shamsi_date.dart';
 class HomeViewModel extends GetxController with StateMixin {
   HomeModel? homeModel;
   TableModel? tableModel;
+
   String searchValue = '';
 
   late final List<Jalali> daysList = getDaysOfCurrentWeek();
@@ -87,9 +88,15 @@ class HomeViewModel extends GetxController with StateMixin {
   }
 
   Future<void> seenAlert() async {
-    await service.seenAlert();
+    Get.back();
+    // change(null, status: RxStatus.loading());
+    await service.seenAlert(token: token);
+    homeModel?.data?.alert = [];
+    change(null, status: RxStatus.success());
   }
 
   void onAlaramTap(int index) => Get.to(() => MovieDetailScreen(
       movieId: homeModel?.data?.alert?[index].link?.split('/').first ?? ''));
+
+  Future<void> seenAlarms() => service.seenAlert(token: token);
 }
