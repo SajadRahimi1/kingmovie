@@ -14,8 +14,10 @@ import 'package:king_movie/views/menu/screens/vip_screen.dart';
 void toVipScreen() =>
     Get.to(() => const VipScreen(), transition: Transition.leftToRight);
 
-void toProfileScreen() =>
-    Get.to(() => const ProfileScreen(), transition: Transition.leftToRight);
+void toProfileScreen() {
+  Get.back();
+  Get.to(() => const ProfileScreen(), transition: Transition.leftToRight);
+}
 
 void toReuestScreen() => Get.to(() => const RequestMovieScreen(),
     transition: Transition.leftToRight);
@@ -45,6 +47,6 @@ void exit() {
   final GetStorage getStorage = GetStorage();
   GetStorage.init().then((value) {
     getStorage.remove('token');
-    SingletonClass.instance.user = null;    
+    SingletonClass.instance.user = null;
   });
 }

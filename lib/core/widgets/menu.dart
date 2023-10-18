@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
 import 'package:king_movie/core/constants/singleton_class.dart';
+import 'package:king_movie/core/constants/url_constant.dart';
 import 'package:king_movie/core/services/menu_service.dart';
 
 class Menu extends StatelessWidget {
@@ -25,6 +26,8 @@ class Menu extends StatelessWidget {
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
                   radius: MediaQuery.sizeOf(context).width / 6,
+                  backgroundImage: NetworkImage(
+                      '${baseUrl}upload/profile_${SingletonClass.instance.user?.id}.jpg'),
                 )),
           ),
         ),

@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:king_movie/core/constants/color_constants.dart';
+import 'package:king_movie/core/constants/singleton_class.dart';
+import 'package:king_movie/core/constants/url_constant.dart';
 import 'package:king_movie/viewmodels/profile_viewmodel.dart';
 import 'package:king_movie/views/menu/widgets/profile_text_input.dart';
 
@@ -35,18 +40,26 @@ class ProfileScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(
                 vertical: MediaQuery.sizeOf(context).height / 45),
             child: Center(
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: MediaQuery.sizeOf(context).width / 5.5,
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Icon(
-                    Icons.change_circle,
-                    size: MediaQuery.sizeOf(context).width / 10,
-                    color: redColor,
-                  ),
-                ),
-              ),
+              child: Obx(() => CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: MediaQuery.sizeOf(context).width / 5.5,
+                    backgroundImage: controller.ticketImage.value.isNotEmpty
+                        ? FileImage(File(controller.ticketImage.value))
+                            as ImageProvider
+                        : NetworkImage(
+                            '${baseUrl}upload/profile_${SingletonClass.instance.user?.id}.jpg'),
+                    child: InkWell(
+                      onTap: controller.pickImage,
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Icon(
+                          Icons.change_circle,
+                          size: MediaQuery.sizeOf(context).width / 10,
+                          color: redColor,
+                        ),
+                      ),
+                    ),
+                  )),
             ),
           ),
           ProfileTextInput(

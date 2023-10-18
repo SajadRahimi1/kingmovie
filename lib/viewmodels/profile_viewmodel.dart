@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:king_movie/core/constants/singleton_class.dart';
 import 'package:king_movie/core/services/message_service.dart';
 import 'package:king_movie/core/services/profile_service.dart' as service;
@@ -9,6 +10,8 @@ import 'package:king_movie/models/user_model.dart';
 class ProfileViewModel extends GetxController {
   final GetStorage getStorage = GetStorage();
   String token = '';
+
+  RxString ticketImage = "".obs;
 
   SingletonClass singletonClass = SingletonClass.instance;
 
@@ -27,6 +30,7 @@ class ProfileViewModel extends GetxController {
   }
 
   Future<void> updateInformation() async {
+    if (ticketImage.isNotEmpty) userModel.image = ticketImage.value;
     final request = await service.updateInformation(userModel: userModel);
     if (request.statusCode == 200 && request.body['error'] == 'false') {
       singletonClass.user = User.fromJson(request.body['user']);
@@ -62,6 +66,17 @@ class ProfileViewModel extends GetxController {
           title: 'خطا',
           message: 'رمز عبور و تکرار آن یکسان نیست',
           type: MessageType.warning);
+    }
+  }
+
+  Future<void> pickImage() async {
+    final ImagePicker imagePicker = ImagePicker();
+    final image = await imagePicker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 20,
+    );
+    if (image != null) {
+      ticketImage.value = image.path;
     }
   }
 }

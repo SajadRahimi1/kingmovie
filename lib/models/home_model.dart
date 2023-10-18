@@ -134,12 +134,14 @@ class User {
   String? vipDate;
   String? mobile;
   String? vip;
+  String? id;
 
-  User({this.email, this.name, this.vipDate, this.mobile, this.vip});
+  User({this.email, this.name, this.vipDate, this.mobile, this.vip,this.id});
 
   User.fromJson(Map<String, dynamic> json) {
     email = json["email"];
     name = json["name"];
+    id = json["id"];
     vipDate = json["vipDate"];
     mobile = json["mobile"];
     vip = json["vip"];

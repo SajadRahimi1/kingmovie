@@ -1,5 +1,5 @@
 class UserModel {
-  String? name, mobile, token;
+  String? name, mobile, token,image;
   Map<String, dynamic> toJson() => {
     'name':name,
     'mobile':mobile,
