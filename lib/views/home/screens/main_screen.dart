@@ -43,9 +43,11 @@ class MainScreen extends StatelessWidget {
                         height: Get.height /
                             10 *
                             (controller.homeModel?.data?.alert?.length ?? 1),
-                        child: ListView.builder(
+                        child: ListView.separated(
+                            separatorBuilder: (context, index) =>
+                                const Divider(color: Colors.white),
                             itemCount:
-                                controller.homeModel?.data?.alert?.length,
+                                controller.homeModel?.data?.alert?.length ?? 0,
                             itemBuilder: (_, index) => ListTile(
                                   tileColor: darkBlue,
                                   title: Text(

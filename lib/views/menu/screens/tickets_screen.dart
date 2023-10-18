@@ -22,6 +22,7 @@ class TicketsScreen extends StatelessWidget {
             children: [
               Obx(() => controller.isClickNew.value
                   ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ProfileTextInput(
                           label: "عنوان تیکت جدید",
@@ -38,6 +39,46 @@ class TicketsScreen extends StatelessWidget {
                             maxLines: 4,
                           ),
                         ),
+                        const Text(
+                          "انتخاب عکس : (png,jpeg,jpg)",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Container(
+                            width: Get.width,
+                            height: Get.height / 20,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border:
+                                    Border.all(color: const Color(0xff3f3f3f)),
+                                color: blackColor),
+                            alignment: Alignment.center,
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  onTap: controller.pickImage,
+                                  child: Container(
+                                    margin: const EdgeInsets.only(right: 10),
+                                    width: Get.width / 4,
+                                    height: Get.height / 30,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: Colors.white),
+                                    alignment: Alignment.center,
+                                    child: const Text("انتخاب"),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Obx(() => Text(
+                                        controller.ticketImage.value
+                                            .split('/')
+                                            .last,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      )),
+                                )
+                              ],
+                            ))
                       ],
                     )
                   : const SizedBox()),

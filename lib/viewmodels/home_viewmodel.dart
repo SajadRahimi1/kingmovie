@@ -6,6 +6,7 @@ import 'package:king_movie/core/services/search_service.dart';
 import 'package:king_movie/models/home_model.dart';
 import 'package:king_movie/models/search_model.dart';
 import 'package:king_movie/models/table_model.dart';
+import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
@@ -88,4 +89,7 @@ class HomeViewModel extends GetxController with StateMixin {
   Future<void> seenAlert() async {
     await service.seenAlert();
   }
+
+  void onAlaramTap(int index) => Get.to(() => MovieDetailScreen(
+      movieId: homeModel?.data?.alert?[index].link?.split('/').first ?? ''));
 }

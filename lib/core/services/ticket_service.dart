@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_connect/http/src/multipart/form_data.dart';
+import 'package:get/get_connect/http/src/multipart/multipart_file.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:king_movie/core/constants/url_constant.dart';
 import 'package:king_movie/core/services/get_connect_service.dart';
@@ -12,17 +15,25 @@ Future<Response<dynamic>> getTickets(String token) async {
 Future<Response<dynamic>> newTicket(
     {required String token,
     required String title,
+    required String image,
     required String text}) async {
   EasyLoading.show(
     status: 'در حال ارسال',
-  ).timeout(const Duration(seconds: 5), onTimeout: () {
+  ).timeout(const Duration(seconds: 15), onTimeout: () {
     EasyLoading.dismiss();
   });
-  FormData formData =
-      FormData({'userSalt': token, 'title': title, 'text': text});
+  FormData formData = FormData({
+    'userSalt': token,
+    'title': title,
+    'text': text,
+  });
+  if (image.isNotEmpty) {
+    formData.files.add(MapEntry(
+        'file', MultipartFile(File(image), filename: image.split('/').last)));
+  }
   var returnData = await getConnect
       .post(newTicketUrl, formData)
-      .timeout(const Duration(seconds: 5), onTimeout: () {
+      .timeout(const Duration(seconds: 15), onTimeout: () {
     EasyLoading.dismiss();
     return const Response(statusCode: 500);
   });
