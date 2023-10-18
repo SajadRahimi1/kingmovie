@@ -34,7 +34,7 @@ class MainScreen extends StatelessWidget {
           backgroundColor: blackColor,
           appBar: homeAppBar(
               context: context,
-              isAlert: controller.homeModel?.data?.alert?.isNotEmpty ?? false,
+              alertLenght: controller.homeModel?.data?.alert?.length ?? 0,
               onAlarmTap: () => showModalBottomSheet(
                   context: context,
                   backgroundColor: darkBlue,

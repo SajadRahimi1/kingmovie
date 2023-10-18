@@ -5,7 +5,7 @@ import 'package:king_movie/views/home/screens/main_screen.dart';
 
 AppBar homeAppBar(
         {required BuildContext context,
-        bool isAlert = false,
+        int alertLenght = 0,
         void Function()? onAlarmTap}) =>
     AppBar(
       backgroundColor: darkBlue,
@@ -15,16 +15,36 @@ AppBar homeAppBar(
       ),
       centerTitle: true,
       actions: [
-        if (isAlert)
+        if (alertLenght > 0)
           InkWell(
             onTap: onAlarmTap,
-            child: const Padding(
-              padding: EdgeInsets.only(left: 5.0),
-              child: Icon(Icons.notifications_active),
+            child: Container(
+              margin: EdgeInsets.symmetric(
+                vertical: Get.height / 55,
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: redColor),
+              child: Row(children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    alertLenght.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Icon(
+                    Icons.notifications_active,
+                    color: Colors.white,
+                    size: 22,
+                  ),
+                ),
+              ]),
             ),
           ),
         const Padding(
-          padding: EdgeInsets.only(left: 8.0),
+          padding: EdgeInsets.only(left: 8.0, right: 8),
           child: InkWell(
             // onTap: onAlarmTap,
             child: Icon(
