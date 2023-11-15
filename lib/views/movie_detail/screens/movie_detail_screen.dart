@@ -120,7 +120,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               ),
                       ),
                     ),
-  
+
                     // bottom of video
                     Container(
                       margin: const EdgeInsets.all(10),
@@ -239,8 +239,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                   fontSize: 12 *
                                       MediaQuery.of(context).textScaleFactor),
                             ),
-                            
-                            
+
                             // tabs
                             Expanded(
                                 child: TabBar(
@@ -310,7 +309,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         controller: controller.pageScrollController,
                         index: 2,
                         child: Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(15.0),
                           child: Text(
                             (controller.movieModel?.data?.text ?? "")
                                 .replaceAll('<br>', '\n')
@@ -444,13 +443,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                           Container(
                                             width: Get.width,
                                             height: Get.height / 12,
-                                            margin: EdgeInsets.only(
-                                                top: Get.height / 18),
+                                            // margin: EdgeInsets.only(
+                                            //     top: Get.height / 18),
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               color: controller.movieModel?.data
-                                                  ?.link?.data?[index].color
+                                                  ?.link?.data?[index].title
                                                   .downloadColor(),
                                             ),
                                             alignment: Alignment.center,
@@ -505,7 +504,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                                 ?.data
                                                                 ?.link
                                                                 ?.data?[index]
-                                                                .color
+                                                                .title
                                                                 .downloadColor(),
                                                             title: Text(
                                                               controller
@@ -520,7 +519,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                                   "",
                                                               style: const TextStyle(
                                                                   color: Colors
-                                                                      .white),
+                                                                      .white,
+                                                                  fontSize: 15),
                                                             ),
                                                             onTap: () => Get.dialog(SeriesDialog(
                                                                 downloadList: controller
@@ -552,99 +552,106 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                             .list
                                                             ?.length ??
                                                         0,
-                                                    (listIndex) => Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              bottom: 8.0),
-                                                      child: ListTile(
-                                                        textColor: Colors.white,
-                                                        iconColor: Colors.white,
-                                                        tileColor: darkBlue,
-                                                        titleTextStyle:
-                                                            const TextStyle(
-                                                                fontSize: 16),
-                                                        trailing: SizedBox(
-                                                          width: Get.width / 7,
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              controller
-                                                                          .movieModel
-                                                                          ?.data
-                                                                          ?.link
-                                                                          ?.data?[
-                                                                              index]
-                                                                          .list?[
-                                                                              listIndex]
-                                                                          .format ==
-                                                                      'movie'
-                                                                  ? InkWell(
-                                                                      onTap: () => controller.choosePlayer(controller
-                                                                          .movieModel
-                                                                          ?.data
-                                                                          ?.link
-                                                                          ?.data?[
-                                                                              index]
-                                                                          .list?[listIndex]),
-                                                                      // onTap: () => Get.to(() => PlayMovieScreen(
-                                                                      //     downloadList: controller
-                                                                      //         .movieModel
-                                                                      //         ?.data
-                                                                      //         ?.link
-                                                                      //         ?.data?[
-                                                                      //             index]
-                                                                      //         .list?[listIndex])),
-                                                                      child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .play_arrow,
-                                                                        color: Colors
-                                                                            .white,
-                                                                        size: Get.width /
-                                                                            14,
-                                                                      ),
-                                                                    )
-                                                                  : const SizedBox(),
-                                                              InkWell(
-                                                                onTap: () => controller
-                                                                    .openUrl(controller
+                                                    (listIndex) => ListTile(
+                                                      textColor: Colors.white,
+                                                      iconColor: Colors.white,
+                                                      tileColor: controller
+                                                          .movieModel
+                                                          ?.data
+                                                          ?.link
+                                                          ?.data?[index]
+                                                          .title
+                                                          .downloadColor(),
+                                                      titleTextStyle:
+                                                          const TextStyle(
+                                                              fontSize: 16),
+                                                      trailing: SizedBox(
+                                                        width: Get.width / 7,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            controller
+                                                                        .movieModel
+                                                                        ?.data
+                                                                        ?.link
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .list?[
+                                                                            listIndex]
+                                                                        .format ==
+                                                                    'movie'
+                                                                ? InkWell(
+                                                                    onTap: () => controller.choosePlayer(controller
                                                                         .movieModel
                                                                         ?.data
                                                                         ?.link
                                                                         ?.data?[
                                                                             index]
                                                                         .list?[listIndex]),
-                                                                child:
-                                                                    const Icon(
-                                                                  Icons
-                                                                      .download,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
+                                                                    // onTap: () => Get.to(() => PlayMovieScreen(
+                                                                    //     downloadList: controller
+                                                                    //         .movieModel
+                                                                    //         ?.data
+                                                                    //         ?.link
+                                                                    //         ?.data?[
+                                                                    //             index]
+                                                                    //         .list?[listIndex])),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .play_arrow,
+                                                                      color: Colors
+                                                                          .white,
+                                                                      size:
+                                                                          Get.width /
+                                                                              14,
+                                                                    ),
+                                                                  )
+                                                                : const SizedBox(),
+                                                            InkWell(
+                                                              onTap: () => controller
+                                                                  .openUrl(controller
+                                                                      .movieModel
+                                                                      ?.data
+                                                                      ?.link
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .list?[listIndex]),
+                                                              child: const Icon(
+                                                                Icons.download,
+                                                                color: Colors
+                                                                    .white,
                                                               ),
-                                                            ],
-                                                          ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        title: Text(
-                                                          controller
-                                                                  .movieModel
-                                                                  ?.data
-                                                                  ?.link
-                                                                  ?.data?[index]
-                                                                  .list?[
-                                                                      listIndex]
-                                                                  .title ??
-                                                              "",
-                                                        ),
+                                                      ),
+                                                      title: Text(
+                                                        controller
+                                                                .movieModel
+                                                                ?.data
+                                                                ?.link
+                                                                ?.data?[index]
+                                                                .list?[
+                                                                    listIndex]
+                                                                .title ??
+                                                            "",
                                                       ),
                                                     ),
                                                   ),
                                                 ),
+                                          const Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 18.0),
+                                            child: Divider(
+                                              color: Colors.white,
+                                              thickness: 2,
+                                            ),
+                                          )
                                         ]),
                                       ))))),
 

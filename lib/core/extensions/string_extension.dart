@@ -2,15 +2,10 @@ import 'package:flutter/material.dart' show Color;
 
 extension DownloadColor on String? {
   Color downloadColor() {
-    String? colorString = this;
-    switch (colorString) {
-      case 'color1':
-        return const Color(0xff49461d);
-      case 'color2':
-        return const Color(0xff152333);
-      default:
-        return const Color(0xff440f2d);
-    }
+    String? title = this;
+    if (title?.contains('دوبله') ?? false) return const Color(0xff49461d);
+    if (title?.contains('زیرنویس') ?? false) return const Color(0xff440f2d);
+    return const Color(0xff152333);
   }
 
   String removeAllHtmlTags() {

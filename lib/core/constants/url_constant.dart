@@ -1,4 +1,4 @@
-const String baseApiUrl = 'https://46kingmovi.xyz/api/?type';
+const String baseApiUrl = 'https://kingmovi.one/?type';
 const String baseUrl = 'https://46kingmovi.xyz/';
 const String homeUrl = '$baseApiUrl=home';
 const String tableUrl = '$baseApiUrl=table';

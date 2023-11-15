@@ -13,6 +13,7 @@ import 'package:king_movie/views/home/widgets/advance_search_dialog.dart';
 import 'package:king_movie/views/home/widgets/new_movie_widget.dart';
 import 'package:king_movie/views/movie_detail/screens/movie_detail_screen.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key, this.isLogedIn = false});
@@ -34,6 +35,9 @@ class MainScreen extends StatelessWidget {
           backgroundColor: blackColor,
           appBar: homeAppBar(
               context: context,
+              onWebTap: () => controller.homeModel?.homeAddress == null
+                  ? {}
+                  : launchUrlString(controller.homeModel?.homeAddress ?? ''),
               alertLenght: controller.homeModel?.data?.alert?.length ?? 0,
               onAlarmTap: () => showModalBottomSheet(
                   context: context,
@@ -379,8 +383,16 @@ class MainScreen extends StatelessWidget {
               height: Get.height / 20,
             ),
 
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                "  جدول پخش سریال",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17 * MediaQuery.of(context).textScaleFactor),
+              ),
+            ),
             // Time line
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: SizedBox(

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:king_movie/models/movie_model.dart';
 import 'package:king_movie/viewmodels/play_movie_viewmodel.dart';
-import 'package:king_movie/views/movie_detail/widgets/setting_bottom_sheet.dart';
 import 'package:king_movie/views/movie_detail/widgets/top_video_widget.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 
@@ -57,28 +56,46 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
                     // Modify theme options:
                     buttonBarButtonSize: 24.0,
                     buttonBarButtonColor: Colors.white,
+                    primaryButtonBar: [
+                      const Spacer(flex: 2),
+                      // forward icon
+                      IconButton(
+                        onPressed: () async {
+                          var currentDuration =
+                              controller.player.state.position;
+                          await controller.player.seek(Duration(
+                              milliseconds:
+                                  currentDuration.inMilliseconds + 15000));
+                        },
+                        icon: Image.asset("assets/pictures/icons/15f.png"),
+                        // size: 45,
+                        color: Colors.white,
+                      ),
+                      const Spacer(),
+                      const MaterialPlayOrPauseButton(iconSize: 48.0),
+                      const Spacer(),
+                      // backeard icon
+                      IconButton(
+                        onPressed: () async {
+                          var currentDuration =
+                              controller.player.state.position;
+                          await controller.player.seek(Duration(
+                              milliseconds:
+                                  currentDuration.inMilliseconds - 15000));
+                        },
+                        icon: Image.asset("assets/pictures/icons/15b.png"),
+                        // size: 45,
+                        color: Colors.white,
+                      ),
+
+                      const Spacer(flex: 2)
+                    ],
+
                     // Modify top button bar:
                     topButtonBar: [
                       const Spacer(),
                       SubtitleWidget(player: controller.player),
                       AudioWidget(player: controller.player),
-                      IconButton(
-                          onPressed: () async {
-                            TextStyle? subtitleStyle =
-                                await showModalBottomSheet(
-                                    context: context,
-                                    builder: (context) =>
-                                        const SettingBottomSheet());
-                            if (subtitleStyle != null) {
-                              controller.subtitleViewConfiguration.value =
-                                  SubtitleViewConfiguration(
-                                      style: subtitleStyle);
-                            }
-                          },
-                          icon: const Icon(
-                            Icons.settings,
-                            color: Colors.white,
-                          )),
                       IconButton(
                           onPressed: () => Get.back(),
                           icon: const Icon(
@@ -95,6 +112,38 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
                     const Spacer(),
                     SubtitleWidget(player: controller.player),
                     AudioWidget(player: controller.player),
+                  ],
+                  primaryButtonBar: [
+                    const Spacer(flex: 2),
+                    // forward icon
+                    IconButton(
+                      onPressed: () async {
+                        var currentDuration = controller.player.state.position;
+                        await controller.player.seek(Duration(
+                            milliseconds:
+                                currentDuration.inMilliseconds + 15000));
+                      },
+                      icon: Image.asset("assets/pictures/icons/15f.png"),
+                      // size: 45,
+                      color: Colors.white,
+                    ),
+                    const Spacer(),
+                    const MaterialPlayOrPauseButton(iconSize: 48.0),
+                    const Spacer(),
+                    // backeard icon
+                    IconButton(
+                      onPressed: () async {
+                        var currentDuration = controller.player.state.position;
+                        await controller.player.seek(Duration(
+                            milliseconds:
+                                currentDuration.inMilliseconds - 15000));
+                      },
+                      icon: Image.asset("assets/pictures/icons/15b.png"),
+                      // size: 45,
+                      color: Colors.white,
+                    ),
+
+                    const Spacer(flex: 2)
                   ],
                   automaticallyImplySkipNextButton: false,
                   automaticallyImplySkipPreviousButton: false,

@@ -6,7 +6,7 @@ import 'package:king_movie/views/home/screens/main_screen.dart';
 AppBar homeAppBar(
         {required BuildContext context,
         int alertLenght = 0,
-        
+        void Function()? onWebTap,
         void Function()? onAlarmTap}) =>
     AppBar(
       backgroundColor: darkBlue,
@@ -44,11 +44,11 @@ AppBar homeAppBar(
               ]),
             ),
           ),
-        const Padding(
-          padding: EdgeInsets.only(left: 8.0, right: 8),
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, right: 8),
           child: InkWell(
-            // onTap: onAlarmTap,
-            child: Icon(
+            onTap: onWebTap,
+            child: const Icon(
               Icons.public,
             ),
           ),
