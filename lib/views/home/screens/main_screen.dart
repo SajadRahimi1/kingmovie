@@ -45,51 +45,63 @@ class MainScreen extends StatelessWidget {
                   builder: (context) => SizedBox(
                         width: Get.width,
                         height: Get.height /
-                            10 *
-                            (controller.homeModel?.data?.alert?.length ?? 1),
-                        child: ListView.separated(
-                            separatorBuilder: (context, index) =>
-                                const Divider(color: Colors.white),
-                            itemCount:
+                                5 *
                                 (controller.homeModel?.data?.alert?.length ??
-                                        0) +
-                                    1,
-                            itemBuilder: (_, index) => index ==
-                                    controller.homeModel?.data?.alert?.length
-                                ? InkWell(
-                                    onTap: controller.seenAlert,
-                                    child: Container(
-                                      width: Get.width / 3.5,
-                                      height: Get.height / 15,
-                                      decoration: BoxDecoration(
-                                        color: redColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: const Text(
-                                        "پاک کردن همه",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ),
-                                  )
-                                : ListTile(
-                                    tileColor: darkBlue,
-                                    title: Text(
-                                      controller.homeModel?.data?.alert?[index]
-                                              .title ??
-                                          '',
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                    subtitle: Text(
-                                      controller.homeModel?.data?.alert?[index]
-                                              .date ??
-                                          '',
-                                      textAlign: TextAlign.end,
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                    ),
-                                  )),
+                                    1) +
+                            2,
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: controller.seenAlert,
+                              child: Container(
+                                width: Get.width / 3.5,
+                                height: Get.height / 21,
+                                margin: const EdgeInsets.only(top: 10),
+                                decoration: BoxDecoration(
+                                  color: redColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                alignment: Alignment.center,
+                                child: const Text(
+                                  "پاک کردن همه",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: ListView.separated(
+                                  separatorBuilder: (context, index) =>
+                                      const Divider(color: Colors.white),
+                                  itemCount: (controller
+                                              .homeModel?.data?.alert?.length ??
+                                          0) +
+                                      1,
+                                  itemBuilder: (_, index) => index ==
+                                          controller
+                                              .homeModel?.data?.alert?.length
+                                      ? const SizedBox()
+                                      : ListTile(
+                                          tileColor: darkBlue,
+                                          title: Text(
+                                            controller.homeModel?.data
+                                                    ?.alert?[index].title ??
+                                                '',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14),
+                                          ),
+                                          subtitle: Text(
+                                            controller.homeModel?.data
+                                                    ?.alert?[index].date ??
+                                                '',
+                                            textAlign: TextAlign.end,
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        )),
+                            ),
+                          ],
+                        ),
                       ))),
           drawer: const Menu(),
           body: ListView(children: [
