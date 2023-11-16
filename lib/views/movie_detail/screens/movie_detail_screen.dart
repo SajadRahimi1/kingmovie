@@ -452,6 +452,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                   ?.link?.data?[index].title
                                                   .downloadColor(),
                                             ),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10),
                                             alignment: Alignment.center,
                                             child: Column(
                                               mainAxisAlignment:
@@ -467,6 +469,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                           ?.data?[index]
                                                           .title ??
                                                       "",
+                                                  maxLines: 2,
                                                   style: const TextStyle(
                                                       color: Colors.white),
                                                 ),
@@ -478,6 +481,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                                           ?.data?[index]
                                                           .des ??
                                                       "",
+                                                  maxLines: 2,
                                                   textAlign: TextAlign.center,
                                                   style: const TextStyle(
                                                       color: Colors.white,
