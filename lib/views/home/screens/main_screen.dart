@@ -684,82 +684,92 @@ class MainScreen extends StatelessWidget {
                 return Column(
                   children: List.generate(
                       controller.tableModel?.data?.listData?.length ?? 0,
-                      (index) => Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 8),
-                            width: Get.width,
-                            height: Get.height / 8,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: darkBlue,
-                            ),
-                            child: Row(
-                                textDirection: TextDirection.ltr,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.network(
-                                      controller.tableModel?.data
-                                              ?.listData?[index].poster ??
-                                          '',
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 12,
-                                  ),
-                                  Expanded(
-                                      child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
+                      (index) => InkWell(
+                            onTap: () => Get.to(() => MovieDetailScreen(
+                                movieId: controller.tableModel?.data
+                                        ?.listData?[index].id ??
+                                    '')),
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 8),
+                              width: Get.width,
+                              height: Get.height / 8,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: darkBlue,
+                              ),
+                              child: Row(
+                                  textDirection: TextDirection.ltr,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.network(
                                         controller.tableModel?.data
-                                                ?.listData?[index].title ??
+                                                ?.listData?[index].poster ??
                                             '',
-                                        textDirection: TextDirection.ltr,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15 *
-                                                MediaQuery.of(context)
-                                                    .textScaleFactor),
+                                        fit: BoxFit.fill,
                                       ),
-                                      Row(
-                                        textDirection: TextDirection.ltr,
-                                        children: [
-                                          const Icon(
-                                            Icons.access_time,
-                                            color: yellowColor,
-                                          ),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          Text(
-                                              controller.tableModel?.data
-                                                      ?.listData?[index].time ??
-                                                  '',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15 *
-                                                      MediaQuery.of(context)
-                                                          .textScaleFactor))
-                                        ],
-                                      )
-                                    ],
-                                  )),
-                                  Padding(
-                                      padding: EdgeInsets.only(
-                                          right: Get.width / 25),
-                                      child: Text(
+                                    ),
+                                    const SizedBox(
+                                      width: 12,
+                                    ),
+                                    Expanded(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
                                           controller.tableModel?.data
-                                                  ?.listData?[index].season ??
+                                                  ?.listData?[index].title ??
                                               '',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                          )))
-                                ]),
+                                          textDirection: TextDirection.ltr,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15 *
+                                                  MediaQuery.of(context)
+                                                      .textScaleFactor),
+                                        ),
+                                        Row(
+                                          textDirection: TextDirection.ltr,
+                                          children: [
+                                            const Icon(
+                                              Icons.access_time,
+                                              color: yellowColor,
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Text(
+                                                controller
+                                                        .tableModel
+                                                        ?.data
+                                                        ?.listData?[index]
+                                                        .time ??
+                                                    '',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 15 *
+                                                        MediaQuery.of(context)
+                                                            .textScaleFactor))
+                                          ],
+                                        )
+                                      ],
+                                    )),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            right: Get.width / 25),
+                                        child: Text(
+                                            controller.tableModel?.data
+                                                    ?.listData?[index].season ??
+                                                '',
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            )))
+                                  ]),
+                            ),
                           )),
                 );
               },
