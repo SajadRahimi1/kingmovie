@@ -28,6 +28,7 @@ class LoginScreen extends StatelessWidget {
           Padding(
               padding: const EdgeInsets.all(10),
               child: ProfileTextInput(
+                obsecure: true,
                 label: "رمز عبور",
                 onChanged: (value) => controller.password = value,
               )),
@@ -43,7 +44,7 @@ class LoginScreen extends StatelessWidget {
           ),
           const Spacer(),
           InkWell(
-            onTap: ()=>controller.login(onDone),
+            onTap: () => controller.login(onDone),
             child: Container(
               width: MediaQuery.sizeOf(context).width,
               height: MediaQuery.sizeOf(context).height / 13,
