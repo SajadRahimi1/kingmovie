@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -14,6 +15,8 @@ void main() async {
     ..loadingStyle = EasyLoadingStyle.light
     ..indicatorType = EasyLoadingIndicatorType.fadingFour;
   WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -25,6 +28,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseMessaging.instance.requestPermission(provisional: true);
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

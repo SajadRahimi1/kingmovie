@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "571731271520",
+    "project_id": "king-movie-d3fa8",
+    "storage_bucket": "king-movie-d3fa8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571731271520:android:4eb20dd40085290a048805",
+        "android_client_info": {
+          "package_name": "com.example.king_movie"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKC5TZB_MTgGGVWtf_SbLGc9VsVd5a6dc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

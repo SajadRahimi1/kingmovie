@@ -11,6 +11,7 @@ class FirstPage extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.offAll(() => const MainScreen());
     });
+    
     return const Scaffold(
       backgroundColor: blackColor,
       body: Center(child: CircularProgressIndicator()),

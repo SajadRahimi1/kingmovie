@@ -90,7 +90,6 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
 
                       const Spacer(flex: 2)
                     ],
-
                     // Modify top button bar:
                     topButtonBar: [
                       const Spacer(),
@@ -106,6 +105,9 @@ class _PlayMovieScreenState extends State<PlayMovieScreen> {
                 fullscreen: MaterialVideoControlsThemeData(
                   // Modify theme options:
                   displaySeekBar: true,
+                  bottomButtonBarMargin:
+                      const EdgeInsets.only(left: 16.0, right: 8.0, bottom: 16),
+                  seekBarMargin: const EdgeInsets.only(bottom: 18),
                   shiftSubtitlesOnControlsVisibilityChange: true,
 
                   topButtonBar: [
