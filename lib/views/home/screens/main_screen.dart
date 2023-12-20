@@ -358,7 +358,7 @@ class MainScreen extends StatelessWidget {
               height: Get.height / 5,
               child: CarouselSlider(
                   items: List.generate(
-                      controller.homeModel?.data?.slider?.length ?? 0,
+                      controller.homeModel?.data?.box?.length ?? 0,
                       (index) => InkWell(
                           onTap: () => Get.to(() => MovieDetailScreen(
                                 movieId: controller

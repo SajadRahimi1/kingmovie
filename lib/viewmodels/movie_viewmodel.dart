@@ -122,6 +122,8 @@ class MovieViewModel extends GetxController with StateMixin {
         true;
 
     if (isSeek) {
+      downloadList.link = downloadList.link?.replaceAll('https', 'http');
+
       Get.to(() => PlayMovieScreen(
             downloadList: downloadList,
             subtitleViewConfiguration: subtitleViewConfiguration,

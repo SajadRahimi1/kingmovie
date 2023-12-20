@@ -15,7 +15,13 @@ void main() async {
     ..loadingStyle = EasyLoadingStyle.light
     ..indicatorType = EasyLoadingIndicatorType.fadingFour;
   WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(
+          apiKey: 'AIzaSyBKC5TZB_MTgGGVWtf_SbLGc9VsVd5a6dc',
+          appId: '1:571731271520:android:4eb20dd40085290a048805',
+          messagingSenderId: '571731271520',
+          projectId: 'king-movie-d3fa8'));
+  print(await FirebaseMessaging.instance.getToken());
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
