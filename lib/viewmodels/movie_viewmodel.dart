@@ -65,8 +65,7 @@ class MovieViewModel extends GetxController with StateMixin {
         timer ??= Timer.periodic(const Duration(seconds: 3), (_) async {
           int playingSecond = player.state.position.inSeconds;
           if (savedTimer != playingSecond) {
-            print(
-                "moviePlayingId                                $moviePlayingId");
+           
             await getStorage.write(
                 moviePlayingId, player.state.position.inSeconds);
           }

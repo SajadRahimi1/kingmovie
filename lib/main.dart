@@ -21,7 +21,9 @@ void main() async {
           appId: '1:571731271520:android:4eb20dd40085290a048805',
           messagingSenderId: '571731271520',
           projectId: 'king-movie-d3fa8'));
-  print(await FirebaseMessaging.instance.getToken());
+  print("token: ${await FirebaseMessaging.instance.getToken() ?? ''}");
+
+  await FirebaseMessaging.instance.requestPermission(provisional: true);
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
